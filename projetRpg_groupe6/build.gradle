@@ -6,7 +6,7 @@ plugins {
     id 'org.beryx.jlink' version '2.25.0'
 }
 
-group 'be.helha.projetRpg_groupe6'
+group 'be.helha'
 version '1.0-SNAPSHOT'
 
 repositories {
@@ -25,8 +25,8 @@ tasks.withType(JavaCompile) {
 }
 
 application {
-    mainModule = 'be.helha.projetrpg_groupe6.projetrpg_groupe6'
-    mainClass = 'be.helha.projetrpg_groupe6.projetrpg_groupe6.HelloApplication'
+    mainModule = 'be.helha.projetrpg_groupe6'
+    mainClass = 'be.helha.projetrpg_groupe6.HelloApplication'
 }
 
 javafx {
