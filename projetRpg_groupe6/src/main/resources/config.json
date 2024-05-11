@@ -3,7 +3,7 @@
   "DBType": "Sqlite3",
   "DBPropreties": {
     "DBName": "projetRpg_groupe6",
-    "DBPath": "C:/Users/Certo/Documents/GitHub/Group06/db/projetRpg_groupe6.db",
-    "DBUrl":  "jdbc:sqlite:C:/Users/Certo/Documents/GitHub/Group06/db/projetRpg_groupe6.db"
+    "DBPath": "../java/db/projetRpg_groupe6.db",
+    "DBUrl":  "jdbc:sqlite:src/main/java/db/projetRpg_groupe6.db"
   }
 }
