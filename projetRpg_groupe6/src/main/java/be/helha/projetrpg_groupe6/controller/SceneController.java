@@ -32,7 +32,7 @@ public class SceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        lv_personnages.getItems().addAll(personnagesList);
+        //lv_personnages.getItems().addAll(personnagesList);
     }
 
     public void switchToMainPage(ActionEvent event) throws IOException {
