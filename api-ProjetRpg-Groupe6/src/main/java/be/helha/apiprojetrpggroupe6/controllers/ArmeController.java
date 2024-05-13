@@ -2,6 +2,7 @@ package be.helha.apiprojetrpggroupe6.controllers;
 
 
 import be.helha.apiprojetrpggroupe6.Models.Arme;
+import be.helha.apiprojetrpggroupe6.Models.DTO.ArmeDTO;
 import be.helha.apiprojetrpggroupe6.Services.ArmeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,9 @@ public class ArmeController {
      * @return List<Arme> Renvoi la liste des armes
      */
     @GetMapping("/armes")
-    public ResponseEntity<List<Arme>> getArmes(){
-        List<Arme> armes = armeService.getArmes();
-        return new ResponseEntity<List<Arme>>(armes, HttpStatus.OK);
+    public ResponseEntity<List<ArmeDTO>> getArmes(){
+        List<ArmeDTO> armes = armeService.getArmes();
+        return new ResponseEntity<List<ArmeDTO>>(armes, HttpStatus.OK);
     }
     /**
      * Récupère une arme par son id

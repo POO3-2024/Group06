@@ -1,5 +1,6 @@
 package be.helha.apiprojetrpggroupe6.controllers;
 
+import be.helha.apiprojetrpggroupe6.Models.DTO.PersonnageDTO;
 import be.helha.apiprojetrpggroupe6.Models.Personnage;
 import be.helha.apiprojetrpggroupe6.Services.PersonnageService;
 import jakarta.websocket.server.PathParam;
@@ -20,9 +21,9 @@ public class PersonnageController {
      * @return List<Personnage>
      */
     @GetMapping("/personnages")
-    public ResponseEntity<List<Personnage>> getPersonnages(){
-        List<Personnage> personnages = personnageService.getPersonnages();
-        return new ResponseEntity<List<Personnage>>(personnages, HttpStatus.OK);
+    public ResponseEntity<List<PersonnageDTO>> getPersonnages(){
+        List<PersonnageDTO> personnages = personnageService.getPersonnages();
+        return new ResponseEntity<List<PersonnageDTO>>(personnages, HttpStatus.OK);
     }
 
     /**
