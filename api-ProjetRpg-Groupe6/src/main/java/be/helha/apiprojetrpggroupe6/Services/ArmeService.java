@@ -20,4 +20,12 @@ public class ArmeService {
         list.add(new Arme(3, "Arc", 75));
         return list;
     }
+    /**
+     * Récupère une arme par son id
+     * @param id id de l'arme
+     * @return Arme Renvoi l'arme correspondant à l'id
+     */
+    public Arme getArmeById(int id){
+        return new Arme(id, "Excalibur", 100);
+    }
 }

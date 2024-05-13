@@ -26,4 +26,14 @@ public class ArmeController {
         List<Arme> armes = armeService.getArmes();
         return new ResponseEntity<List<Arme>>(armes, HttpStatus.OK);
     }
+    /**
+     * Récupère une arme par son id
+     * @param id id de l'arme
+     * @return Arme Renvoi l'arme correspondant à l'id
+     */
+    @GetMapping("/armes/{id}")
+    public ResponseEntity<Arme> getArmeById(int id){
+        Arme arme = armeService.getArmeById(id);
+        return new ResponseEntity<Arme>(arme, HttpStatus.OK);
+    }
 }
