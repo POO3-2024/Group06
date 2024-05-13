@@ -19,4 +19,7 @@ public class PersonnageService {
     public Personnage getPersonnageById(int id){
         return new Personnage(id, "Gandalf", 100, 1000);
     }
+    public Personnage addPersonnage(Personnage personnage){
+        return personnage;
+    }
 }

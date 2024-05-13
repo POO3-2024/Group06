@@ -25,4 +25,9 @@ public class PersonnageController {
         Personnage personnage = personnageService.getPersonnageById(id);
         return new ResponseEntity<Personnage>(personnage, HttpStatus.OK);
     }
+    @PostMapping("/personnages")
+    public ResponseEntity<Personnage> addPersonnage(@RequestBody Personnage personnage){
+        Personnage personnage1 = personnageService.addPersonnage(personnage);
+        return new ResponseEntity<Personnage>(personnage1, HttpStatus.CREATED);
+    }
 }
