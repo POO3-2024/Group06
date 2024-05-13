@@ -25,4 +25,7 @@ public class PersonnageService {
     public int updatePersonnage(Personnage personnage){
         return 1;
     }
+    public int deletePersonnage(int id){
+        return 1;
+    }
 }

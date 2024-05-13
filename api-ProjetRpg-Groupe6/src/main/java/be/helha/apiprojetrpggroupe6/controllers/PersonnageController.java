@@ -35,4 +35,9 @@ public class PersonnageController {
         int result = personnageService.updatePersonnage(personnage);
         return new ResponseEntity<Integer>(result, HttpStatus.OK);
     }
+    @DeleteMapping("/personnages/{id}")
+    public ResponseEntity<Integer> deletePersonnage(@PathVariable int id){
+        int result = personnageService.deletePersonnage(id);
+        return new ResponseEntity<Integer>(result, HttpStatus.OK);
+    }
 }
