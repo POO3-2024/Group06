@@ -47,4 +47,13 @@ public class ArmeController {
         Arme arme1 = armeService.addArme(arme);
         return new ResponseEntity<Arme>(arme1, HttpStatus.CREATED);
     }
+    /**
+     * Met à jour une arme
+     * @param arme Arme à mettre à jour
+     * @return int Renvoi le nombre de lignes modifiées
+     */
+    public ResponseEntity<Integer> updateArme(Arme arme) {
+        int result = armeService.updateArme(arme);
+        return new ResponseEntity<Integer>(result, HttpStatus.OK);
+    }
 }

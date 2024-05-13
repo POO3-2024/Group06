@@ -36,4 +36,12 @@ public class ArmeService {
     public Arme addArme(Arme arme){
         return arme;
     }
+    /**
+     * Met à jour une arme
+     * @param arme Arme à mettre à jour
+     * @return int Renvoi le nombre de lignes modifiées
+     */
+    public int updateArme(Arme arme) {
+        return 1;
+    }
 }
