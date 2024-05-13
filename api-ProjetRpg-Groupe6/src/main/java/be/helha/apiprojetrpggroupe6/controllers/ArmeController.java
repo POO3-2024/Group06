@@ -5,10 +5,7 @@ import be.helha.apiprojetrpggroupe6.Models.Arme;
 import be.helha.apiprojetrpggroupe6.Services.ArmeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,7 +30,7 @@ public class ArmeController {
      * @return Arme Renvoi l'arme correspondant à l'id
      */
     @GetMapping("/armes/{id}")
-    public ResponseEntity<Arme> getArmeById(int id){
+    public ResponseEntity<Arme> getArmeById(@PathVariable int id){
         Arme arme = armeService.getArmeById(id);
         return new ResponseEntity<Arme>(arme, HttpStatus.OK);
     }
@@ -43,7 +40,7 @@ public class ArmeController {
      * @return Arme Renvoi l'arme ajoutée
      */
     @PostMapping("/armes")
-    public ResponseEntity<Arme> addArme(Arme arme){
+    public ResponseEntity<Arme> addArme(@RequestBody Arme arme){
         Arme arme1 = armeService.addArme(arme);
         return new ResponseEntity<Arme>(arme1, HttpStatus.CREATED);
     }
@@ -52,7 +49,8 @@ public class ArmeController {
      * @param arme Arme à mettre à jour
      * @return int Renvoi le nombre de lignes modifiées
      */
-    public ResponseEntity<Integer> updateArme(Arme arme) {
+    @PutMapping("/armes")
+    public ResponseEntity<Integer> updateArme(@RequestBody Arme arme) {
         int result = armeService.updateArme(arme);
         return new ResponseEntity<Integer>(result, HttpStatus.OK);
     }
@@ -61,7 +59,8 @@ public class ArmeController {
      * @param id id de l'arme à supprimer
      * @return int Renvoi le nombre de lignes supprimées
      */
-    public ResponseEntity<Integer> deleteArme(int id) {
+    @DeleteMapping("/armes/{id}")
+    public ResponseEntity<Integer> deleteArme(@PathVariable int id) {
         int result = armeService.deleteArme(id);
         return new ResponseEntity<Integer>(result, HttpStatus.OK);
     }
