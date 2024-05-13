@@ -30,4 +30,9 @@ public class PersonnageController {
         Personnage personnage1 = personnageService.addPersonnage(personnage);
         return new ResponseEntity<Personnage>(personnage1, HttpStatus.CREATED);
     }
+    @PutMapping("/personnages")
+    public ResponseEntity<Integer> updatePersonnage(@RequestBody Personnage personnage){
+        int result = personnageService.updatePersonnage(personnage);
+        return new ResponseEntity<Integer>(result, HttpStatus.OK);
+    }
 }

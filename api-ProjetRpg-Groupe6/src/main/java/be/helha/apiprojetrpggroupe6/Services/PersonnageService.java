@@ -22,4 +22,7 @@ public class PersonnageService {
     public Personnage addPersonnage(Personnage personnage){
         return personnage;
     }
+    public int updatePersonnage(Personnage personnage){
+        return 1;
+    }
 }
