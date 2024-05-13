@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller servant à gérer les attaques
+ *
+ */
 @RestController
 @RequestMapping("/api")
 public class AttaqueController {

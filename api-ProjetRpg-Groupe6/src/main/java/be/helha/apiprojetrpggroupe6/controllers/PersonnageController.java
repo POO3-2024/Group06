@@ -10,6 +10,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * Controller de la classe Personnage
+ * Permet de faire le lien entre les requêtes http et les services de la classe Personnage
+ */
 @RestController
 @RequestMapping("/api")
 public class PersonnageController {

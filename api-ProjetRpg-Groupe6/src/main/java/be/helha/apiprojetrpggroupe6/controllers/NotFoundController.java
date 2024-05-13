@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class NotFoundController {
 
+    /**
+     * Renvoi une erreur 404 lorsque l'url n'existe pas
+     * @return String Renvoi une erreur 404
+     */
     @RequestMapping("/**")
     public ResponseEntity<String> notFound(){
         return new ResponseEntity<String>("Cette page n'existe pas", HttpStatus.NOT_FOUND);
