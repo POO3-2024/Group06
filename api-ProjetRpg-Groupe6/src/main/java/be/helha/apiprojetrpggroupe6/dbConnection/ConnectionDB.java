@@ -9,24 +9,54 @@ import org.sqlite.SQLiteJDBCLoader;
 
 
 public class ConnectionDB {
-
+    /**
+     * Objet utilisé pour la connexion à la base de données
+     */
     private Connection connection;
+    /**
+     * Instance de ConnectionDB utilisé pour le singleton
+     */
     private static ConnectionDB instance;
+
+    /**
+     * Récupère l'instance de la connexion à la base de données de production
+     * @return insance d'objet ConnectionDB en Singleton
+     */
 
     public static ConnectionDB getConnection() {
 
         if (instance == null) {
-            instance = new ConnectionDB();
+            instance = new ConnectionDB(false);
         }
         return instance;
-
     }
 
-    private  ConnectionDB() {
-            try{
+    /**
+     * Récupère l'instance de la connexion à la base de données
+     * @param test : Détermine si la base de données est utilisée pour les tests ou la production
+     * @return insance d'objet ConnectionDB en Singleton
+     */
+    public static ConnectionDB getConnection(boolean test) {
+
+        if (instance == null) {
+            instance = new ConnectionDB(test);
+        }
+        return instance;
+    }
+
+    /**
+     * Constructeur de la connexion à la base de données
+     * @param test Détermine si la base de données est utilisée pour les tests ou la production
+     */
+    private  ConnectionDB(boolean test) {
+            try {
                 SQLiteJDBCLoader.initialize();
                 SQLiteDataSource dataSource = new SQLiteDataSource();
-                dataSource.setUrl("jdbc:sqlite:C:\\sqlite\\db\\poo3.db");
+                if (!test) {
+                    dataSource.setUrl("jdbc:sqlite:C:\\sqlite\\db\\poo3.db");
+                } else {
+                    dataSource.setUrl("jdbc:sqlite:C:\\sqlite\\db\\poo3test.db");
+                }
                 connection = dataSource.getConnection();
             }
             catch (SQLException e){
@@ -35,9 +65,23 @@ public class ConnectionDB {
                 throw new RuntimeException(e);
             }
     }
+
+    /**
+     * Permet d'executer une requête SQL et d'en récupérer le résultat
+     * @param query Requête SQL
+     * @return ResultSet Résultat de la requête
+     * @throws SQLException Renvoi une exeption de type SQLException si la requête échoue
+     */
     public ResultSet executeQuery(String query) throws SQLException {
         return connection.createStatement().executeQuery(query);
     }
+
+    /**
+     * Permet d'executer une requête SQL et de récupérer le nombre de lignes affectées
+     * @param query Requête SQL
+     * @return int Nombre de lignes affectées par la requête
+     * @throws SQLException Renvoi une exeption de type SQLException si la requête échoue
+     */
     public int executeUpdate(String query) throws SQLException {
         return connection.createStatement().executeUpdate(query);
     }
