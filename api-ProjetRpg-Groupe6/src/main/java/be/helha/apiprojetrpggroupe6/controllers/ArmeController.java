@@ -56,4 +56,13 @@ public class ArmeController {
         int result = armeService.updateArme(arme);
         return new ResponseEntity<Integer>(result, HttpStatus.OK);
     }
+    /**
+     * Supprime une arme
+     * @param id id de l'arme à supprimer
+     * @return int Renvoi le nombre de lignes supprimées
+     */
+    public ResponseEntity<Integer> deleteArme(int id) {
+        int result = armeService.deleteArme(id);
+        return new ResponseEntity<Integer>(result, HttpStatus.OK);
+    }
 }

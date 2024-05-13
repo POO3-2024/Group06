@@ -44,4 +44,12 @@ public class ArmeService {
     public int updateArme(Arme arme) {
         return 1;
     }
+    /**
+     * Supprime une arme
+     * @param id id de l'arme à supprimer
+     * @return int Renvoi le nombre de lignes supprimées
+     */
+    public int deleteArme(int id) {
+        return 1;
+    }
 }
