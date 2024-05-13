@@ -6,6 +6,7 @@ import be.helha.apiprojetrpggroupe6.Services.ArmeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,5 +36,15 @@ public class ArmeController {
     public ResponseEntity<Arme> getArmeById(int id){
         Arme arme = armeService.getArmeById(id);
         return new ResponseEntity<Arme>(arme, HttpStatus.OK);
+    }
+    /**
+     * Ajoute une arme à la base de données
+     * @param arme Arme à ajouter
+     * @return Arme Renvoi l'arme ajoutée
+     */
+    @PostMapping("/armes")
+    public ResponseEntity<Arme> addArme(Arme arme){
+        Arme arme1 = armeService.addArme(arme);
+        return new ResponseEntity<Arme>(arme1, HttpStatus.CREATED);
     }
 }

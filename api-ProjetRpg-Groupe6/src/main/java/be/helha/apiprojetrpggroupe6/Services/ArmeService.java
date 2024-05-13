@@ -28,4 +28,12 @@ public class ArmeService {
     public Arme getArmeById(int id){
         return new Arme(id, "Excalibur", 100);
     }
+    /**
+     * Ajoute une arme à la base de données
+     * @param arme Arme à ajouter
+     * @return Arme Renvoi l'arme ajoutée
+     */
+    public Arme addArme(Arme arme){
+        return arme;
+    }
 }
