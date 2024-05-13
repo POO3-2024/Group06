@@ -48,4 +48,7 @@ public class Personnage {
     public void setPv(int pv) {
         this.pv = pv < LimitValues.MIN_CHARACTER_HP ? LimitValues.MIN_CHARACTER_HP : pv > LimitValues.MAX_CHARACTER_HP ? LimitValues.MAX_CHARACTER_HP : pv;
     }
+    public void infligerDegats(int degats){
+        this.pv = this.pv - degats < 0 ? 0 : this.pv - degats;
+    }
 }
