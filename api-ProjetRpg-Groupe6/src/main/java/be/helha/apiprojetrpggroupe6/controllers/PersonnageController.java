@@ -15,26 +15,51 @@ public class PersonnageController {
 
     private PersonnageService personnageService = new PersonnageService();
 
+    /**
+     * Récupère tous les personnages de la base de donénes
+     * @return List<Personnage>
+     */
     @GetMapping("/personnages")
     public ResponseEntity<List<Personnage>> getPersonnages(){
         List<Personnage> personnages = personnageService.getPersonnages();
         return new ResponseEntity<List<Personnage>>(personnages, HttpStatus.OK);
     }
+
+    /**
+     * Récupère un personnage par son id
+     * @param id id du personnage
+     * @return Personnage Renvoi le personnage correspondant à l'id
+     */
     @GetMapping("/personnages/{id}")
     public ResponseEntity<Personnage> getPersonnageById(@PathVariable int id){
         Personnage personnage = personnageService.getPersonnageById(id);
         return new ResponseEntity<Personnage>(personnage, HttpStatus.OK);
     }
+    /**
+     * Ajoute un personnage à la base de données
+     * @param personnage Personnage à ajouter
+     * @return Personnage Renvoi le personnage ajouté
+     */
     @PostMapping("/personnages")
     public ResponseEntity<Personnage> addPersonnage(@RequestBody Personnage personnage){
         Personnage personnage1 = personnageService.addPersonnage(personnage);
         return new ResponseEntity<Personnage>(personnage1, HttpStatus.CREATED);
     }
+    /**
+     * Met à jour un personnage
+     * @param personnage Personnage à mettre à jour
+     * @return int Renvoi le nombre de lignes modifiées
+     */
     @PutMapping("/personnages")
     public ResponseEntity<Integer> updatePersonnage(@RequestBody Personnage personnage){
         int result = personnageService.updatePersonnage(personnage);
         return new ResponseEntity<Integer>(result, HttpStatus.OK);
     }
+    /**
+     * Supprime un personnage
+     * @param id id du personnage à supprimer
+     * @return int Renvoi le nombre de lignes supprimées
+     */
     @DeleteMapping("/personnages/{id}")
     public ResponseEntity<Integer> deletePersonnage(@PathVariable int id){
         int result = personnageService.deletePersonnage(id);
