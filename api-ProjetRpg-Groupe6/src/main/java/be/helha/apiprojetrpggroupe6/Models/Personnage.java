@@ -1,5 +1,7 @@
 package be.helha.apiprojetrpggroupe6.Models;
 
+import be.helha.apiprojetrpggroupe6.Config.LimitValues;
+
 public class Personnage {
 
     private int id;
@@ -38,12 +40,12 @@ public class Personnage {
         return mana;
     }
     public void setMana(int mana) {
-        this.mana = mana < 0 ? 0 : mana > 100 ? 100 : mana;
+        this.mana = mana < LimitValues.MIN_CHARACTER_MANA ? LimitValues.MIN_CHARACTER_MANA : mana > LimitValues.MAX_CHARACTER_MANA ? LimitValues.MAX_CHARACTER_MANA : mana;
     }
     public int getPv() {
         return pv;
     }
     public void setPv(int pv) {
-        this.pv = pv < 0 ? 0 : pv > 1000 ? 1000 : pv;
+        this.pv = pv < LimitValues.MIN_CHARACTER_HP ? LimitValues.MIN_CHARACTER_HP : pv > LimitValues.MAX_CHARACTER_HP ? LimitValues.MAX_CHARACTER_HP : pv;
     }
 }
