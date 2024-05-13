@@ -12,7 +12,7 @@ public class Personnage {
         this.id = id;
         this.nom = nom;
         this.setMana(mana);
-        this.setPv(pv));
+        this.setPv(pv);
     }
 
     public Personnage(String nom, int mana, int pv) {
