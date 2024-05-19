@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="be.helha.apiprojetrpggroupe6.testArme" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-19T21:15:17" hostname="TSUPUNTER" time="0.829">
+  <properties/>
+  <testcase name="testGetArme()" classname="be.helha.apiprojetrpggroupe6.testArme" time="0.829"/>
+  <system-out><![CDATA[23:15:15.793 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [be.helha.apiprojetrpggroupe6.testArme]: testArme does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+23:15:15.900 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration be.helha.apiprojetrpggroupe6.ApiProjetRpgGroupe6Application for test class be.helha.apiprojetrpggroupe6.testArme
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.5)
+
+2024-05-19T23:15:16.410+02:00  INFO 9392 --- [api-ProjetRpg-Groupe6] [    Test worker] be.helha.apiprojetrpggroupe6.testArme    : Starting testArme using Java 21.0.2 with PID 9392 (started by Tsuyo in C:\projet java\Group06\api-ProjetRpg-Groupe6)
+2024-05-19T23:15:16.412+02:00  INFO 9392 --- [api-ProjetRpg-Groupe6] [    Test worker] be.helha.apiprojetrpggroupe6.testArme    : No active profile set, falling back to 1 default profile: "default"
+2024-05-19T23:15:17.595+02:00  INFO 9392 --- [api-ProjetRpg-Groupe6] [    Test worker] be.helha.apiprojetrpggroupe6.testArme    : Started testArme in 1.419 seconds (process running for 2.772)
+]]></system-out>
+  <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\Tsuyo\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.13\979ce25f7d3096a2e82214ba7dc972a05ce7a171\byte-buddy-agent-1.14.13.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+</testsuite>
