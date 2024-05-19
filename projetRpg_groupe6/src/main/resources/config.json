@@ -1,0 +1,9 @@
+{
+  "ConnectionType": "DB",
+  "DBType": "Sqlite3",
+  "DBPropreties": {
+    "DBName": "projetRpg_groupe6",
+    "DBPath": "../java/db/projetRpg_groupe6.db",
+    "DBUrl":  "jdbc:sqlite:src/main/java/db/projetRpg_groupe6.db"
+  }
+}
