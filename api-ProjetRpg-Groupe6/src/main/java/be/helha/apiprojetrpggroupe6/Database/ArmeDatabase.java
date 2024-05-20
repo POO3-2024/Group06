@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Cette classe fournit des méthodes pour interagir avec la base de données des armes.
@@ -65,6 +66,28 @@ public class ArmeDatabase {
         } catch (SQLException e) {
             System.err.println("SQL Exception during insert: " + e.getMessage());
             throw e;
+        }
+    }
+
+    /**
+     * Supprime une arme spécifique ou toutes les armes de la base de données.
+     *
+     * @param arme est un paramètre Optionnel contenant l'objet de type arme à supprimer.
+     *             Si l'argument est vide, toutes les armes seront supprimées de la base de données.
+     * @throws RuntimeException si une erreur de base de données survient.
+     */
+    public void deleteArme(Optional<Arme> arme){
+        String query;
+        if(arme.isPresent()){
+            query = "DELETE FROM arme WHERE Id_arme = "+arme.get().getId()+" ";
+        }else {
+            query = "DELETE FROM arme";
+        }
+
+        try {
+            connection.executeUpdate(query);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @SpringBootTest
 public class testArme {
@@ -21,6 +22,7 @@ public class testArme {
     private Arme arme2 = new Arme("test2",48);
     @BeforeEach
     public void setUp() throws SQLException {
+        armeDatabase.deleteArme(Optional.empty());
         armeDatabase.addArme(arme);
         armeDatabase.addArme(arme2);
     }
@@ -31,6 +33,15 @@ public class testArme {
         assertEquals(2,list.size());
         assertTrue(list.get(0).getNom().equals(arme.getNom()));
         assertTrue(list.get(1).getNom().equals(arme2.getNom()));
+    }
+
+    @Test
+    public void testDelete1Arme() throws SQLException {
+        List<Arme> list = armeDatabase.getArme();
+        armeDatabase.deleteArme(Optional.of(list.get(0)));
+        list = armeDatabase.getArme();
+        assertEquals(1,list.size());
+
     }
 
 
