@@ -89,16 +89,17 @@ public class ArmeDatabase {
      *             Si l'argument est vide, toutes les armes seront supprimées de la base de données.
      * @throws RuntimeException si une erreur de base de données survient.
      */
-    public void deleteArme(Optional<Arme> arme){
+    public int deleteArme(Optional<Integer> arme){
         String query;
         if(arme.isPresent()){
-            query = "DELETE FROM arme WHERE Id_arme = "+arme.get().getId()+" ";
+            query = "DELETE FROM arme WHERE Id_arme = "+arme.get()+" ";
         }else {
             query = "DELETE FROM arme";
         }
 
         try {
-            connection.executeUpdate(query);
+           int result = connection.executeUpdate(query);
+           return result;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -109,13 +110,15 @@ public class ArmeDatabase {
      *
      * @param arme l'objet arme modifié
      */
-    public void updateArme(Arme arme){
+    public int updateArme(Arme arme) throws Exception {
+
         String query = "UPDATE arme SET Nom = '"+arme.getNom()+"', Degats = "+arme.getDegats()+" WHERE Id_arme = "+arme.getId()+" ";
 
         try{
-            connection.executeUpdate(query);
+           int result = connection.executeUpdate(query);
+           return result;
         }catch (SQLException e){
-            throw new RuntimeException(e);
+            throw new Exception("Modification annulée");
         }
     }
 

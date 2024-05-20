@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="be.helha.apiprojetrpggroupe6.testArme" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-20T10:24:27" hostname="TSUPUNTER" time="0.827">
+<testsuite name="be.helha.apiprojetrpggroupe6.testArme" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-20T17:11:33" hostname="TSUPUNTER" time="1.011">
   <properties/>
-  <testcase name="testInsertFalse()" classname="be.helha.apiprojetrpggroupe6.testArme" time="0.827"/>
-  <system-out><![CDATA[12:24:26.115 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [be.helha.apiprojetrpggroupe6.testArme]: testArme does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
-12:24:26.224 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration be.helha.apiprojetrpggroupe6.ApiProjetRpgGroupe6Application for test class be.helha.apiprojetrpggroupe6.testArme
+  <testcase name="testDeleteArmeNonExist()" classname="be.helha.apiprojetrpggroupe6.testArme" time="1.011"/>
+  <system-out><![CDATA[19:11:31.548 [Test worker] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [be.helha.apiprojetrpggroupe6.testArme]: testArme does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+19:11:31.699 [Test worker] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration be.helha.apiprojetrpggroupe6.ApiProjetRpgGroupe6Application for test class be.helha.apiprojetrpggroupe6.testArme
 
   .   ____          _            __ _ _
  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
@@ -13,9 +13,9 @@
  =========|_|==============|___/=/_/_/_/
  :: Spring Boot ::                (v3.2.5)
 
-2024-05-20T12:24:26.736+02:00  INFO 2756 --- [api-ProjetRpg-Groupe6] [    Test worker] be.helha.apiprojetrpggroupe6.testArme    : Starting testArme using Java 21.0.2 with PID 2756 (started by Tsuyo in C:\projet java\Group06\api-ProjetRpg-Groupe6)
-2024-05-20T12:24:26.737+02:00  INFO 2756 --- [api-ProjetRpg-Groupe6] [    Test worker] be.helha.apiprojetrpggroupe6.testArme    : No active profile set, falling back to 1 default profile: "default"
-2024-05-20T12:24:27.967+02:00  INFO 2756 --- [api-ProjetRpg-Groupe6] [    Test worker] be.helha.apiprojetrpggroupe6.testArme    : Started testArme in 1.463 seconds (process running for 2.835)
+2024-05-20T19:11:32.374+02:00  INFO 14724 --- [api-ProjetRpg-Groupe6] [    Test worker] be.helha.apiprojetrpggroupe6.testArme    : Starting testArme using Java 21.0.2 with PID 14724 (started by Tsuyo in C:\projet java\Group06\api-ProjetRpg-Groupe6)
+2024-05-20T19:11:32.376+02:00  INFO 14724 --- [api-ProjetRpg-Groupe6] [    Test worker] be.helha.apiprojetrpggroupe6.testArme    : No active profile set, falling back to 1 default profile: "default"
+2024-05-20T19:11:33.958+02:00  INFO 14724 --- [api-ProjetRpg-Groupe6] [    Test worker] be.helha.apiprojetrpggroupe6.testArme    : Started testArme in 1.884 seconds (process running for 3.869)
 ]]></system-out>
   <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (C:\Users\Tsuyo\.gradle\caches\modules-2\files-2.1\net.bytebuddy\byte-buddy-agent\1.14.13\979ce25f7d3096a2e82214ba7dc972a05ce7a171\byte-buddy-agent-1.14.13.jar)
 WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning

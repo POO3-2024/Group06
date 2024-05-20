@@ -3,6 +3,7 @@ package be.helha.apiprojetrpggroupe6;
 import be.helha.apiprojetrpggroupe6.Database.ArmeDatabase;
 import be.helha.apiprojetrpggroupe6.Models.Arme;
 import be.helha.apiprojetrpggroupe6.dbConnection.ConnectionDB;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -27,6 +28,10 @@ public class testArme {
         armeDatabase.addArme(arme);
         armeDatabase.addArme(arme2);
         armeDatabase.addArme(arme3);
+    }
+    @AfterEach
+    public void end(){
+        armeDatabase.deleteArme(Optional.empty());
     }
 
     @Test
@@ -54,14 +59,19 @@ public class testArme {
     @Test
     public void testDelete1Arme() throws SQLException {
         List<Arme> list = armeDatabase.getArme();
-        armeDatabase.deleteArme(Optional.of(list.get(0)));
+        armeDatabase.deleteArme(Optional.of(list.get(0).getId()));
         list = armeDatabase.getArme();
         assertEquals(2,list.size());
 
     }
+    @Test
+    public void testDeleteArmeNonExist(){
+        Arme armeTest = new Arme(68,"test89",52);
+        assertEquals(0,armeDatabase.deleteArme(Optional.of(armeTest.getId())));
+    }
 
     @Test
-    public void testUpdateArme() throws SQLException {
+    public void testUpdateArme() throws Exception {
         List<Arme> list = armeDatabase.getArme();
         list.get(0).setNom("NewName");
         list.get(1).setDegats(28);
@@ -74,6 +84,13 @@ public class testArme {
         assertTrue(list.get(0).getNom().equals("NewName"));
         assertTrue(list.get(1).getDegats() == 28);
         assertTrue(list.get(2).getNom().equals("NewName2") && list.get(2).getDegats() == 65);
+    }
+
+    @Test
+    public void testUpdateArmeNonFonctionnel() throws Exception {
+        Arme armeTest = new Arme("test89",52);
+        assertEquals(0, armeDatabase.updateArme(armeTest)) ;
+
     }
 
 
