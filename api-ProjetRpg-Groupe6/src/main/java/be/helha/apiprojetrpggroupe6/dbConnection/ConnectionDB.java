@@ -85,4 +85,17 @@ public class ConnectionDB {
     public int executeUpdate(String query) throws SQLException {
         return connection.createStatement().executeUpdate(query);
     }
+
+    public void closeConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                connection = null;
+                instance = null;
+            }
+        }
+    }
 }
