@@ -58,21 +58,34 @@ public class ArmeDatabase {
      *
      * @param arme l'objet Arme à ajouter.
      * @throws SQLException si une erreur de base de données survient.
+     * @throws Exception si l'arme voulant etre ajoutée existe déjà sur base de son nom
      */
-    public void addArme(Arme arme) throws SQLException {
-        String query = "INSERT INTO arme (Nom, Degats) VALUES ('"+arme.getNom()+"','"+arme.getDegats()+"')";
-        try {
-            connection.executeUpdate(query);
-        } catch (SQLException e) {
-            System.err.println("SQL Exception during insert: " + e.getMessage());
-            throw e;
+    public void addArme(Arme arme) throws Exception {
+        List<Arme> listArme = getArme();
+        boolean verifArmeExist = false;
+        for(Arme armeLoop : listArme){
+            if (armeLoop.getNom().equals(arme.getNom())){
+                verifArmeExist = true;
+            }
         }
+        if(!verifArmeExist){
+            String query = "INSERT INTO arme (Nom, Degats) VALUES ('"+arme.getNom()+"','"+arme.getDegats()+"')";
+            try {
+                connection.executeUpdate(query);
+            } catch (SQLException e) {
+                System.err.println("SQL Exception during insert: " + e.getMessage());
+                throw e;
+            }
+        }else {
+            throw new Exception("Arme déjà existante");
+        }
+
     }
 
     /**
      * Supprime une arme spécifique ou toutes les armes de la base de données.
      *
-     * @param arme est un paramètre Optionnel contenant l'objet de type arme à supprimer.
+     * @param arme  un paramètre Optionnel contenant l'objet de type arme à supprimer.
      *             Si l'argument est vide, toutes les armes seront supprimées de la base de données.
      * @throws RuntimeException si une erreur de base de données survient.
      */
@@ -87,6 +100,21 @@ public class ArmeDatabase {
         try {
             connection.executeUpdate(query);
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Modifie une arme dans la base de donnée
+     *
+     * @param arme l'objet arme modifié
+     */
+    public void updateArme(Arme arme){
+        String query = "UPDATE arme SET Nom = '"+arme.getNom()+"', Degats = "+arme.getDegats()+" WHERE Id_arme = "+arme.getId()+" ";
+
+        try{
+            connection.executeUpdate(query);
+        }catch (SQLException e){
             throw new RuntimeException(e);
         }
     }
