@@ -5,6 +5,7 @@ module be.helha.projetrpg_groupe6 {
     requires org.controlsfx.controls;
     requires java.sql;
     requires com.google.gson;
+    requires java.net.http;
 
     opens be.helha.projetrpg_groupe6 to javafx.fxml;
     exports be.helha.projetrpg_groupe6;
