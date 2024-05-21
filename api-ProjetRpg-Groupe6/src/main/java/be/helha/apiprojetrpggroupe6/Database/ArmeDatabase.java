@@ -94,7 +94,7 @@ public class ArmeDatabase {
      * @throws SQLException si une erreur de base de données survient.
      * @throws Exception si l'arme voulant etre ajoutée existe déjà sur base de son nom
      */
-    public void addArme(Arme arme) throws Exception {
+    public Arme addArme(Arme arme) throws Exception {
         List<ArmeDTO> listArme = getArme();
         boolean verifArmeExist = false;
         for(ArmeDTO armeLoop : listArme){
@@ -106,6 +106,10 @@ public class ArmeDatabase {
             String query = "INSERT INTO arme (Nom, Degats) VALUES ('"+arme.getNom()+"','"+arme.getDegats()+"')";
             try {
                 connection.executeUpdate(query);
+                ResultSet res =  connection.executeQuery("select max(Id_arme) from arme");
+                res.next();
+                arme.setId(res.getInt(1));
+                return arme;
             } catch (SQLException e) {
                 System.err.println("SQL Exception during insert: " + e.getMessage());
                 throw e;
