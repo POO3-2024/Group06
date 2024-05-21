@@ -10,6 +10,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,9 +28,6 @@ public class ArmeService {
         HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/armes")).GET().build();
         try {
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            System.out.println("Response code: " + response.statusCode());
-            System.out.println("Response body: " + response.body());
-
             Type armeListType = new TypeToken<List<Arme>>(){}.getType();
 
            listArme = gson.fromJson(response.body(),armeListType);
@@ -38,5 +36,23 @@ public class ArmeService {
             e.printStackTrace();
         }
         return listArme;
+    }
+
+    public boolean postArme(String nom, int degats){
+        Arme arme = new Arme(nom,degats);
+        HttpClient httpClient = HttpClient.newHttpClient();
+        String json = gson.toJson(arme);
+        HttpRequest.BodyPublisher bodyPublisher = HttpRequest.BodyPublishers.ofString(json, StandardCharsets.UTF_8);
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/armes")).POST(bodyPublisher).header("Content-Type", "application/json").build();
+
+        try {
+            HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            System.out.println("Code de statut : " + response.statusCode());
+            return true;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
