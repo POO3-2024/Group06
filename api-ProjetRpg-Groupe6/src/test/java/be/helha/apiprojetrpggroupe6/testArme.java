@@ -2,6 +2,7 @@ package be.helha.apiprojetrpggroupe6;
 
 import be.helha.apiprojetrpggroupe6.Database.ArmeDatabase;
 import be.helha.apiprojetrpggroupe6.Models.Arme;
+import be.helha.apiprojetrpggroupe6.Models.DTO.ArmeDTO;
 import be.helha.apiprojetrpggroupe6.dbConnection.ConnectionDB;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,7 +37,7 @@ public class testArme {
 
     @Test
     public void testGetArme() throws SQLException {
-        List<Arme> list = armeDatabase.getArme();
+        List<ArmeDTO> list = armeDatabase.getArme();
         assertEquals(3,list.size());
         assertTrue(list.get(0).getNom().equals(arme.getNom()));
         assertTrue(list.get(1).getNom().equals(arme2.getNom()));
@@ -52,13 +53,13 @@ public class testArme {
 
         // Verify the exception message
         assertEquals("Arme déjà existante", exception.getMessage());
-        List<Arme> list = armeDatabase.getArme();
+        List<ArmeDTO> list = armeDatabase.getArme();
         assertEquals(3, list.size());
     }
 
     @Test
     public void testDelete1Arme() throws SQLException {
-        List<Arme> list = armeDatabase.getArme();
+        List<ArmeDTO> list = armeDatabase.getArme();
         armeDatabase.deleteArme(Optional.of(list.get(0).getId()));
         list = armeDatabase.getArme();
         assertEquals(2,list.size());
@@ -71,19 +72,30 @@ public class testArme {
     }
 
     @Test
+    public void testGetByID() throws SQLException {
+        List<ArmeDTO> list = armeDatabase.getArme();
+        Arme arme = armeDatabase.getArmeByID(list.get(0).getId());
+        assertTrue(arme.getNom().equals("test1"));
+        assertEquals(25,arme.getDegats());
+    }
+
+    @Test
     public void testUpdateArme() throws Exception {
-        List<Arme> list = armeDatabase.getArme();
-        list.get(0).setNom("NewName");
-        list.get(1).setDegats(28);
-        list.get(2).setNom("NewName2");
-        list.get(2).setDegats(65);
-        armeDatabase.updateArme(list.get(0));
-        armeDatabase.updateArme(list.get(1));
-        armeDatabase.updateArme(list.get(2));
+        List<ArmeDTO> list = armeDatabase.getArme();
+        Arme arme1 = armeDatabase.getArmeByID(list.get(0).getId());
+        Arme arme2 = armeDatabase.getArmeByID(list.get(1).getId());
+        Arme arme3 = armeDatabase.getArmeByID(list.get(2).getId());
+        arme1.setNom("NewName");
+        arme2.setDegats(28);
+        arme3.setNom("NewName2");
+        arme3.setDegats(65);
+        armeDatabase.updateArme(arme1);
+        armeDatabase.updateArme(arme2);
+        armeDatabase.updateArme(arme3);
         list = armeDatabase.getArme();
         assertTrue(list.get(0).getNom().equals("NewName"));
-        assertTrue(list.get(1).getDegats() == 28);
-        assertTrue(list.get(2).getNom().equals("NewName2") && list.get(2).getDegats() == 65);
+        assertTrue(armeDatabase.getArmeByID(list.get(1).getId()).getDegats() == 28);
+        assertTrue(list.get(2).getNom().equals("NewName2") && armeDatabase.getArmeByID(list.get(2).getId()).getDegats() == 65);
     }
 
     @Test

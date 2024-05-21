@@ -34,6 +34,8 @@ public class SceneController implements Initializable {
 
     private PersonnageDAO personnageDAO;
 
+    private ArmeController armeController;
+
     Personnage test1 = new Personnage("test1", 100, 100);
     Personnage test2 = new Personnage("test2", 500, 100);
     Personnage[] personnagesList = {test1, test2};
@@ -42,6 +44,7 @@ public class SceneController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //lv_personnages.getItems().addAll(personnagesList);
         try {
+            armeController = new ArmeController();
             personnageDAO = new PersonnageDAO();
             List<Personnage> personnages = personnageDAO.getAllPersonnages();
             //lv_personnages.getItems().addAll(personnages);
@@ -77,6 +80,10 @@ public class SceneController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void afficherArme(){
+        armeController.getArme();
     }
 
 }

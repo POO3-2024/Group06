@@ -2,6 +2,7 @@ package be.helha.apiprojetrpggroupe6.Database;
 
 
 import be.helha.apiprojetrpggroupe6.Models.Arme;
+import be.helha.apiprojetrpggroupe6.Models.DTO.ArmeDTO;
 import be.helha.apiprojetrpggroupe6.dbConnection.ConnectionDB;
 
 import java.sql.PreparedStatement;
@@ -30,20 +31,51 @@ public class ArmeDatabase {
     /**
      * Récupère la liste de toutes les armes dans la base de données.
      *
-     * @return une liste d'objets Arme.
+     * @return une liste d'objets ArmeDTO.
      * @throws SQLException si une erreur de base de données survient.
      */
-    public List<Arme> getArme() throws SQLException {
+    public List<ArmeDTO> getArme() throws SQLException {
+
+            List<ArmeDTO> list = new ArrayList<>();
+            String query = "SELECT * FROM arme";
+
+            try {
+                ResultSet resultSet = connection.executeQuery(query);
+                while(resultSet.next()){
+                    int idArme = resultSet.getInt("Id_arme");
+                    String nom = resultSet.getString("Nom");
+                    int degats = resultSet.getInt("Degats");
+                    ArmeDTO arme =  new ArmeDTO(idArme,nom);
+                    list.add(arme);
+
+                }
+            }catch (Exception e){
+                System.out.println(e.getMessage());
+            }
+
+            return list;
+
+
+    }
+
+    /**
+     * Récupère la liste de toutes les armes dans la base de données.
+     *
+     * @return un objets Arme.
+     * @throws SQLException si une erreur de base de données survient.
+     */
+    public Arme getArmeByID(Integer id) throws SQLException {
+
         List<Arme> list = new ArrayList<>();
-        String query = "SELECT * FROM arme";
+        String query = "SELECT * FROM arme WHERE Id_arme = '"+id+"' ";
 
         try {
             ResultSet resultSet = connection.executeQuery(query);
             while(resultSet.next()){
-                int id = resultSet.getInt("Id_arme");
+                int idArme = resultSet.getInt("Id_arme");
                 String nom = resultSet.getString("Nom");
                 int degats = resultSet.getInt("Degats");
-                Arme arme =  new Arme(id,nom,degats);
+                Arme arme =  new Arme(idArme,nom,degats);
                 list.add(arme);
 
             }
@@ -51,7 +83,9 @@ public class ArmeDatabase {
             System.out.println(e.getMessage());
         }
 
-        return list;
+        return list.get(0);
+
+
     }
     /**
      * Ajoute une nouvelle arme à la base de données.
@@ -61,9 +95,9 @@ public class ArmeDatabase {
      * @throws Exception si l'arme voulant etre ajoutée existe déjà sur base de son nom
      */
     public void addArme(Arme arme) throws Exception {
-        List<Arme> listArme = getArme();
+        List<ArmeDTO> listArme = getArme();
         boolean verifArmeExist = false;
-        for(Arme armeLoop : listArme){
+        for(ArmeDTO armeLoop : listArme){
             if (armeLoop.getNom().equals(arme.getNom())){
                 verifArmeExist = true;
             }
