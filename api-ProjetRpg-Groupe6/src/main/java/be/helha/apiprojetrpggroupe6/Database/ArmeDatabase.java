@@ -44,7 +44,6 @@ public class ArmeDatabase {
                 while(resultSet.next()){
                     int idArme = resultSet.getInt("Id_arme");
                     String nom = resultSet.getString("Nom");
-                    int degats = resultSet.getInt("Degats");
                     ArmeDTO arme =  new ArmeDTO(idArme,nom);
                     list.add(arme);
 

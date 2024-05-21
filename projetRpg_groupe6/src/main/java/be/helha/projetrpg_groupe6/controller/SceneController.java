@@ -82,8 +82,5 @@ public class SceneController implements Initializable {
         stage.show();
     }
 
-    public void afficherArme(){
-        armeController.getArme();
-    }
 
 }
