@@ -1,6 +1,7 @@
 package be.helha.projetrpg_groupe6.service;
 
 import be.helha.projetrpg_groupe6.arme.Arme;
+import be.helha.projetrpg_groupe6.config.LectureJson;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -16,6 +17,7 @@ import java.util.List;
 
 public class ArmeService {
 
+    private String apiUrl = LectureJson.getInstance().getApiUrl();
     private Gson gson;
 
     public ArmeService() {
@@ -25,7 +27,7 @@ public class ArmeService {
     public List<Arme> getArme(){
         List<Arme> listArme = new ArrayList<>();
         HttpClient httpClient = HttpClient.newHttpClient();
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/armes")).GET().build();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(apiUrl + "/armes")).GET().build();
         try {
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             Type armeListType = new TypeToken<List<Arme>>(){}.getType();
@@ -41,7 +43,7 @@ public class ArmeService {
     public Arme getArmeById(int id){
 
         HttpClient httpClient = HttpClient.newHttpClient();
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/armes/"+id)).GET().build();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(apiUrl + "/armes"+id)).GET().build();
         try {
             HttpResponse<String> response = httpClient.send(httpRequest,HttpResponse.BodyHandlers.ofString());
 
@@ -73,7 +75,7 @@ public class ArmeService {
         HttpClient httpClient = HttpClient.newHttpClient();
         String json = gson.toJson(arme);
         HttpRequest.BodyPublisher bodyPublisher = HttpRequest.BodyPublishers.ofString(json,StandardCharsets.UTF_8);
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/armes")).PUT(bodyPublisher).header("Content-Type", "application/json").build();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(apiUrl + "/armes")).PUT(bodyPublisher).header("Content-Type", "application/json").build();
         try {
            HttpResponse<String> response = httpClient.send(httpRequest,HttpResponse.BodyHandlers.ofString());
            System.out.println(response.statusCode());
@@ -90,7 +92,7 @@ public class ArmeService {
         HttpClient httpClient = HttpClient.newHttpClient();
         String json = gson.toJson(arme);
         HttpRequest.BodyPublisher bodyPublisher = HttpRequest.BodyPublishers.ofString(json, StandardCharsets.UTF_8);
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/armes")).POST(bodyPublisher).header("Content-Type", "application/json").build();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(apiUrl + "/armes")).POST(bodyPublisher).header("Content-Type", "application/json").build();
 
         try {
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());

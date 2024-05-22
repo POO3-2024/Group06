@@ -1,7 +1,6 @@
 package be.helha.projetrpg_groupe6.controller;
 
 import be.helha.projetrpg_groupe6.HelloApplication;
-import be.helha.projetrpg_groupe6.configNomAChanger.LectureJson;
 import be.helha.projetrpg_groupe6.dao.PersonnageDAO;
 import be.helha.projetrpg_groupe6.personnage.Personnage;
 import javafx.event.ActionEvent;
@@ -16,8 +15,6 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -46,7 +43,7 @@ public class SceneController implements Initializable {
         try {
             armeController = new ArmeController();
             personnageDAO = new PersonnageDAO();
-            List<Personnage> personnages = personnageDAO.getAllPersonnages();
+//            List<Personnage> personnages = personnageDAO.getAllPersonnages();
             //lv_personnages.getItems().addAll(personnages);
         } catch (SQLException e) {
             throw new RuntimeException(e);
