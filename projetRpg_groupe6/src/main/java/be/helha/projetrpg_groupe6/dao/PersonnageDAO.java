@@ -15,7 +15,7 @@ public class PersonnageDAO {
         //connection = DriverManager.getConnection();
         Class.forName("org.sqlite.JDBC");
         LectureJson fichierConfig = new LectureJson();
-        connection = DriverManager.getConnection(fichierConfig.getDbUrl()); // Initialisez la variable de classe connection
+        connection = DriverManager.getConnection(fichierConfig.getDbUrl());
     }
 
     public List<Personnage> getAllPersonnages() throws SQLException {
@@ -34,7 +34,6 @@ public class PersonnageDAO {
                 personnages.add(personnage);
             }
         }
-
         return personnages;
     }
 }

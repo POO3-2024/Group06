@@ -6,9 +6,11 @@ import be.helha.apiprojetrpggroupe6.dbConnection.ConnectionDB;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.SQLException;
 
+@SpringBootTest
 public class PersonnageDatabaseTest {
     private static final ConnectionDB connectionDB = ConnectionDB.getConnection(true);
     private PersonnageDatabase personnageDatabase = new PersonnageDatabase(connectionDB);

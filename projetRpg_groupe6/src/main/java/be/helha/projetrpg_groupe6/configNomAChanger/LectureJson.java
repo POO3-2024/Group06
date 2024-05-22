@@ -15,7 +15,6 @@ public class LectureJson {
     private void readConfig() {
         try (FileReader reader = new FileReader("src/main/resources/config.json")) { //Tente
             JsonObject jsonObject = JsonParser.parseReader(reader).getAsJsonObject(); //Analyse le fichier json
-
             dbUrl = jsonObject.getAsJsonObject("DBPropreties").get("DBUrl").getAsString(); //Récupere l'url de la db dans la config
         } catch (IOException e) { //Echec
             e.printStackTrace();

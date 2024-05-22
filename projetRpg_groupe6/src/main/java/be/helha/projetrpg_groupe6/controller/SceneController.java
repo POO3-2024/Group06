@@ -4,6 +4,7 @@ import be.helha.projetrpg_groupe6.HelloApplication;
 import be.helha.projetrpg_groupe6.configNomAChanger.LectureJson;
 import be.helha.projetrpg_groupe6.dao.PersonnageDAO;
 import be.helha.projetrpg_groupe6.personnage.Personnage;
+import be.helha.projetrpg_groupe6.services.PersonnageService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +33,7 @@ public class SceneController implements Initializable {
     @FXML
     private ListView<Personnage> lv_personnages;
 
-    private PersonnageDAO personnageDAO;
+    private PersonnageService personnageService;
 
     Personnage test1 = new Personnage("test1", 100, 100);
     Personnage test2 = new Personnage("test2", 500, 100);
@@ -40,16 +41,6 @@ public class SceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //lv_personnages.getItems().addAll(personnagesList);
-        try {
-            personnageDAO = new PersonnageDAO();
-            List<Personnage> personnages = personnageDAO.getAllPersonnages();
-            //lv_personnages.getItems().addAll(personnages);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     public void switchToMainPage(ActionEvent event) throws IOException {
