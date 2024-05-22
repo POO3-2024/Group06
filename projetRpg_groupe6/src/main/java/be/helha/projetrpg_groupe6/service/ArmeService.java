@@ -38,6 +38,39 @@ public class ArmeService {
         return listArme;
     }
 
+    public Arme getArmeById(int id){
+
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/armes/"+id)).GET().build();
+        try {
+            HttpResponse<String> response = httpClient.send(httpRequest,HttpResponse.BodyHandlers.ofString());
+
+            Arme arme = gson.fromJson(response.body(), Arme.class);
+            return arme;
+
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public boolean UpdateArme(Arme arme){
+        HttpClient httpClient = HttpClient.newHttpClient();
+        String json = gson.toJson(arme);
+        HttpRequest.BodyPublisher bodyPublisher = HttpRequest.BodyPublishers.ofString(json,StandardCharsets.UTF_8);
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/armes")).PUT(bodyPublisher).header("Content-Type", "application/json").build();
+        try {
+           HttpResponse<String> response = httpClient.send(httpRequest,HttpResponse.BodyHandlers.ofString());
+           System.out.println(response.statusCode());
+           return true;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean postArme(String nom, int degats){
         Arme arme = new Arme(nom,degats);
         HttpClient httpClient = HttpClient.newHttpClient();

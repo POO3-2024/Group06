@@ -54,10 +54,16 @@ public class ArmeController implements Initializable {
 
     private ArmeService armeService = new ArmeService();
 
+    private static ArmeController instance;
+
     private Stage stage;
     private Scene scene;
     private FXMLLoader fxmlLoader;
     private Parent root;
+
+    public ArmeController(){
+        instance = this;
+    }
     public void addArme(){
         if(nomArme.getText().isEmpty() || DegatsArme.getText().isEmpty()){
             affichageError.setText("Le champ nom ou dégats est vide");
@@ -100,6 +106,27 @@ public class ArmeController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void changeViewToDetail(ActionEvent event, int id) throws IOException {
+        // Logic to change the view and use the arme parameter
+        // For example, load a new FXML file and pass the arme object to the new controller
+        fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("detailArme.fxml"));
+        root = fxmlLoader.load();
+        DetailArme detailArme = fxmlLoader.getController();
+        detailArme.setId_Arme(id);
+        detailArme.initialize();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+
+
+        // Assuming you have a reference to your Stage
+
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    public static ArmeController getInstance(){
+        return instance;
     }
 
     @Override
