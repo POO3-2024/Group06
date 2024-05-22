@@ -61,6 +61,7 @@ public class ArmeController implements Initializable {
     private FXMLLoader fxmlLoader;
     private Parent root;
 
+
     public ArmeController(){
         instance = this;
     }

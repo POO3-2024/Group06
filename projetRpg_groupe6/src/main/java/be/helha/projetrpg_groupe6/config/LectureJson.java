@@ -1,4 +1,4 @@
-package be.helha.projetrpg_groupe6.configNomAChanger;
+package be.helha.projetrpg_groupe6.config;
 
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
@@ -7,10 +7,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class LectureJson {
     static final String jsonPath = "src/main/resources/config.json";

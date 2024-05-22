@@ -1,7 +1,7 @@
 package be.helha.projetrpg_groupe6.service;
 
 import be.helha.projetrpg_groupe6.arme.Arme;
-import be.helha.projetrpg_groupe6.configNomAChanger.LectureJson;
+import be.helha.projetrpg_groupe6.config.LectureJson;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
