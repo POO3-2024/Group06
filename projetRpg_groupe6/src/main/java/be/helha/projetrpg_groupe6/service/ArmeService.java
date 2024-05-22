@@ -27,7 +27,7 @@ public class ArmeService {
     public List<Arme> getArme(){
         List<Arme> listArme = new ArrayList<>();
         HttpClient httpClient = HttpClient.newHttpClient();
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(apiUrl + "/armes")).GET().build();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(apiUrl+"/armes")).GET().build();
         try {
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             Type armeListType = new TypeToken<List<Arme>>(){}.getType();
@@ -43,7 +43,7 @@ public class ArmeService {
     public Arme getArmeById(int id){
 
         HttpClient httpClient = HttpClient.newHttpClient();
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(apiUrl + "/armes"+id)).GET().build();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(apiUrl+"/armes/"+id)).GET().build();
         try {
             HttpResponse<String> response = httpClient.send(httpRequest,HttpResponse.BodyHandlers.ofString());
 
@@ -59,7 +59,7 @@ public class ArmeService {
 
     public boolean DeleteArme(int id){
         HttpClient httpClient = HttpClient.newHttpClient();
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/armes/"+id)).DELETE().build();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(apiUrl+"/armes/"+id)).DELETE().build();
         try {
            HttpResponse<String> response = httpClient.send(httpRequest,HttpResponse.BodyHandlers.ofString());
            System.out.println(response.statusCode());

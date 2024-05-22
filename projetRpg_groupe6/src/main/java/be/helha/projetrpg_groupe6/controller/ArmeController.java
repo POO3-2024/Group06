@@ -15,10 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 
@@ -51,6 +49,8 @@ public class ArmeController implements Initializable {
 
     @FXML
     private ListView<Arme> lv_armes;
+    @FXML
+    private TableView<Arme> tvArmes;
 
     private ArmeService armeService = new ArmeService();
 
@@ -139,5 +139,15 @@ public class ArmeController implements Initializable {
         }
         lv_armes.setItems(listArme);
         lv_armes.setCellFactory(param -> new ArmeListCell());
+        TableColumn<Arme,String> id_column = new TableColumn<>("ID");
+        TableColumn<Arme,String> nom_column = new TableColumn<>("NOM");
+        TableColumn<Arme,Arme> button_column = new TableColumn<>("Details");
+        ArmeListCell test = new ArmeListCell();
+
+        tvArmes.getColumns().add(id_column);
+        tvArmes.getColumns().add(nom_column);
+        tvArmes.getColumns().add(button_column);
+        tvArmes.setItems(listArme);
+
     }
 }

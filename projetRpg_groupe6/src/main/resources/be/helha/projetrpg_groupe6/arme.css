@@ -1,0 +1,17 @@
+.button{
+    -fx-background-color: #121417;
+}
+.navigation{
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: none;
+
+}
+.title{
+    -fx-text-fill: #FFFFFF;
+}
+
+.button2{
+    -fx-background-color: #293038;
+    -fx-border-radius: 12px;
+    -fx-text-fill: #FFFFFF;
+}
