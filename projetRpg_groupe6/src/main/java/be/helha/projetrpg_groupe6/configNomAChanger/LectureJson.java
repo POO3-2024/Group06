@@ -1,27 +1,39 @@
 package be.helha.projetrpg_groupe6.configNomAChanger;
 
+import java.io.Reader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import java.io.FileReader;
 import java.io.IOException;
 
 public class LectureJson {
-    private String dbUrl;
-    public LectureJson() {
-        readConfig();
+    static final String jsonPath = "src/main/resources/config.json";
+    JsonConfig jsonConfig;
+    private static LectureJson instance;
+    public static LectureJson getInstance() {
+        if(instance == null) {
+            instance = new LectureJson();
+        }
+        return instance;
     }
-    private void readConfig() {
-        try (FileReader reader = new FileReader("src/main/resources/config.json")) { //Tente
-            JsonObject jsonObject = JsonParser.parseReader(reader).getAsJsonObject(); //Analyse le fichier json
-
-            dbUrl = jsonObject.getAsJsonObject("DBPropreties").get("DBUrl").getAsString(); //Récupere l'url de la db dans la config
-        } catch (IOException e) { //Echec
+    private LectureJson() {
+        Path path = Paths.get(jsonPath);
+        Gson gson = new Gson();
+        try(Reader reader = Files.newBufferedReader(path, StandardCharsets.UTF_8)) {
+            jsonConfig = gson.fromJson(reader, JsonConfig.class);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public String getDbUrl() { //Fonction qui retourne l'url de la db dans la config
-        return dbUrl;
+    public String getApiUrl() {
+        return jsonConfig.apiUrl;
     }
+
+
 }
