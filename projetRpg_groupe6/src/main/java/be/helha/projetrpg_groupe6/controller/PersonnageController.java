@@ -10,9 +10,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -46,20 +48,54 @@ public class PersonnageController implements Initializable {
     private Label manaLabel;
 
     @FXML
-    private ListView<Personnage> listView;
+    private ListView<String> listView;
 
     private PersonnageService personnageService;
+    private List<Personnage> personnages;
+
+    @FXML
+    private AnchorPane detailsPane;
+
+    @FXML
+    private Label infoLabel;
+    @FXML
+    private Button modifierButton;
+    @FXML
+    private Button createButton;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         personnageService = new PersonnageService();
         refreshPersonnageList();
+
+        listView.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                afficherDetailsPersonnage(newValue);
+                detailsPane.setVisible(true);
+                infoLabel.setVisible(true);
+                modifierButton.setVisible(true);
+            } else {
+                detailsPane.setVisible(false);
+                infoLabel.setVisible(false);
+                modifierButton.setVisible(false);
+            }
+        });
+
+        detailsPane.setVisible(false);
+        infoLabel.setVisible(false);
+        modifierButton.setVisible(false);
+
     }
 
     private void refreshPersonnageList() {
-        List<Personnage> personnages = personnageService.getPersonnage();
+        personnages = personnageService.getPersonnage();
         listView.getItems().clear();
-        listView.getItems().addAll(personnages);
+        for (Personnage personnage : personnages) {
+            listView.getItems().add(personnage.getNom());
+        }
+
+
     }
 
     @FXML
@@ -72,25 +108,14 @@ public class PersonnageController implements Initializable {
         refreshPersonnageList();
     }
 
-    public void afficherPersonnage(Personnage personnage) {
-        nomLabel.setText(personnage.getNom());
-        pvLabel.setText(String.valueOf(personnage.getPv()));
-        manaLabel.setText(String.valueOf(personnage.getMana()));
-    }
-
-    public void modifierPersonnage(Personnage personnage) {
-        personnage.setNom(nomField.getText());
-        personnage.setPv(Integer.parseInt(pvField.getText()));
-        personnage.setMana(Integer.parseInt(manaField.getText()));
-        personnageService.updatePersonnage(personnage);
-        refreshPersonnageList();
-    }
-
-    public void supprimerPersonnage() {
-        Personnage personnageSelectionne = listView.getSelectionModel().getSelectedItem();
-        if (personnageSelectionne != null) {
-            listView.getItems().remove(personnageSelectionne);
-            refreshPersonnageList();
+    private void afficherDetailsPersonnage(String nomPersonnage) {
+        for (Personnage personnage : personnages) {
+            if (personnage.getNom().equals(nomPersonnage)) {
+                nomLabel.setText("» " + personnage.getNom());
+                pvLabel.setText(String.valueOf(personnage.getPv()) + " hp");
+                manaLabel.setText(String.valueOf(personnage.getMana())  + " mana");
+                break;
+            }
         }
     }
 
@@ -115,6 +140,29 @@ public class PersonnageController implements Initializable {
     public void switchToGestionArmes(ActionEvent event) throws IOException{
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("gestionArmes.fxml"));
         root = fxmlLoader.load();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    public void switchToModification(ActionEvent event) throws IOException {
+        fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("modificationPersonnages.fxml"));
+        root = fxmlLoader.load();
+        ModificationPersonnageController modificationPersonnageController = fxmlLoader.getController();
+        String selectedPersonnageName = listView.getSelectionModel().getSelectedItem();
+        Personnage selectedPersonnage = personnages.stream().filter(p -> p.getNom().equals(selectedPersonnageName)).findFirst().orElse(null);
+        modificationPersonnageController.setPersonnage(selectedPersonnage);
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToCreation(ActionEvent event) throws IOException {
+        fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("modificationPersonnages.fxml"));
+        root = fxmlLoader.load();
+        ModificationPersonnageController modificationPersonnageController = fxmlLoader.getController();
+        modificationPersonnageController.setPersonnage(null);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

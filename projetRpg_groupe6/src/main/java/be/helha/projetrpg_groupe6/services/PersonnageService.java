@@ -25,7 +25,10 @@ public class PersonnageService {
     public List<Personnage> getPersonnage() {
         List<Personnage> listPersonnage = new ArrayList<>();
         HttpClient httpClient = HttpClient.newHttpClient();
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/personnages")).GET().build();
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/api/personnages"))
+                .GET()
+                .build();
         try {
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             Type personnageListType = new TypeToken<List<Personnage>>() {}.getType();
@@ -40,22 +43,32 @@ public class PersonnageService {
         HttpClient httpClient = HttpClient.newHttpClient();
         String json = gson.toJson(personnage);
         HttpRequest.BodyPublisher bodyPublisher = HttpRequest.BodyPublishers.ofString(json, StandardCharsets.UTF_8);
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/personnages")).PUT(bodyPublisher).header("Content-Type", "application/json").build();
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/api/personnages/" + personnage.getId()))
+                .PUT(bodyPublisher)
+                .header("Content-Type", "application/json")
+                .build();
         try {
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.statusCode());
+            System.out.println("Code de statut : " + response.statusCode());
             return response.statusCode() == 200;
         } catch (IOException | InterruptedException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
+            return false;
         }
     }
+
 
     public boolean postPersonnage(String nom, int pv, int mana) {
         Personnage personnage = new Personnage(nom, pv, mana);
         HttpClient httpClient = HttpClient.newHttpClient();
         String json = gson.toJson(personnage);
         HttpRequest.BodyPublisher bodyPublisher = HttpRequest.BodyPublishers.ofString(json, StandardCharsets.UTF_8);
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/personnages")).POST(bodyPublisher).header("Content-Type", "application/json").build();
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/api/personnages"))
+                .POST(bodyPublisher)
+                .header("Content-Type", "application/json")
+                .build();
         try {
             HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
             System.out.println("Code de statut : " + response.statusCode());
