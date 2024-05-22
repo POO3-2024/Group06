@@ -3,6 +3,8 @@ package be.helha.projetrpg_groupe6.controller;
 import be.helha.projetrpg_groupe6.arme.Arme;
 import be.helha.projetrpg_groupe6.service.ArmeService;
 import com.google.gson.reflect.TypeToken;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -26,13 +28,18 @@ public class DetailArme {
     @FXML
     private Label degats;
     @FXML Label error;
+    @FXML
+    private Label confirmation;
 
 
     private int id_Arme;
+    private int compteur = 0;
     @FXML
     private TextField nomModif;
     @FXML
     private TextField degatsModif;
+    @FXML
+    private Button delete;
 
     public void setId_Arme(int id) {
 
@@ -65,6 +72,34 @@ public class DetailArme {
         Arme arme = armeService.getArmeById(id_Arme);
         nom.setText(arme.getNom());
         degats.setText(String.valueOf(arme.getDegats()));
+
+        delete.setOnAction(new EventHandler<ActionEvent>(){
+
+            public void handle(ActionEvent event){
+                if(compteur == 0){
+                    confirmation.setText("Etes vous sur de supprimer l'objet? (si oui reclic boutton)");
+                    compteur++;
+                }else if(compteur == 1){
+                    ArmeService armeService = new ArmeService();
+                    boolean verif = armeService.DeleteArme(id_Arme);
+                    if(verif){
+
+
+                        try {
+                            ArmeController.getInstance().switchToGestionArmes(event);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+
+            }
+        });
+
+    }
+
+    public DetailArme(){
+
 
     }
 }

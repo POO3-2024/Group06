@@ -12,7 +12,8 @@
       <TextField fx:id="nomModif" layoutX="29.0" layoutY="105.0" />
       <TextField fx:id="degatsModif" layoutX="226.0" layoutY="105.0" />
       <Button fx:id="modifier" layoutX="64.0" layoutY="229.0" mnemonicParsing="false" onAction="#modifArme" text="Modifier" />
-      <Button layoutX="284.0" layoutY="229.0" mnemonicParsing="false" text="Supprimer" />
+      <Button fx:id="delete" layoutX="284.0" layoutY="229.0" mnemonicParsing="false" text="Supprimer" />
       <Label fx:id="error" layoutX="198.0" layoutY="279.0" text="Label" />
+      <Label fx:id="confirmation" layoutX="403.0" layoutY="233.0" text="Label" />
    </children>
 </AnchorPane>

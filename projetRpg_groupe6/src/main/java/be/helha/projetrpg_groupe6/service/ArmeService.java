@@ -55,6 +55,20 @@ public class ArmeService {
         }
     }
 
+    public boolean DeleteArme(int id){
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create("http://localhost:8080/api/armes/"+id)).DELETE().build();
+        try {
+           HttpResponse<String> response = httpClient.send(httpRequest,HttpResponse.BodyHandlers.ofString());
+           System.out.println(response.statusCode());
+           return true;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public boolean UpdateArme(Arme arme){
         HttpClient httpClient = HttpClient.newHttpClient();
         String json = gson.toJson(arme);
