@@ -49,7 +49,7 @@ public class ArmeDatabase {
 
                 }
             }catch (Exception e){
-                System.out.println(e.getMessage());
+                System.out.println("Aucune arme selectionnée");
             }
 
             return list;
@@ -79,7 +79,7 @@ public class ArmeDatabase {
 
             }
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            System.out.println("Aucune selection faite");
         }
 
         return list.get(0);
@@ -134,7 +134,7 @@ public class ArmeDatabase {
            int result = connection.executeUpdate(query);
            return result;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Arme pas supprimée");
         }
     }
 
