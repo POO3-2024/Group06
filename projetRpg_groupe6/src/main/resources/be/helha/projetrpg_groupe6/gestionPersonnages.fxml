@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1020.0" style="-fx-background-color: #111518;" stylesheets="@Styles/homepage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.helha.projetrpg_groupe6.controller.PersonnageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1020.0" style="-fx-background-color: #111518;" stylesheets="@Styles/personnages.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.helha.projetrpg_groupe6.controller.PersonnageController">
    <children>
       <HBox prefHeight="45.0" prefWidth="1020.0">
          <children>
@@ -20,12 +20,12 @@
             <Region HBox.hgrow="ALWAYS" />
             <Button mnemonicParsing="false" onAction="#switchToMainPage" prefHeight="25.0" prefWidth="112.0" stylesheets="@Styles/homepage.css" text="Accueil" textFill="WHITE" />
             <Region prefHeight="45.0" prefWidth="10.0" />
-            <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToGestionPersonnages" prefHeight="25.0" prefWidth="150.0" text="Personnages" textFill="WHITE" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToGestionPersonnages" prefHeight="25.0" prefWidth="150.0" stylesheets="@Styles/homepage.css" text="Personnages" textFill="WHITE" />
             <Region prefHeight="45.0" prefWidth="10.0" />
-            <Button mnemonicParsing="false" onAction="#switchToGestionArmes" prefHeight="25.0" prefWidth="150.0" text="Armes" textAlignment="CENTER" textFill="WHITE" />
+            <Button mnemonicParsing="false" onAction="#switchToGestionArmes" prefHeight="25.0" prefWidth="150.0" stylesheets="@Styles/homepage.css" text="Armes" textAlignment="CENTER" textFill="WHITE" />
          </children>
       </HBox>
-      <ListView fx:id="listView" layoutX="14.0" layoutY="158.0" prefHeight="497.0" prefWidth="200.0" styleClass="personnage_background" stylesheets="@Styles/personnages.css" />
+      <ListView fx:id="listView" layoutX="14.0" layoutY="158.0" prefHeight="497.0" prefWidth="200.0" styleClass="list-view" stylesheets="@Styles/personnages.css" />
       <Label alignment="CENTER" layoutX="14.0" layoutY="113.0" prefHeight="45.0" prefWidth="200.0" text="Sélectionner un personnage" textFill="WHITE">
          <font>
             <Font size="16.0" />
@@ -33,9 +33,9 @@
       </Label>
       <AnchorPane fx:id="detailsPane" layoutX="310.0" layoutY="158.0" prefHeight="240.0" prefWidth="624.0" styleClass="personnage_background" stylesheets="@Styles/personnages.css" visible="false">
          <children>
-            <Label fx:id="nomLabel" layoutX="20.0" layoutY="20.0" text="Nom" textFill="#ABAFB1" />
-            <Label fx:id="pvLabel" layoutX="20.0" layoutY="60.0" text="PV" textFill="#ABAFB1" />
-            <Label fx:id="manaLabel" layoutX="20.0" layoutY="100.0" text="Mana" textFill="#ABAFB1" />
+            <Label fx:id="nomLabel" layoutX="20.0" layoutY="20.0" text="Nom" textFill="#222f3e" />
+            <Label fx:id="pvLabel" layoutX="20.0" layoutY="60.0" text="PV" textFill="#222f3e" />
+            <Label fx:id="manaLabel" layoutX="20.0" layoutY="100.0" text="Mana" textFill="#222f3e" />
          </children>
       </AnchorPane>
       <Label fx:id="infoLabel" alignment="CENTER" layoutX="310.0" layoutY="113.0" prefHeight="45.0" prefWidth="206.0" text="Informations du personnage" textFill="WHITE" visible="false">
@@ -43,8 +43,8 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="modifierButton" layoutX="839.0" layoutY="421.0" mnemonicParsing="false" onAction="#switchToModification" prefHeight="25.0" prefWidth="95.0" text="Modifier" textAlignment="CENTER" textFill="WHITE" visible="false" />
-      <Button fx:id="createButton" layoutX="44.0" layoutY="665.0" mnemonicParsing="false" onAction="#switchToCreation" prefHeight="25.0" prefWidth="140.0" text="Créer un personnage" textAlignment="CENTER" textFill="WHITE" />
+      <Button fx:id="modifierButton" layoutX="839.0" layoutY="421.0" mnemonicParsing="false" styleClass="button" onAction="#switchToModification" prefHeight="25.0" prefWidth="95.0" text="Modifier" textAlignment="CENTER" textFill="WHITE" visible="false" />
+      <Button fx:id="createButton" layoutX="23.0" layoutY="666.0" mnemonicParsing="false" styleClass="button" onAction="#switchToCreation" prefHeight="40.0" prefWidth="183.0" text="Créer un personnage" textAlignment="CENTER" textFill="WHITE" />
 
    </children>
 </AnchorPane>

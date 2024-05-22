@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1020.0" style="-fx-background-color: #111518;" stylesheets="@Styles/homepage.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.helha.projetrpg_groupe6.controller.ModificationPersonnageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1020.0" style="-fx-background-color: #111518;" stylesheets="@Styles/modifperso.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.helha.projetrpg_groupe6.controller.ModificationPersonnageController">
     <children>
         <HBox prefHeight="45.0" prefWidth="1020.0">
             <children>
@@ -20,12 +20,12 @@
                 <Region HBox.hgrow="ALWAYS" />
                 <Button mnemonicParsing="false" onAction="#switchToMainPage" prefHeight="25.0" prefWidth="112.0" stylesheets="@Styles/homepage.css" text="Accueil" textFill="WHITE" />
                 <Region prefHeight="45.0" prefWidth="10.0" />
-                <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToGestionPersonnages" prefHeight="25.0" prefWidth="150.0" text="Personnages" textFill="WHITE" />
+                <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToGestionPersonnages" prefHeight="25.0" prefWidth="150.0" stylesheets="@Styles/homepage.css" text="Personnages" textFill="WHITE" />
                 <Region prefHeight="45.0" prefWidth="10.0" />
-                <Button mnemonicParsing="false" onAction="#switchToGestionArmes" prefHeight="25.0" prefWidth="150.0" text="Armes" textAlignment="CENTER" textFill="WHITE" />
+                <Button mnemonicParsing="false" onAction="#switchToGestionArmes" prefHeight="25.0" prefWidth="150.0" stylesheets="@Styles/homepage.css" text="Armes" textAlignment="CENTER" textFill="WHITE" />
             </children>
         </HBox>
-        <Label layoutX="310.0" layoutY="113.0" prefHeight="45.0" prefWidth="206.0" text="Modifier Personnage" textFill="WHITE">
+        <Label layoutX="310.0" layoutY="113.0" prefHeight="45.0" prefWidth="217.0" text="Configuration de Personnage" textFill="WHITE">
             <font>
                 <Font size="16.0" />
             </font>
@@ -38,8 +38,8 @@
                 <TextField fx:id="pvField" layoutX="150.0" layoutY="60.0" prefWidth="200.0" />
                 <Label layoutX="20.0" layoutY="100.0" text="Mana" textFill="#ABAFB1" />
                 <TextField fx:id="manaField" layoutX="150.0" layoutY="100.0" prefWidth="200.0" />
-                <Button layoutX="150.0" layoutY="150.0" mnemonicParsing="false" onAction="#modifierPersonnage" text="Enregistrer" />
-                <Button layoutX="260.0" layoutY="150.0" mnemonicParsing="false" onAction="#switchToGestionPersonnages" text="Annuler" />
+                <Button layoutX="150.0" layoutY="150.0" mnemonicParsing="false" onAction="#modifierPersonnage" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" stylesheets="@Styles/modifperso.css" text="Enregistrer" />
+                <Button layoutX="260.0" layoutY="150.0" mnemonicParsing="false" onAction="#switchToGestionPersonnages" style="-fx-background-color: #FFA500; -fx-text-fill: white;" stylesheets="@Styles/modifperso.css" text="Annuler" />
             </children>
         </AnchorPane>
     </children>
