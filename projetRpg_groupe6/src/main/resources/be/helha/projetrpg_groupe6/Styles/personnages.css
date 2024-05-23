@@ -31,3 +31,8 @@
     -fx-background-color: #FFA500;
     -fx-text-fill: white;
 }
+
+.button#supprimerButton {
+    -fx-background-color: #ff3232;
+    -fx-text-fill: white;
+}

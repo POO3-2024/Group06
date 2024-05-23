@@ -84,6 +84,7 @@ public class PersonnageService {
      * @return true si l'ajout a réussi, false sinon
      */
     public boolean postPersonnage(String nom, int pv, int mana) {
+
         Personnage personnage = new Personnage(nom, pv, mana);
         HttpClient httpClient = HttpClient.newHttpClient();
         String json = gson.toJson(personnage);
@@ -125,4 +126,22 @@ public class PersonnageService {
         }
         return personnage;
     }
+
+    public boolean deletePersonnageById(int id) {
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/api/personnages/" + id))
+                .DELETE()
+                .build();
+        try {
+            HttpResponse<Void> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.discarding());
+            return response.statusCode() == 200;
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
 }

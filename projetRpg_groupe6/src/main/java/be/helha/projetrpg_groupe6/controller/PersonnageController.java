@@ -14,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -65,6 +67,8 @@ public class PersonnageController implements Initializable {
     private Button modifierButton;
     @FXML
     private Button createButton;
+    @FXML
+    private ImageView avatarImageView;
 
     /**
      * Initialise le contrôleur. Charge la liste des personnages et configure les gestionnaires d'événements.
@@ -145,8 +149,9 @@ public class PersonnageController implements Initializable {
             Personnage personnage = personnageService.getPersonnageById(idPersonnage);
             if (personnage != null) {
                 nomLabel.setText("» " + personnage.getNom());
-                pvLabel.setText(String.valueOf(personnage.getPv()) + " hp");
-                manaLabel.setText(String.valueOf(personnage.getMana()) + " mana");
+                pvLabel.setText(personnage.getPv() + " hp");
+                manaLabel.setText(personnage.getMana() + " mana");
+                avatarImageView.setImage(new Image("https://mineskin.eu/helm/" + personnage.getNom() + "/100"));
             }
         }
     }
