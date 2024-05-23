@@ -37,5 +37,8 @@
 }
 .selectedPlayer2Button {
     -fx-background-color: #ff0028;
+}
+.button#supprimerButton {
+    -fx-background-color: #ff3232;
     -fx-text-fill: white;
 }

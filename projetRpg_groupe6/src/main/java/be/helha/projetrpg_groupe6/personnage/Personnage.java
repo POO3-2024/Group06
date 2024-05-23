@@ -34,6 +34,12 @@ public class Personnage {
         this.mana = personnage.getMana();
     }
 
+    public Personnage(String nom) {
+        this.nom = nom;
+        this.pv = 10;
+        this.mana = 10;
+    }
+
     public int getId() {
         return id;
     }

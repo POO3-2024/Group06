@@ -40,6 +40,7 @@
                 <TextField fx:id="manaField" layoutX="150.0" layoutY="100.0" prefWidth="200.0" />
                 <Button layoutX="150.0" layoutY="150.0" mnemonicParsing="false" onAction="#modifierPersonnage" style="-fx-background-color: #4CAF50; -fx-text-fill: white;" stylesheets="@Styles/modifperso.css" text="Enregistrer" />
                 <Button layoutX="260.0" layoutY="150.0" mnemonicParsing="false" onAction="#switchToGestionPersonnages" style="-fx-background-color: #FFA500; -fx-text-fill: white;" stylesheets="@Styles/modifperso.css" text="Annuler" />
+            <Button layoutX="150.0" layoutY="216.0" mnemonicParsing="false" onAction="#supprimerPersonnage" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: FF3232FF; -fx-text-fill: white;" stylesheets="@Styles/modifperso.css" text="Supprimer le personnage" />
             </children>
         </AnchorPane>
     </children>

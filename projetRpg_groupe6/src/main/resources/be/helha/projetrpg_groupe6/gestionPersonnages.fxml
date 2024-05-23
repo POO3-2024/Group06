@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
@@ -31,20 +32,18 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <AnchorPane fx:id="detailsPane" layoutX="310.0" layoutY="158.0" prefHeight="240.0" prefWidth="624.0" styleClass="personnage_background" stylesheets="@Styles/personnages.css" visible="false">
+      <AnchorPane fx:id="detailsPane" layoutX="310.0" layoutY="268.0" prefHeight="240.0" prefWidth="624.0" styleClass="personnage_background" stylesheets="@Styles/personnages.css" visible="false">
          <children>
             <Label fx:id="nomLabel" layoutX="20.0" layoutY="20.0" text="Nom" textFill="#222f3e" />
             <Label fx:id="pvLabel" layoutX="20.0" layoutY="60.0" text="PV" textFill="#222f3e" />
             <Label fx:id="manaLabel" layoutX="20.0" layoutY="100.0" text="Mana" textFill="#222f3e" />
          </children>
       </AnchorPane>
-      <Label fx:id="infoLabel" alignment="CENTER" layoutX="310.0" layoutY="113.0" prefHeight="45.0" prefWidth="206.0" text="Informations du personnage" textFill="WHITE" visible="false">
+      <Label fx:id="infoLabel" alignment="CENTER" layoutX="519.0" layoutY="113.0" prefHeight="45.0" prefWidth="206.0" text="Informations du personnage" textFill="WHITE" visible="false">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <Button fx:id="modifierButton" layoutX="839.0" layoutY="421.0" mnemonicParsing="false" onAction="#switchToModification" prefHeight="25.0" prefWidth="95.0" styleClass="button" text="Modifier" textAlignment="CENTER" textFill="WHITE" visible="false" />
-      <Button fx:id="createButton" layoutX="23.0" layoutY="666.0" mnemonicParsing="false" onAction="#switchToCreation" prefHeight="40.0" prefWidth="183.0" styleClass="button" text="Créer un personnage" textAlignment="CENTER" textFill="WHITE" />
       <Button fx:id="selectionJoueur1" layoutX="310.0" layoutY="421.0" mnemonicParsing="false" onAction="#selectionJoueur1" prefHeight="40.0" prefWidth="183.0" styleClass="selectedPlayer1Button" stylesheets="@Styles/personnages.css" text="Selectionner pour joueur 1" textAlignment="CENTER" textFill="WHITE" visible="false">
          <font>
             <Font size="14.0" />
@@ -55,6 +54,10 @@
             <Font size="14.0" />
          </font>
       </Button>
+      <Button fx:id="modifierButton" layoutX="839.0" layoutY="516.0" mnemonicParsing="false" onAction="#switchToModification" prefHeight="25.0" prefWidth="95.0" styleClass="button" text="Modifier" textAlignment="CENTER" textFill="WHITE" visible="false" />
+      <Button fx:id="createButton" layoutX="23.0" layoutY="666.0" mnemonicParsing="false" onAction="#switchToCreation" prefHeight="40.0" prefWidth="183.0" styleClass="button" text="Créer un personnage" textAlignment="CENTER" textFill="WHITE" />
+      <ImageView fx:id="avatarImageView" fitHeight="100" fitWidth="100" layoutX="313.0" layoutY="150.0" />
+
 
    </children>
 </AnchorPane>
