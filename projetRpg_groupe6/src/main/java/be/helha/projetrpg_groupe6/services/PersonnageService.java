@@ -15,13 +15,24 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Service pour gérer les opérations CRUD sur les objets Personnage.
+ */
 public class PersonnageService {
     private Gson gson;
 
+    /**
+     * Constructeur par défaut qui initialise le parseur Gson.
+     */
     public PersonnageService() {
         this.gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
     }
 
+    /**
+     * Récupère la liste de tous les personnages.
+     *
+     * @return une liste de personnages
+     */
     public List<Personnage> getPersonnage() {
         List<Personnage> listPersonnage = new ArrayList<>();
         HttpClient httpClient = HttpClient.newHttpClient();
@@ -39,6 +50,12 @@ public class PersonnageService {
         return listPersonnage;
     }
 
+    /**
+     * Met à jour les informations d'un personnage existant.
+     *
+     * @param personnage le personnage à mettre à jour
+     * @return true si la mise à jour a réussi, false sinon
+     */
     public boolean updatePersonnage(Personnage personnage) {
         HttpClient httpClient = HttpClient.newHttpClient();
         String json = gson.toJson(personnage);
@@ -58,7 +75,14 @@ public class PersonnageService {
         }
     }
 
-
+    /**
+     * Ajoute un nouveau personnage.
+     *
+     * @param nom le nom du personnage
+     * @param pv les points de vie du personnage
+     * @param mana les points de mana du personnage
+     * @return true si l'ajout a réussi, false sinon
+     */
     public boolean postPersonnage(String nom, int pv, int mana) {
         Personnage personnage = new Personnage(nom, pv, mana);
         HttpClient httpClient = HttpClient.newHttpClient();
@@ -76,5 +100,29 @@ public class PersonnageService {
         } catch (IOException | InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Récupère un personnage par son ID.
+     *
+     * @param id l'ID du personnage
+     * @return le personnage correspondant à l'ID, ou null si non trouvé
+     */
+    public Personnage getPersonnageById(int id) {
+        Personnage personnage = null;
+        HttpClient httpClient = HttpClient.newHttpClient();
+        HttpRequest httpRequest = HttpRequest.newBuilder()
+                .uri(URI.create("http://localhost:8080/api/personnages/" + id))
+                .GET()
+                .build();
+        try {
+            HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                personnage = gson.fromJson(response.body(), Personnage.class);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return personnage;
     }
 }
