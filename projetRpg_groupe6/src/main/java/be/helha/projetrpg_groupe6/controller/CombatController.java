@@ -14,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -51,6 +52,10 @@ public class CombatController implements Initializable {
     private Button attackButtonPlayer1;
     @FXML
     private Button attackButtonPlayer2;
+    @FXML
+    private Label endMessageLabel;
+    @FXML
+    private AnchorPane endMessageContainer;
 
     private Partie partie;
     private ArmeService armeService = new ArmeService();
@@ -61,7 +66,11 @@ public class CombatController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.partie = CombatService.getPartie();
+        initialisation();
+        verifWin();
+    }
 
+    private void initialisation() {
         if(partie.getPersonnage1() == null || partie.getPersonnage2() == null || partie.getArme1() == null || partie.getArme2() == null){
             attackButtonPlayer1.setDisable(true);
             attackButtonPlayer2.setDisable(true);
@@ -97,25 +106,40 @@ public class CombatController implements Initializable {
         int idAttaque = 0;
         int idArme = 0;
         if(partie.getJoueur1_actif()){
-            idAttaque = partie.getPersonnage1().getId();
+            idAttaque = partie.getPersonnage2().getId();
             idArme = partie.getArme1().getId();
             partie.setPersonnage2(combatService.attaquer(idAttaque, idArme));
             labelCharacterHpPlayer2.setText(String.valueOf(partie.getPersonnage2().getPv()));
             attackButtonPlayer1.setDisable(true);
             attackButtonPlayer2.setDisable(false);
         }else {
-            idAttaque = partie.getPersonnage2().getId();
+            idAttaque = partie.getPersonnage1().getId();
             idArme = partie.getArme2().getId();
             partie.setPersonnage1(combatService.attaquer(idAttaque, idArme));
             labelCharacterHpPlayer1.setText(String.valueOf(partie.getPersonnage1().getPv()));
             attackButtonPlayer1.setDisable(false);
             attackButtonPlayer2.setDisable(true);
         }
-        System.out.println(partie.getPersonnage1().getId());
-        System.out.println(partie.getPersonnage2().getId());
+        verifWin();
+
 
         partie.skipTurn();
     }
+
+    private void verifWin() {
+        if(partie.getPersonnage1().getPv() <= 0){
+            endMessageLabel.setText("Le joueur 2 a gagné !");
+            endMessageContainer.setVisible(true);
+            attackButtonPlayer1.setDisable(true);
+            attackButtonPlayer2.setDisable(true);
+        }else if(partie.getPersonnage2().getPv() <= 0){
+            endMessageLabel.setText("Le joueur 1 a gagné !");
+            endMessageContainer.setVisible(true);
+            attackButtonPlayer1.setDisable(true);
+            attackButtonPlayer2.setDisable(true);
+        }
+    }
+
     public void switchToGestionPersonnages(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("gestionPersonnages.fxml"));
         root = fxmlLoader.load();

@@ -42,3 +42,8 @@
     -fx-background-color: #FFA500;
     -fx-text-fill: white;
 }
+.endMessage{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-border-color: #000000;
+}

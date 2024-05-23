@@ -112,5 +112,15 @@
             </Button>
          </children>
       </AnchorPane>
+      <AnchorPane fx:id="endMessageContainer" layoutX="223.0" layoutY="124.0" prefHeight="286.0" prefWidth="575.0" styleClass="endMessage" stylesheets="@Styles/combat.css" visible="false">
+         <children>
+            <Label fx:id="endMessageLabel" layoutX="9.0" layoutY="81.0" prefHeight="82.0" prefWidth="559.0" text="Partie terminée" textAlignment="CENTER">
+               <font>
+                  <Font size="25.0" />
+               </font>
+            </Label>
+            <Button layoutX="134.0" layoutY="232.0" mnemonicParsing="false" onAction="#switchToMainPage" prefHeight="40.0" prefWidth="307.0" text="Retour à la page d'accueil" />
+         </children>
+      </AnchorPane>
     </children>
 </AnchorPane>
