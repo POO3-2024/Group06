@@ -49,8 +49,12 @@ public class PersonnageService {
      * @return int Renvoi le nombre de lignes modifiées
      */
     public int updatePersonnage(Personnage personnage) throws SQLException {
-
-        return this.personnageDatabase.update(personnage);
+        Personnage personnage1 = this.personnageDatabase.getPersonnageByName(personnage.getNom());
+        if(personnage1 == null || personnage1.getId() == personnage.getId()){
+            return this.personnageDatabase.update(personnage);
+        }else{
+            throw new SQLException("Personnage déjà existant");
+        }
     }
     /**
      * Supprime un personnage

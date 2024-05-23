@@ -48,14 +48,18 @@ public class PersonnageDatabase {
         }
         return null;
     }
-
-    public int update(Personnage perso) throws SQLException {
-        String query = "UPDATE personnage SET pv = " + perso.getPv() + ", mana = " + perso.getMana() + " WHERE nom = '" + perso.getNom() + "'";
-        return connectionDB.executeUpdate(query);
+    public Personnage getPersonnageByName(String name) throws SQLException {
+        String query = "SELECT * FROM personnage WHERE nom = '" + name + "'";
+        try (ResultSet resultSet = connectionDB.executeQuery(query)) {
+            if (resultSet.next()) {
+                return new Personnage(resultSet.getInt("Id_personnage"), resultSet.getString("nom"), resultSet.getInt("mana"), resultSet.getInt("pv"));
+            }
+        }
+        return null;
     }
 
-    public int deleteByNom(String nom) throws SQLException {
-        String query = "DELETE FROM personnage WHERE nom = '" + nom + "'";
+    public int update(Personnage perso) throws SQLException {
+        String query = "UPDATE personnage SET pv = " + perso.getPv() + ", mana = " + perso.getMana() + ", nom = '" + perso.getNom() + "' WHERE Id_personnage = " + perso.getId();
         return connectionDB.executeUpdate(query);
     }
     public int deletePersonnageById(int id) throws SQLException {

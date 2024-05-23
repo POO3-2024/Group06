@@ -53,7 +53,13 @@ public class ArmeService {
      * @return int Renvoi le nombre de lignes modifiées
      */
     public int updateArme(Arme arme) throws Exception{
-        return this.armeDatabase.updateArme(arme);
+       Arme arme1 = this.armeDatabase.getArmeByName(arme.getNom());
+         if(arme1 == null || arme1.getId() == arme.getId()){
+              return this.armeDatabase.updateArme(arme);
+            }else{
+                throw new SQLException("Arme déjà existante");
+         }
+
     }
     /**
      * Supprime une arme

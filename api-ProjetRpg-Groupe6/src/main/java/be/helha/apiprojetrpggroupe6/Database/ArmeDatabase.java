@@ -84,8 +84,32 @@ public class ArmeDatabase {
         }
 
         return list.get(0);
+    }
+    /**
+     * Récupère une arme par son nom.
+     *
+     * @return un objets Arme ou null si l'amre n'existe pas.
+     * @throws SQLException si une erreur de base de données survient.
+     */
+    public Arme getArmeByName(String name) throws SQLException {
 
+        List<Arme> list = new ArrayList<>();
+        String query = "SELECT * FROM arme WHERE Nom = '"+name+"' ";
 
+        try {
+            ResultSet resultSet = connection.executeQuery(query);
+            while(resultSet.next()){
+                int idArme = resultSet.getInt("Id_arme");
+                String nom = resultSet.getString("Nom");
+                int degats = resultSet.getInt("Degats");
+                Arme arme =  new Arme(idArme,nom,degats);
+                list.add(arme);
+
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+        return list.get(0);
     }
     /**
      * Ajoute une nouvelle arme à la base de données.
