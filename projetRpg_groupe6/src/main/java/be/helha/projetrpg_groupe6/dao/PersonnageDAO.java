@@ -1,6 +1,5 @@
 package be.helha.projetrpg_groupe6.dao;
 
-import be.helha.projetrpg_groupe6.configNomAChanger.LectureJson;
 import be.helha.projetrpg_groupe6.personnage.Personnage;
 
 import java.sql.*;
