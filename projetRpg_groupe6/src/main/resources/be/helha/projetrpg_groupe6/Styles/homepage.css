@@ -1,0 +1,40 @@
+.button {
+    -fx-background-color: #111518;
+    -fx-text-fill: #ABAFB1;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.3), 5, 0, 0, 1);
+}
+
+.button:hover {
+    -fx-background-color: #333; /* Couleur d'arrière-plan lorsque survolé */
+    -fx-text-fill: white; /* Couleur du texte lorsque survolé */
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 8, 0, 0, 2); /* Effet de surbrillance */
+}
+
+
+.vertical_button {
+    -fx-alignment: center;
+}
+
+.personnages_box{
+    -fx-background-image:url("../Images/Characters.png");
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+
+
+}
+
+.armes_box{
+    -fx-background-image:url("../Images/Gun.png");
+    -fx-background-size: 100 100;
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+}
+
+.war_box{
+    -fx-background-image:url("../Images/War.png");
+    -fx-background-size: 100 100;
+    -fx-background-repeat: stretch;
+    -fx-background-position: center center;
+}
