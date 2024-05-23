@@ -1,11 +1,25 @@
 package be.helha.projetrpg_groupe6.personnage;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Personnage {
 
-   private String id;
-   private String nom;
-   private int pv;
-   private int mana;
+    @SerializedName("id")
+    @Expose
+    private String id;
+
+    @SerializedName("nom")
+    @Expose
+    private String nom;
+
+    @SerializedName("pv")
+    @Expose
+    private int pv;
+
+    @SerializedName("mana")
+    @Expose
+    private int mana;
 
     public Personnage(String nom, int pv, int mana) {
         this.nom = nom;

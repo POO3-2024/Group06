@@ -3,6 +3,7 @@ package be.helha.projetrpg_groupe6.controller;
 import be.helha.projetrpg_groupe6.HelloApplication;
 import be.helha.projetrpg_groupe6.dao.PersonnageDAO;
 import be.helha.projetrpg_groupe6.personnage.Personnage;
+import be.helha.projetrpg_groupe6.services.PersonnageService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -29,7 +30,7 @@ public class SceneController implements Initializable {
     @FXML
     private ListView<Personnage> lv_personnages;
 
-    private PersonnageDAO personnageDAO;
+    private PersonnageService personnageService;
 
     private ArmeController armeController;
 

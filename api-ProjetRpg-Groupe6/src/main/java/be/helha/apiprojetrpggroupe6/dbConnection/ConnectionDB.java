@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import be.helha.apiprojetrpggroupe6.Config.LectureJson;
+import ch.qos.logback.core.net.SyslogOutputStream;
 import org.sqlite.SQLiteDataSource;
 import org.sqlite.SQLiteJDBCLoader;
 
@@ -52,10 +55,11 @@ public class ConnectionDB {
             try {
                 SQLiteJDBCLoader.initialize();
                 SQLiteDataSource dataSource = new SQLiteDataSource();
+                LectureJson config =  LectureJson.getInstance();
                 if (!test) {
-                    dataSource.setUrl("jdbc:sqlite:C:\\sqlite\\db\\poo3.db");
+                    dataSource.setUrl("jdbc:sqlite:" + config.getDbPath() + config.getDbProduction());
                 } else {
-                    dataSource.setUrl("jdbc:sqlite:C:\\sqlite\\db\\poo3test.db");
+                    dataSource.setUrl("jdbc:sqlite:" + config.getDbPath() + config.getDbTest());
                 }
                 connection = dataSource.getConnection();
             }
@@ -84,5 +88,18 @@ public class ConnectionDB {
      */
     public int executeUpdate(String query) throws SQLException {
         return connection.createStatement().executeUpdate(query);
+    }
+
+    public void closeConnection() {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } finally {
+                connection = null;
+                instance = null;
+            }
+        }
     }
 }

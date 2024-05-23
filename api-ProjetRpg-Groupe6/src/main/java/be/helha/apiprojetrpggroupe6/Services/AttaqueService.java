@@ -10,14 +10,23 @@ import org.springframework.stereotype.Service;
 @Service
 public class AttaqueService {
 
+
+    private PersonnageService personnageService = new PersonnageService();
+    private ArmeService armeService = new ArmeService();
     /**
      * Attaque un personnage avec une arme
-     * @param personnage Personnage à attaquer
-     * @param arme Arme avec laquelle attaquer
-     * @return Personnage Personnage attaqué
+     * @param id_personnage Personnage à attaquer
+     * @param id_arme Arme avec laquelle attaquer
+     * @return perso Personnage attaqué
      */
-    public Personnage attaquer(Personnage personnage, Arme arme){
-        personnage.infligerDegats(arme.getDegats());
-        return personnage;
+    public Personnage attaquer(int id_personnage, int id_arme) throws Exception {
+        Personnage perso = personnageService.getPersonnageById(id_personnage);
+        Arme arme = armeService.getArmeById(id_arme);
+        if (perso == null || arme == null) {
+            throw new Exception("Personnage ou arme introuvable");
+        }
+        perso.infligerDegats(arme.getDegats());
+        personnageService.updatePersonnage(perso);
+        return perso;
     }
 }
