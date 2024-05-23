@@ -44,13 +44,12 @@ public class ArmeDatabase {
                 while(resultSet.next()){
                     int idArme = resultSet.getInt("Id_arme");
                     String nom = resultSet.getString("Nom");
-                    int degats = resultSet.getInt("Degats");
                     ArmeDTO arme =  new ArmeDTO(idArme,nom);
                     list.add(arme);
 
                 }
             }catch (Exception e){
-                System.out.println(e.getMessage());
+                System.out.println("Aucune arme selectionnée");
             }
 
             return list;
@@ -80,7 +79,7 @@ public class ArmeDatabase {
 
             }
         }catch (Exception e){
-            System.out.println(e.getMessage());
+            System.out.println("Aucune selection faite");
         }
 
         return list.get(0);
@@ -163,7 +162,7 @@ public class ArmeDatabase {
            int result = connection.executeUpdate(query);
            return result;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Arme pas supprimée");
         }
     }
 
@@ -174,7 +173,8 @@ public class ArmeDatabase {
      */
     public int updateArme(Arme arme) throws Exception {
 
-        String query = "UPDATE arme SET Nom = '"+arme.getNom()+"', Degats = "+arme.getDegats()+" WHERE Id_arme = "+arme.getId()+" ";
+        String query = "UPDATE arme SET Nom='"+arme.getNom()+"',degats="+arme.getDegats()+" WHERE Id_arme="+arme.getId()+"";
+
 
         try{
            int result = connection.executeUpdate(query);

@@ -12,4 +12,7 @@ module be.helha.projetrpg_groupe6 {
     exports be.helha.projetrpg_groupe6;
     exports be.helha.projetrpg_groupe6.controller;
     opens be.helha.projetrpg_groupe6.controller to javafx.fxml;
+    opens be.helha.projetrpg_groupe6.arme to com.google.gson;
+    opens be.helha.projetrpg_groupe6.config to com.google.gson;
+    opens be.helha.projetrpg_groupe6.fx to javafx.base;
 }

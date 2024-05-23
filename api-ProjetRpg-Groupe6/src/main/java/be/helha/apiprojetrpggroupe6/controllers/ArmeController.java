@@ -40,7 +40,7 @@ public class ArmeController {
      * @return Arme Renvoi l'arme correspondant à l'id
      */
     @GetMapping("/armes/{id}")
-    public ResponseEntity<?> getArmeById(@PathVariable int id){
+    public ResponseEntity<?> getArmeById(@PathVariable("id") int id){
         try {
             Arme arme = armeService.getArmeById(id);
             return new ResponseEntity<Arme>(arme, HttpStatus.OK);
@@ -69,8 +69,10 @@ public class ArmeController {
      */
     @PutMapping("/armes")
     public ResponseEntity<?> updateArme(@RequestBody Arme arme) {
+        Arme armeModif = new Arme(arme.getId(),arme.getNom(),arme.getDegats());
         try {
-            int result = armeService.updateArme(arme);
+
+            int result = armeService.updateArme(armeModif);
             return new ResponseEntity<Integer>(result, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<String>(e.getMessage(),  HttpStatus.INTERNAL_SERVER_ERROR);
@@ -82,7 +84,7 @@ public class ArmeController {
      * @return int Renvoi le nombre de lignes supprimées
      */
     @DeleteMapping("/armes/{id}")
-    public ResponseEntity<?> deleteArme(@PathVariable int id) {
+    public ResponseEntity<?> deleteArme(@PathVariable("id") int id) {
         try {
             int result = armeService.deleteArme(id);
             return new ResponseEntity<Integer>(result, HttpStatus.OK);

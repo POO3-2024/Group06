@@ -37,6 +37,12 @@ public class SceneController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //lv_personnages.getItems().addAll(personnagesList);
+        armeController = new ArmeController();
+
+//            List<Personnage> personnages = personnageDAO.getAllPersonnages();
+        //lv_personnages.getItems().addAll(personnages);
+
     }
 
     public void switchToMainPage(ActionEvent event) throws IOException {
@@ -66,8 +72,5 @@ public class SceneController implements Initializable {
         stage.show();
     }
 
-    public void afficherArme(){
-        armeController.getArme();
-    }
 
 }

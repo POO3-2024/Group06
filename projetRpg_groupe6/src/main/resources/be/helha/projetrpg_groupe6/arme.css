@@ -1,0 +1,52 @@
+.button{
+    -fx-background-color: #121417;
+    -fx-text-fill: white;
+}
+.navigation{
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: none;
+
+}
+.title{
+    -fx-text-fill: #FFFFFF;
+}
+
+.button2{
+    -fx-background-color: #293038;
+    -fx-border-radius: 12px;
+    -fx-text-fill: #FFFFFF;
+}
+
+
+.table-view {
+    -fx-background-color: lightgray;
+    -fx-border-color: gray;
+    -fx-border-width: 2px;
+}
+
+/* Styles pour les en-têtes des colonnes */
+.table-view .column-header {
+    -fx-background-color: darkgray;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+/* Styles pour les lignes de la table */
+.table-view .table-row-cell {
+    -fx-background-color: white;
+    -fx-text-fill: white;
+    -fx-border-color: lightgray;
+    -fx-border-width: 1px;
+}
+
+/* Styles pour les cellules */
+.table-view .table-cell {
+    -fx-alignment: center-left;
+    -fx-padding: 5px;
+    -fx-text-fill: white;
+}
+
+/* Styles pour les cellules de la colonne de boutons */
+.table-view .table-cell:filled {
+    -fx-background-color: #121417;
+}

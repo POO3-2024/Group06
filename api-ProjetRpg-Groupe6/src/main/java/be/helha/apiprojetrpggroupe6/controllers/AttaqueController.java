@@ -29,7 +29,7 @@ public class AttaqueController {
      * @return Personnage Renvoi le personnage attaqué
      */
     @GetMapping("/attaques/{id_personnage}/{id_arme}")
-    public ResponseEntity<?> attaquer(@PathVariable int id_personnage,@PathVariable int id_arme){
+    public ResponseEntity<?> attaquer(@PathVariable("id_personnage") int id_personnage,@PathVariable("id_arme") int id_arme){
         try {
             Personnage personnageAttaque = this.attaqueService.attaquer(id_personnage, id_arme);
             return new ResponseEntity<Personnage>(personnageAttaque, HttpStatus.OK);
