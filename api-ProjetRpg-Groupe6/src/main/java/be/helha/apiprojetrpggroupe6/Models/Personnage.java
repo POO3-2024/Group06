@@ -23,8 +23,8 @@ public class Personnage {
     public Personnage(int id, String nom, int mana, int pv) {
         this.id = id;
         this.nom = nom;
-        this.setMana(mana);
-        this.setPv(pv);
+        this.mana = mana;
+        this.pv = pv;
     }
 
     /**
@@ -35,8 +35,6 @@ public class Personnage {
      */
     public Personnage(String nom, int mana, int pv) {
         this.nom = nom;
-        this.setPv(pv);
-        this.setMana(mana);
     }
     /**
      * Constructeur vide

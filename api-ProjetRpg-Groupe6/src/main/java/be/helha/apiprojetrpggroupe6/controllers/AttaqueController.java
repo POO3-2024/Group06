@@ -20,8 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class AttaqueController {
 
-    private PersonnageService personnageService = new PersonnageService();
-    private ArmeService armeService = new ArmeService();
     private AttaqueService attaqueService = new AttaqueService();
 
     /**
@@ -31,16 +29,12 @@ public class AttaqueController {
      * @return Personnage Renvoi le personnage attaqué
      */
     @GetMapping("/attaques/{id_personnage}/{id_arme}")
-    public ResponseEntity<Personnage> attaquer(@PathVariable int id_personnage,@PathVariable int id_arme){
+    public ResponseEntity<?> attaquer(@PathVariable int id_personnage,@PathVariable int id_arme){
         try {
-            Personnage personnage = this.personnageService.getPersonnageById(id_personnage);
-            Arme arme = this.armeService.getArmeById(id_arme);
-
-            Personnage personnageAttaque = this.attaqueService.attaquer(personnage, arme);
-
+            Personnage personnageAttaque = this.attaqueService.attaquer(id_personnage, id_arme);
             return new ResponseEntity<Personnage>(personnageAttaque, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<Personnage>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 }
