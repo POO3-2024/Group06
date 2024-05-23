@@ -40,6 +40,8 @@ public class DetailArme {
     private TextField degatsModif;
     @FXML
     private Button delete;
+    @FXML
+    private Button retour;
 
     public void setId_Arme(int id) {
 
@@ -77,7 +79,7 @@ public class DetailArme {
 
             public void handle(ActionEvent event){
                 if(compteur == 0){
-                    confirmation.setText("Etes vous sur de supprimer l'objet? (si oui reclic boutton)");
+                    confirmation.setText("supprimer l'objet?");
                     compteur++;
                 }else if(compteur == 1){
                     ArmeService armeService = new ArmeService();
@@ -93,6 +95,17 @@ public class DetailArme {
                     }
                 }
 
+            }
+        });
+
+        retour.setOnAction(new EventHandler<ActionEvent>() {
+
+            public void handle(ActionEvent event) {
+                try {
+                    ArmeController.getInstance().switchToGestionArmes(event);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
 

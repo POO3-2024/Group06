@@ -72,6 +72,7 @@ public class ArmeController implements Initializable {
             try {
                 int number = Integer.parseInt(DegatsArme.getText());
                 boolean test = armeService.postArme(nomArme.getText(),number);
+                affichageError.setText("");
                 System.out.println(test);
             }catch (NumberFormatException e){
                 affichageError.setText(e.getMessage());

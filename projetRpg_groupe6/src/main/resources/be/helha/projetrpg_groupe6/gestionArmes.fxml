@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1020.0" styleClass="button" stylesheets="@arme.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.helha.projetrpg_groupe6.controller.ArmeController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1020.0" styleClass="button" stylesheets="@arme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.helha.projetrpg_groupe6.controller.ArmeController">
    <children>
       <Label alignment="CENTER" layoutX="153.0" layoutY="116.0" prefHeight="45.0" prefWidth="98.0" styleClass="title" text="Armes">
          <font>
@@ -21,7 +21,7 @@
       <Button layoutX="799.0" layoutY="126.0" mnemonicParsing="false" onAction="#addArme" prefHeight="25.0" prefWidth="68.0" styleClass="button2" text="Add" />
       <TextField fx:id="nomArme" layoutX="448.0" layoutY="126.0" />
       <TextField fx:id="DegatsArme" layoutX="618.0" layoutY="126.0" />
-      <Label fx:id="affichageError" layoutX="597.0" layoutY="161.0" styleClass="navigation" text="Label" />
+      <Label fx:id="affichageError" layoutX="597.0" layoutY="161.0" styleClass="navigation" />
       <TableView fx:id="tvArmes" layoutX="153.0" layoutY="257.0" prefHeight="408.0" prefWidth="719.0" />
    </children>
 </AnchorPane>
