@@ -175,6 +175,18 @@ public class ArmeController implements Initializable {
         tvArmes.getColumns().add(nom_column);
         tvArmes.getColumns().add(button_column);
         tvArmes.setItems(listArme);
+        adjustTableColumnsWidth(tvArmes);
 
+    }
+
+    private void adjustTableColumnsWidth(TableView<?> tableView) {
+        // Ajouter un écouteur sur la largeur de la TableView
+        tableView.widthProperty().addListener((obs, oldWidth, newWidth) -> {
+            double tableWidth = newWidth.doubleValue();
+            double columnCount = tableView.getColumns().size();
+            for (TableColumn<?, ?> column : tableView.getColumns()) {
+                column.prefWidthProperty().set(tableWidth / columnCount);
+            }
+        });
     }
 }

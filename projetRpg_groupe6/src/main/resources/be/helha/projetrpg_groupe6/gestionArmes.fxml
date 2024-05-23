@@ -21,7 +21,7 @@
       <Button layoutX="799.0" layoutY="126.0" mnemonicParsing="false" onAction="#addArme" prefHeight="25.0" prefWidth="68.0" styleClass="button2" text="Add" />
       <TextField fx:id="nomArme" layoutX="448.0" layoutY="126.0" />
       <TextField fx:id="DegatsArme" layoutX="618.0" layoutY="126.0" />
-      <Label fx:id="affichageError" layoutX="597.0" layoutY="161.0" text="Label" />
-      <TableView fx:id="tvArmes" layoutX="252.0" layoutY="257.0" prefHeight="200.0" prefWidth="517.0" />
+      <Label fx:id="affichageError" layoutX="597.0" layoutY="161.0" styleClass="navigation" text="Label" />
+      <TableView fx:id="tvArmes" layoutX="153.0" layoutY="257.0" prefHeight="408.0" prefWidth="719.0" />
    </children>
 </AnchorPane>
