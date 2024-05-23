@@ -2,6 +2,7 @@ package be.helha.projetrpg_groupe6.controller;
 
 import be.helha.projetrpg_groupe6.HelloApplication;
 import be.helha.projetrpg_groupe6.personnage.Personnage;
+import be.helha.projetrpg_groupe6.services.CombatService;
 import be.helha.projetrpg_groupe6.services.PersonnageService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -52,7 +53,6 @@ public class PersonnageController implements Initializable {
 
     private PersonnageService personnageService;
     private List<Personnage> personnages;
-
     @FXML
     private AnchorPane detailsPane;
 
@@ -62,6 +62,8 @@ public class PersonnageController implements Initializable {
     private Button modifierButton;
     @FXML
     private Button createButton;
+
+    private Personnage selectedPersonnage;
 
 
     @Override
@@ -111,12 +113,19 @@ public class PersonnageController implements Initializable {
     private void afficherDetailsPersonnage(String nomPersonnage) {
         for (Personnage personnage : personnages) {
             if (personnage.getNom().equals(nomPersonnage)) {
+                this.selectedPersonnage = personnage;
                 nomLabel.setText("» " + personnage.getNom());
                 pvLabel.setText(String.valueOf(personnage.getPv()) + " hp");
                 manaLabel.setText(String.valueOf(personnage.getMana())  + " mana");
                 break;
             }
         }
+    }
+    public void selectionJoueur1(){
+        CombatService.getPartie().setPersonnage1(selectedPersonnage);
+    }
+    public void selectionJoueur2(){
+        CombatService.getPartie().setPersonnage2(selectedPersonnage);
     }
 
     public void switchToMainPage(ActionEvent event) throws IOException {

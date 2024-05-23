@@ -31,3 +31,11 @@
     -fx-background-color: #FFA500;
     -fx-text-fill: white;
 }
+.selectedPlayer1Button {
+    -fx-background-color: #0a58c2;
+    -fx-text-fill: white;
+}
+.selectedPlayer2Button {
+    -fx-background-color: #ff0028;
+    -fx-text-fill: white;
+}
