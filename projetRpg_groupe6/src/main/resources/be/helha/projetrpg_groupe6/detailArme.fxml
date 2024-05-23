@@ -15,6 +15,8 @@
       <Button fx:id="delete" layoutX="381.0" layoutY="175.0" mnemonicParsing="false" styleClass="button2" text="Supprimer" />
       <Label fx:id="error" layoutX="116.0" layoutY="221.0" styleClass="title" text="Label" />
       <Label fx:id="confirmation" layoutX="403.0" layoutY="221.0" styleClass="title" text="Label" />
-      <Button fx:id="retour" layoutX="238.0" layoutY="316.0" mnemonicParsing="false" styleClass="button2" text="Retour GestionArme" />
+      <Button fx:id="retour" layoutX="355.0" layoutY="299.0" mnemonicParsing="false" styleClass="button2" text="Retour GestionArme" />
+      <Button layoutX="93.0" layoutY="251.0" mnemonicParsing="false" onAction="#selecteArmeJoueur1" prefHeight="40.0" prefWidth="142.0" styleClass="selectedPlayer1Button" stylesheets="@Styles/personnages.css" text="Selection arme joueur 1" />
+      <Button layoutX="93.0" layoutY="299.0" mnemonicParsing="false" onAction="#selecteArmeJoueur2" prefHeight="40.0" prefWidth="142.0" styleClass="selectedPlayer2Button" stylesheets="@Styles/personnages.css" text="Selection arme joueur 2" />
    </children>
 </AnchorPane>

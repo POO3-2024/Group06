@@ -50,6 +50,7 @@ public class ArmeController implements Initializable {
 
     @FXML
     private TableView<ArmeListCell> tvArmes;
+    private List<Arme> listArme;
 
     private ArmeService armeService = new ArmeService();
 
@@ -115,7 +116,6 @@ public class ArmeController implements Initializable {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("detailArme.fxml"));
         root = fxmlLoader.load();
         DetailArme detailArme = fxmlLoader.getController();
-        System.out.println(id);
         detailArme.initialize(id);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
@@ -134,6 +134,7 @@ public class ArmeController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<ArmeListCell> listArme = FXCollections.observableArrayList();
         List<Arme> listArme2 = armeService.getArme();
+        this.listArme = listArme2;
         for(Arme arme : listArme2){
             ArmeListCell arme2 = new ArmeListCell(arme);
             listArme.add(arme2);
@@ -152,7 +153,7 @@ public class ArmeController implements Initializable {
                 bouton.setOnAction(event -> {
                     ArmeListCell arme = getTableView().getItems().get(getIndex());
                     try {
-                        arme.changeView(event,Integer.parseInt(arme.getIdLabel() ));
+                        arme.changeView(event,Integer.parseInt(arme.getIdLabel()));
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

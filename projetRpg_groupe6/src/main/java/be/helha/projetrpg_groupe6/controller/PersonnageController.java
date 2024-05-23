@@ -66,6 +66,11 @@ public class PersonnageController implements Initializable {
     @FXML
     private Button createButton;
 
+    @FXML
+    private Button selectionJoueur1;
+    @FXML
+    private Button selectionJoueur2;
+
     private Personnage selectedPersonnage;
 
 
@@ -86,10 +91,14 @@ public class PersonnageController implements Initializable {
                 detailsPane.setVisible(true);
                 infoLabel.setVisible(true);
                 modifierButton.setVisible(true);
+                selectionJoueur1.setVisible(true);
+                selectionJoueur2.setVisible(true);
             } else {
                 detailsPane.setVisible(false);
                 infoLabel.setVisible(false);
                 modifierButton.setVisible(false);
+                selectionJoueur1.setVisible(false);
+                selectionJoueur2.setVisible(false);
             }
         });
 
