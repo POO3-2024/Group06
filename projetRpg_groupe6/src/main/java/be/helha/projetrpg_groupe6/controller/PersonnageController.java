@@ -23,6 +23,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller pour gérer les interactions avec l'interface utilisateur des personnages.
+ */
 public class PersonnageController implements Initializable {
 
     private Stage stage;
@@ -66,6 +69,12 @@ public class PersonnageController implements Initializable {
     private Personnage selectedPersonnage;
 
 
+    /**
+     * Initialise le contrôleur. Charge la liste des personnages et configure les gestionnaires d'événements.
+     *
+     * @param url l'URL utilisée pour résoudre les chemins relatifs pour l'objet racine, ou null si non connu.
+     * @param resourceBundle les ressources utilisées pour localiser l'objet racine, ou null si non connu.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         personnageService = new PersonnageService();
@@ -87,19 +96,22 @@ public class PersonnageController implements Initializable {
         detailsPane.setVisible(false);
         infoLabel.setVisible(false);
         modifierButton.setVisible(false);
-
     }
 
+    /**
+     * Rafraîchit la liste des personnages affichés dans la ListView.
+     */
     private void refreshPersonnageList() {
         personnages = personnageService.getPersonnage();
         listView.getItems().clear();
         for (Personnage personnage : personnages) {
             listView.getItems().add(personnage.getNom());
         }
-
-
     }
 
+    /**
+     * Ajoute un nouveau personnage en utilisant les informations saisies dans les champs de texte.
+     */
     @FXML
     public void ajouterPersonnage() {
         String nom = nomField.getText();
@@ -110,14 +122,35 @@ public class PersonnageController implements Initializable {
         refreshPersonnageList();
     }
 
-    private void afficherDetailsPersonnage(String nomPersonnage) {
+    /**
+     * Récupère l'ID d'un personnage par son nom.
+     *
+     * @param nomPersonnage le nom du personnage
+     * @return l'ID du personnage, ou -1 si non trouvé
+     */
+    private int getPersonnageIdByName(String nomPersonnage) {
         for (Personnage personnage : personnages) {
             if (personnage.getNom().equals(nomPersonnage)) {
                 this.selectedPersonnage = personnage;
+                return personnage.getId();
+            }
+        }
+        return -1; // ou une autre valeur par défaut ou lancer une exception si nécessaire
+    }
+
+    /**
+     * Affiche les détails d'un personnage dans les labels correspondants.
+     *
+     * @param id l'ID du personnage
+     */
+    private void afficherDetailsPersonnage(String id) {
+        int idPersonnage = getPersonnageIdByName(id);
+        if (idPersonnage != -1) {
+            Personnage personnage = personnageService.getPersonnageById(idPersonnage);
+            if (personnage != null) {
                 nomLabel.setText("» " + personnage.getNom());
                 pvLabel.setText(String.valueOf(personnage.getPv()) + " hp");
-                manaLabel.setText(String.valueOf(personnage.getMana())  + " mana");
-                break;
+                manaLabel.setText(String.valueOf(personnage.getMana()) + " mana");
             }
         }
     }
@@ -128,51 +161,83 @@ public class PersonnageController implements Initializable {
         CombatService.getPartie().setPersonnage2(selectedPersonnage);
     }
 
+    /**
+     * Change de scène pour afficher la page principale.
+     *
+     * @param event l'événement de l'action
+     * @throws IOException en cas d'erreur de chargement de la scène
+     */
     public void switchToMainPage(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("mainPage.fxml"));
         root = fxmlLoader.load();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void switchToGestionPersonnages(ActionEvent event) throws IOException{
+    /**
+     * Change de scène pour afficher la gestion des personnages.
+     *
+     * @param event l'événement de l'action
+     * @throws IOException en cas d'erreur de chargement de la scène
+     */
+    public void switchToGestionPersonnages(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("gestionPersonnages.fxml"));
         root = fxmlLoader.load();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void switchToGestionArmes(ActionEvent event) throws IOException{
+    /**
+     * Change de scène pour afficher la gestion des armes.
+     *
+     * @param event l'événement de l'action
+     * @throws IOException en cas d'erreur de chargement de la scène
+     */
+    public void switchToGestionArmes(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("gestionArmes.fxml"));
         root = fxmlLoader.load();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
+
+    /**
+     * Change de scène pour afficher la modification d'un personnage.
+     *
+     * @param event l'événement de l'action
+     * @throws IOException en cas d'erreur de chargement de la scène
+     */
     public void switchToModification(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("modificationPersonnages.fxml"));
         root = fxmlLoader.load();
         ModificationPersonnageController modificationPersonnageController = fxmlLoader.getController();
         String selectedPersonnageName = listView.getSelectionModel().getSelectedItem();
-        Personnage selectedPersonnage = personnages.stream().filter(p -> p.getNom().equals(selectedPersonnageName)).findFirst().orElse(null);
+        int selectedPersonnageId = getPersonnageIdByName(selectedPersonnageName);
+        Personnage selectedPersonnage = personnageService.getPersonnageById(selectedPersonnageId);
         modificationPersonnageController.setPersonnage(selectedPersonnage);
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
     }
 
+    /**
+     * Change de scène pour afficher la création d'un personnage.
+     *
+     * @param event l'événement de l'action
+     * @throws IOException en cas d'erreur de chargement de la scène
+     */
     public void switchToCreation(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("modificationPersonnages.fxml"));
         root = fxmlLoader.load();
         ModificationPersonnageController modificationPersonnageController = fxmlLoader.getController();
         modificationPersonnageController.setPersonnage(null);
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
