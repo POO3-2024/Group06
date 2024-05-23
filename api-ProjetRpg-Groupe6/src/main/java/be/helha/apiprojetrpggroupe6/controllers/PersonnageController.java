@@ -41,7 +41,7 @@ public class PersonnageController {
      * @return Personnage Renvoi le personnage correspondant à l'id
      */
     @GetMapping("/personnages/{id}")
-    public ResponseEntity<?> getPersonnageById(@PathVariable int id){
+    public ResponseEntity<?> getPersonnageById(@PathVariable("id") int id){
         try {
             Personnage personnage = personnageService.getPersonnageById(id);
             return new ResponseEntity<Personnage>(personnage, HttpStatus.OK);
@@ -83,7 +83,7 @@ public class PersonnageController {
      * @return int Renvoi le nombre de lignes supprimées
      */
     @DeleteMapping("/personnages/{id}")
-    public ResponseEntity<?> deletePersonnage(@PathVariable int id){
+    public ResponseEntity<?> deletePersonnage(@PathVariable("id") int id){
         try {
             int result = personnageService.deletePersonnage(id);
             return new ResponseEntity<Integer>(result, HttpStatus.OK);

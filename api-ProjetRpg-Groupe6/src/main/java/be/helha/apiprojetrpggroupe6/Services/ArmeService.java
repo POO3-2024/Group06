@@ -53,10 +53,16 @@ public class ArmeService {
      * @return int Renvoi le nombre de lignes modifiées
      */
     public int updateArme(Arme arme) throws Exception{
-       Arme arme1 = this.armeDatabase.getArmeByName(arme.getNom());
-         if(arme1 == null || arme1.getId() == arme.getId()){
+      List<ArmeDTO> list = getArmes();
+      boolean verifDejaExist = false;
+      for(ArmeDTO armeVerif : list){
+          if(armeVerif.getNom().equals(arme.getNom()) && armeVerif.getId() != arme.getId()){
+              verifDejaExist = true;
+          }
+      }
+       if(!verifDejaExist){
               return this.armeDatabase.updateArme(arme);
-            }else{
+           }else{
                 throw new SQLException("Arme déjà existante");
          }
 

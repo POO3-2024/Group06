@@ -74,8 +74,9 @@ public class ArmeService {
     public boolean UpdateArme(Arme arme){
         HttpClient httpClient = HttpClient.newHttpClient();
         String json = gson.toJson(arme);
+        System.out.println(json);
         HttpRequest.BodyPublisher bodyPublisher = HttpRequest.BodyPublishers.ofString(json,StandardCharsets.UTF_8);
-        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(apiUrl + "/armes")).PUT(bodyPublisher).header("Content-Type", "application/json").build();
+        HttpRequest httpRequest = HttpRequest.newBuilder().uri(URI.create(apiUrl+"/armes")).PUT(bodyPublisher).header("Content-Type", "application/json").build();
         try {
            HttpResponse<String> response = httpClient.send(httpRequest,HttpResponse.BodyHandlers.ofString());
            System.out.println(response.statusCode());

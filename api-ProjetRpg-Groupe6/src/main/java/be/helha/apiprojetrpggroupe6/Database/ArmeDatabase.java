@@ -173,7 +173,8 @@ public class ArmeDatabase {
      */
     public int updateArme(Arme arme) throws Exception {
 
-        String query = "UPDATE arme SET Nom = '"+arme.getNom()+"', Degats = "+arme.getDegats()+" WHERE Id_arme = "+arme.getId()+" ";
+        String query = "UPDATE arme SET Nom='"+arme.getNom()+"',degats="+arme.getDegats()+" WHERE Id_arme="+arme.getId()+"";
+
 
         try{
            int result = connection.executeUpdate(query);

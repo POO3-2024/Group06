@@ -54,10 +54,13 @@ public class DetailArme {
             error.setText("Introduire des valeurs");
         }else{
             Arme arme;
-            if(nomModif.getText()==null){
-                arme = new Arme(nom.getText(),Integer.parseInt(degatsModif.getText()));
+            if(nomModif.getText().isEmpty()){
+
+                arme = new Arme(String.valueOf(id_Arme), nom.getText(),Integer.parseInt(degatsModif.getText()));
+            }else if(degatsModif.getText().isEmpty()){
+                arme = new Arme(String.valueOf(id_Arme),nomModif.getText(),Integer.parseInt(degats.getText()));
             }else{
-                arme = new Arme(nomModif.getText(),Integer.parseInt(degats.getText()));
+                arme = new Arme(String.valueOf(id_Arme),nomModif.getText(),Integer.parseInt(degatsModif.getText()));
             }
             ArmeService armeService = new ArmeService();
             Boolean test = armeService.UpdateArme(arme);
@@ -68,10 +71,11 @@ public class DetailArme {
     }
 
 
-    public void initialize() {
+    public void initialize(int id) {
         ArmeService armeService = new ArmeService();
-        System.out.println(id_Arme);
-        Arme arme = armeService.getArmeById(id_Arme);
+
+        Arme arme = armeService.getArmeById(id);
+        id_Arme = id;
         nom.setText(arme.getNom());
         degats.setText(String.valueOf(arme.getDegats()));
 

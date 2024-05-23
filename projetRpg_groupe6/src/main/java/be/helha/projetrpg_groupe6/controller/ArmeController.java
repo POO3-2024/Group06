@@ -115,8 +115,8 @@ public class ArmeController implements Initializable {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("detailArme.fxml"));
         root = fxmlLoader.load();
         DetailArme detailArme = fxmlLoader.getController();
-        detailArme.setId_Arme(id);
-        detailArme.initialize();
+        System.out.println(id);
+        detailArme.initialize(id);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 
 
@@ -152,7 +152,7 @@ public class ArmeController implements Initializable {
                 bouton.setOnAction(event -> {
                     ArmeListCell arme = getTableView().getItems().get(getIndex());
                     try {
-                        arme.changeView(event, getIndex());
+                        arme.changeView(event,Integer.parseInt(arme.getIdLabel() ));
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }

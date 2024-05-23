@@ -11,6 +11,12 @@ public class Arme {
         this.degats = degats;
     }
 
+    public Arme(String id,String nom, int degats) {
+        this.nom = nom;
+        this.degats = degats;
+        this.id = id;
+    }
+
     public String getId() {
         return id;
     }
