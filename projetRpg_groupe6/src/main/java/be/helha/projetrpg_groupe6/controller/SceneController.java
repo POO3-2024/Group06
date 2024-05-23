@@ -41,16 +41,11 @@ public class SceneController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //lv_personnages.getItems().addAll(personnagesList);
-        try {
-            armeController = new ArmeController();
-            personnageDAO = new PersonnageDAO();
+        armeController = new ArmeController();
+
 //            List<Personnage> personnages = personnageDAO.getAllPersonnages();
-            //lv_personnages.getItems().addAll(personnages);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        //lv_personnages.getItems().addAll(personnages);
+
     }
 
     public void switchToMainPage(ActionEvent event) throws IOException {
