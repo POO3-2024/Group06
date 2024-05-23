@@ -32,11 +32,15 @@ public class AttaqueController {
      */
     @GetMapping("/attaques/{id_personnage}/{id_arme}")
     public ResponseEntity<Personnage> attaquer(@PathVariable int id_personnage,@PathVariable int id_arme){
-        Personnage personnage = this.personnageService.getPersonnageById(id_personnage);
-        Arme arme = this.armeService.getArmeById(id_arme);
+        try {
+            Personnage personnage = this.personnageService.getPersonnageById(id_personnage);
+            Arme arme = this.armeService.getArmeById(id_arme);
 
-        Personnage personnageAttaque = this.attaqueService.attaquer(personnage, arme);
+            Personnage personnageAttaque = this.attaqueService.attaquer(personnage, arme);
 
-        return new ResponseEntity<Personnage>(personnageAttaque, HttpStatus.OK);
+            return new ResponseEntity<Personnage>(personnageAttaque, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<Personnage>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

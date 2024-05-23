@@ -1,0 +1,5 @@
+{
+  "dbPath": "C:/sqlite/db",
+  "dbTest": "/poo3test.db",
+  "dbProduction": "/poo3.db"
+}

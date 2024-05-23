@@ -35,6 +35,8 @@ public class SceneController implements Initializable {
 
     private PersonnageService personnageService;
 
+    private ArmeController armeController;
+
     Personnage test1 = new Personnage("test1", 100, 100);
     Personnage test2 = new Personnage("test2", 500, 100);
     Personnage[] personnagesList = {test1, test2};
@@ -68,6 +70,10 @@ public class SceneController implements Initializable {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void afficherArme(){
+        armeController.getArme();
     }
 
 }

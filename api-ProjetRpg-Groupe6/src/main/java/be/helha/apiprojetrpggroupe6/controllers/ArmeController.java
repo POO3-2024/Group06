@@ -26,9 +26,13 @@ public class ArmeController {
      * @return List<Arme> Renvoi la liste des armes
      */
     @GetMapping("/armes")
-    public ResponseEntity<List<ArmeDTO>> getArmes(){
-        List<ArmeDTO> armes = armeService.getArmes();
-        return new ResponseEntity<List<ArmeDTO>>(armes, HttpStatus.OK);
+    public ResponseEntity<?> getArmes(){
+        try {
+            List<ArmeDTO> armes = armeService.getArmes();
+            return new ResponseEntity<List<ArmeDTO>>(armes, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<String>( e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     /**
      * Récupère une arme par son id
@@ -36,9 +40,13 @@ public class ArmeController {
      * @return Arme Renvoi l'arme correspondant à l'id
      */
     @GetMapping("/armes/{id}")
-    public ResponseEntity<Arme> getArmeById(@PathVariable int id){
-        Arme arme = armeService.getArmeById(id);
-        return new ResponseEntity<Arme>(arme, HttpStatus.OK);
+    public ResponseEntity<?> getArmeById(@PathVariable int id){
+        try {
+            Arme arme = armeService.getArmeById(id);
+            return new ResponseEntity<Arme>(arme, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     /**
      * Ajoute une arme à la base de données
@@ -46,9 +54,13 @@ public class ArmeController {
      * @return Arme Renvoi l'arme ajoutée
      */
     @PostMapping("/armes")
-    public ResponseEntity<Arme> addArme(@RequestBody Arme arme){
-        Arme arme1 = armeService.addArme(arme);
-        return new ResponseEntity<Arme>(arme1, HttpStatus.CREATED);
+    public ResponseEntity<?> addArme(@RequestBody Arme arme){
+        try {
+            Arme arme1 = armeService.addArme(arme);
+            return new ResponseEntity<Arme>(arme1, HttpStatus.CREATED);
+        } catch (Exception e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     /**
      * Met à jour une arme
@@ -56,9 +68,13 @@ public class ArmeController {
      * @return int Renvoi le nombre de lignes modifiées
      */
     @PutMapping("/armes")
-    public ResponseEntity<Integer> updateArme(@RequestBody Arme arme) {
-        int result = armeService.updateArme(arme);
-        return new ResponseEntity<Integer>(result, HttpStatus.OK);
+    public ResponseEntity<?> updateArme(@RequestBody Arme arme) {
+        try {
+            int result = armeService.updateArme(arme);
+            return new ResponseEntity<Integer>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<String>(e.getMessage(),  HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
     /**
      * Supprime une arme
@@ -66,8 +82,12 @@ public class ArmeController {
      * @return int Renvoi le nombre de lignes supprimées
      */
     @DeleteMapping("/armes/{id}")
-    public ResponseEntity<Integer> deleteArme(@PathVariable int id) {
-        int result = armeService.deleteArme(id);
-        return new ResponseEntity<Integer>(result, HttpStatus.OK);
+    public ResponseEntity<?> deleteArme(@PathVariable int id) {
+        try {
+            int result = armeService.deleteArme(id);
+            return new ResponseEntity<Integer>(result, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
