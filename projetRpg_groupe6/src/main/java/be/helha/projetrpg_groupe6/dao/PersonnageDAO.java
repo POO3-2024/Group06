@@ -14,8 +14,8 @@ public class PersonnageDAO {
         // Initialize de la connexion à la db
         //connection = DriverManager.getConnection();
         Class.forName("org.sqlite.JDBC");
-        LectureJson fichierConfig = new LectureJson();
-        connection = DriverManager.getConnection(fichierConfig.getDbUrl());
+       /* LectureJson fichierConfig = new LectureJson();
+        connection = DriverManager.getConnection(fichierConfig.getDbUrl());*/
     }
 
     public List<Personnage> getAllPersonnages() throws SQLException {

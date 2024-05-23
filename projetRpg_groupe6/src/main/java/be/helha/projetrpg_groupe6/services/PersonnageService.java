@@ -44,7 +44,7 @@ public class PersonnageService {
         String json = gson.toJson(personnage);
         HttpRequest.BodyPublisher bodyPublisher = HttpRequest.BodyPublishers.ofString(json, StandardCharsets.UTF_8);
         HttpRequest httpRequest = HttpRequest.newBuilder()
-                .uri(URI.create("http://localhost:8080/api/personnages/" + personnage.getId()))
+                .uri(URI.create("http://localhost:8080/api/personnages"))
                 .PUT(bodyPublisher)
                 .header("Content-Type", "application/json")
                 .build();
