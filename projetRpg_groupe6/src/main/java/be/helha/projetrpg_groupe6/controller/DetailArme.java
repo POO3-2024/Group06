@@ -56,11 +56,11 @@ public class DetailArme {
             Arme arme;
             if(nomModif.getText().isEmpty()){
 
-                arme = new Arme(String.valueOf(id_Arme), nom.getText(),Integer.parseInt(degatsModif.getText()));
+                arme = new Arme(id_Arme, nom.getText(),Integer.parseInt(degatsModif.getText()));
             }else if(degatsModif.getText().isEmpty()){
-                arme = new Arme(String.valueOf(id_Arme),nomModif.getText(),Integer.parseInt(degats.getText()));
+                arme = new Arme(id_Arme,nomModif.getText(),Integer.parseInt(degats.getText()));
             }else{
-                arme = new Arme(String.valueOf(id_Arme),nomModif.getText(),Integer.parseInt(degatsModif.getText()));
+                arme = new Arme(id_Arme,nomModif.getText(),Integer.parseInt(degatsModif.getText()));
             }
             ArmeService armeService = new ArmeService();
             Boolean test = armeService.UpdateArme(arme);

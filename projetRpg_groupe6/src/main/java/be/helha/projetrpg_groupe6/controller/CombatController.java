@@ -83,8 +83,8 @@ public class CombatController implements Initializable {
 
     public void attaquer(){
         CombatService combatService = new CombatService();
-        String idAttaque = "0";
-        String idArme = "0";
+        int idAttaque = 0;
+        int idArme = 0;
         if(partie.getJoueur1_actif()){
             idAttaque = partie.getPersonnage1().getId();
             idArme = partie.getArme1().getId();

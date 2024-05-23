@@ -2,7 +2,7 @@ package be.helha.projetrpg_groupe6.arme;
 
 public class Arme {
 
-    private String id;
+    private int id;
     private String nom;
     private int degats;
 
@@ -11,17 +11,17 @@ public class Arme {
         this.degats = degats;
     }
 
-    public Arme(String id,String nom, int degats) {
+    public Arme(int id,String nom, int degats) {
         this.nom = nom;
         this.degats = degats;
         this.id = id;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

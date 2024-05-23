@@ -30,7 +30,7 @@ public class CombatService {
         return partie;
     }
 
-    public Personnage attaquer(String idAttaque, String idArme){
+    public Personnage attaquer(int idAttaque, int idArme){
         Personnage perso = null;
         this.client = HttpClient.newHttpClient();
         HttpRequest httpRequest = HttpRequest.newBuilder()
