@@ -160,14 +160,18 @@ public class PersonnageController implements Initializable {
                 nomLabel.setText("» " + personnage.getNom());
                 pvLabel.setText(String.valueOf(personnage.getPv()) + " hp");
                 manaLabel.setText(String.valueOf(personnage.getMana()) + " mana");
+                this.selectedPersonnage = personnage;
             }
         }
     }
     public void selectionJoueur1(){
-        CombatService.getPartie().setPersonnage1(selectedPersonnage);
+        CombatService.getPartie().setPersonnage1(new Personnage(selectedPersonnage));
+        System.out.println(selectedPersonnage.getNom());
     }
     public void selectionJoueur2(){
-        CombatService.getPartie().setPersonnage2(selectedPersonnage);
+        CombatService.getPartie().setPersonnage2(new Personnage(selectedPersonnage));
+        System.out.println(selectedPersonnage.getNom());
+
     }
 
     /**

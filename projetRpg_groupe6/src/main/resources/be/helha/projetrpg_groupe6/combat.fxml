@@ -64,7 +64,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <Button fx:id="attackButtonPlayer1" layoutX="11.0" layoutY="299.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="362.0" stylesheets="@Styles/combat.css" text="Attaquer">
+            <Button fx:id="attackButtonPlayer1" layoutX="11.0" layoutY="299.0" mnemonicParsing="false" onAction="#attaquer" prefHeight="67.0" prefWidth="362.0" stylesheets="@Styles/combat.css" text="Attaquer">
                <font>
                   <Font size="22.0" />
                </font>
@@ -105,7 +105,7 @@
                   </AnchorPane>
                </children>
             </AnchorPane>
-            <Button fx:id="attackButtonPlayer2" layoutX="11.0" layoutY="299.0" mnemonicParsing="false" prefHeight="67.0" prefWidth="362.0" stylesheets="@Styles/combat.css" text="Attaquer">
+            <Button fx:id="attackButtonPlayer2" layoutX="11.0" layoutY="299.0" mnemonicParsing="false" onAction="#attaquer" prefHeight="67.0" prefWidth="362.0" stylesheets="@Styles/combat.css" text="Attaquer">
                <font>
                   <Font size="22.0" />
                </font>

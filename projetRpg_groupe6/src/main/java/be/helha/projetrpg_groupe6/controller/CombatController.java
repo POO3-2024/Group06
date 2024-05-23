@@ -2,7 +2,9 @@ package be.helha.projetrpg_groupe6.controller;
 
 import be.helha.projetrpg_groupe6.HelloApplication;
 import be.helha.projetrpg_groupe6.models.Partie;
+import be.helha.projetrpg_groupe6.service.ArmeService;
 import be.helha.projetrpg_groupe6.services.CombatService;
+import be.helha.projetrpg_groupe6.services.PersonnageService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -51,15 +53,24 @@ public class CombatController implements Initializable {
     private Button attackButtonPlayer2;
 
     private Partie partie;
+    private ArmeService armeService = new ArmeService();
+    private PersonnageService personnageService = new PersonnageService();
 
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.partie = CombatService.getPartie();
+
         if(partie.getPersonnage1() == null || partie.getPersonnage2() == null || partie.getArme1() == null || partie.getArme2() == null){
             attackButtonPlayer1.setDisable(true);
             attackButtonPlayer2.setDisable(true);
+        }else if(partie.getJoueur1_actif()){
+            attackButtonPlayer1.setDisable(false);
+            attackButtonPlayer2.setDisable(true);
+        } else {
+            attackButtonPlayer1.setDisable(true);
+            attackButtonPlayer2.setDisable(false);
         }
         if(partie.getPersonnage1() != null){
             labelCharacterNamePlayer1.setText(partie.getPersonnage1().getNom());
@@ -90,12 +101,20 @@ public class CombatController implements Initializable {
             idArme = partie.getArme1().getId();
             partie.setPersonnage2(combatService.attaquer(idAttaque, idArme));
             labelCharacterHpPlayer2.setText(String.valueOf(partie.getPersonnage2().getPv()));
+            attackButtonPlayer1.setDisable(true);
+            attackButtonPlayer2.setDisable(false);
         }else {
             idAttaque = partie.getPersonnage2().getId();
             idArme = partie.getArme2().getId();
             partie.setPersonnage1(combatService.attaquer(idAttaque, idArme));
             labelCharacterHpPlayer1.setText(String.valueOf(partie.getPersonnage1().getPv()));
+            attackButtonPlayer1.setDisable(false);
+            attackButtonPlayer2.setDisable(true);
         }
+        System.out.println(partie.getPersonnage1().getId());
+        System.out.println(partie.getPersonnage2().getId());
+
+        partie.skipTurn();
     }
     public void switchToGestionPersonnages(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("gestionPersonnages.fxml"));
