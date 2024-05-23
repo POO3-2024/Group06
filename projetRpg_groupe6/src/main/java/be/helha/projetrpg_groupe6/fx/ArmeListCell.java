@@ -17,18 +17,17 @@ import java.io.IOException;
 
 public class ArmeListCell extends ListCell<Arme> {
     private HBox content;
-    private Label nomLabel;
-    private Label idLabel;
+    public String nomLabel;
+    public String idLabel;
     private Button buttonView;
 
-    public ArmeListCell() {
+    public ArmeListCell(Arme arme) {
         super();
-        nomLabel = new Label();
-        idLabel = new Label();
+        this.nomLabel = arme.getNom();
+        this.idLabel = arme.getId();
         buttonView = new Button();
-        HBox vBox = new HBox(idLabel, nomLabel, buttonView);
-        content = new HBox(vBox);
-        content.setSpacing(10);
+
+
 
         buttonView.setOnAction(new EventHandler<ActionEvent>(){
             @Override
@@ -46,7 +45,7 @@ public class ArmeListCell extends ListCell<Arme> {
         });
     }
 
-    @Override
+  /*  @Override
     protected void updateItem(Arme arme, boolean empty) {
         super.updateItem(arme, empty);
         if (arme != null && !empty) {
@@ -56,9 +55,29 @@ public class ArmeListCell extends ListCell<Arme> {
         } else {
             setGraphic(null);
         }
+    }*/
+
+    public Button getButtonView() {
+        return buttonView;
     }
 
-    protected void changeView(ActionEvent event,int id) throws IOException {
+    public String getNomLabel() {
+        return nomLabel;
+    }
+
+    public void setNomLabel(String nomLabel) {
+        this.nomLabel = nomLabel;
+    }
+
+    public String getIdLabel() {
+        return idLabel;
+    }
+
+    public void setIdLabel(String idLabel) {
+        this.idLabel = idLabel;
+    }
+
+    public void changeView(ActionEvent event, int id) throws IOException {
         ArmeController.getInstance().changeViewToDetail(event,id);
     }
 

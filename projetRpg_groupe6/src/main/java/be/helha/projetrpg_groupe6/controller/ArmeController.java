@@ -47,10 +47,9 @@ public class ArmeController implements Initializable {
     @FXML
     private Button boutonAdd;
 
+
     @FXML
-    private ListView<Arme> lv_armes;
-    @FXML
-    private TableView<Arme> tvArmes;
+    private TableView<ArmeListCell> tvArmes;
 
     private ArmeService armeService = new ArmeService();
 
@@ -132,17 +131,45 @@ public class ArmeController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        ObservableList<Arme> listArme = FXCollections.observableArrayList();
+        ObservableList<ArmeListCell> listArme = FXCollections.observableArrayList();
         List<Arme> listArme2 = armeService.getArme();
         for(Arme arme : listArme2){
-            listArme.add(arme);
+            ArmeListCell arme2 = new ArmeListCell(arme);
+            listArme.add(arme2);
         }
-        lv_armes.setItems(listArme);
-        lv_armes.setCellFactory(param -> new ArmeListCell());
-        TableColumn<Arme,String> id_column = new TableColumn<>("ID");
-        TableColumn<Arme,String> nom_column = new TableColumn<>("NOM");
-        TableColumn<Arme,Arme> button_column = new TableColumn<>("Details");
-        ArmeListCell test = new ArmeListCell();
+
+
+
+        TableColumn<ArmeListCell,String> id_column = new TableColumn<>("ID");
+        id_column.setCellValueFactory(new PropertyValueFactory<>("idLabel"));
+        TableColumn<ArmeListCell,String> nom_column = new TableColumn<>("NOM");
+        nom_column.setCellValueFactory(new PropertyValueFactory<>("nomLabel"));
+        TableColumn<ArmeListCell,Void> button_column = new TableColumn<>("DETAILS");
+        button_column.setCellFactory(param -> new TableCell<>() {
+            private final Button bouton = new Button("Détail");
+            {
+                bouton.setOnAction(event -> {
+                    ArmeListCell arme = getTableView().getItems().get(getIndex());
+                    try {
+                        arme.changeView(event, getIndex());
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(bouton);
+                }
+            }
+
+        });
+      //  ArmeListCell test = new ArmeListCell();
 
         tvArmes.getColumns().add(id_column);
         tvArmes.getColumns().add(nom_column);
