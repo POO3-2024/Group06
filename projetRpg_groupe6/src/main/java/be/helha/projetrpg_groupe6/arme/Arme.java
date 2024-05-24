@@ -4,7 +4,7 @@ package be.helha.projetrpg_groupe6.arme;
  */
 public class Arme {
 
-    private String id;
+    private int id;
     private String nom;
     private int degats;
     /**
@@ -24,7 +24,7 @@ public class Arme {
      * @param nom le nom de l'arme.
      * @param degats les dégâts de l'arme.
      */
-    public Arme(String id,String nom, int degats) {
+    public Arme(int id,String nom, int degats) {
         this.nom = nom;
         this.degats = degats;
         this.id = id;
@@ -34,7 +34,7 @@ public class Arme {
      *
      * @return l'identifiant de l'arme.
      */
-    public String getId() {
+    public int getId() {
         return id;
     }
     /**
@@ -42,7 +42,7 @@ public class Arme {
      *
      * @param id l'identifiant de l'arme.
      */
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
     /**

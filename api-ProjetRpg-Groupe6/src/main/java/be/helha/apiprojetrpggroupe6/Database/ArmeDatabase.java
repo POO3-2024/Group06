@@ -120,7 +120,7 @@ public class ArmeDatabase {
     public Arme addArme(Arme arme) throws Exception {
         boolean verifArmeExist = false;
         List<ArmeDTO> listArme;
-        System.out.println(getArme().isEmpty());
+       
         if(!getArme().isEmpty()){
             listArme = getArme();
             for(ArmeDTO armeLoop : listArme){

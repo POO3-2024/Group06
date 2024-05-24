@@ -31,7 +31,7 @@ public class ArmeListCell extends ListCell<Arme> {
     public ArmeListCell(Arme arme) {
         super();
         this.nomLabel = arme.getNom();
-        this.idLabel = arme.getId();
+        this.idLabel =String.valueOf(arme.getId()) ;
         buttonView = new Button();
 
 
@@ -42,7 +42,7 @@ public class ArmeListCell extends ListCell<Arme> {
                 Arme arme = getItem();
                 if (arme != null) {
                     try {
-                        changeView(event,Integer.parseInt(arme.getId()));
+                        changeView(event,arme.getId());
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
