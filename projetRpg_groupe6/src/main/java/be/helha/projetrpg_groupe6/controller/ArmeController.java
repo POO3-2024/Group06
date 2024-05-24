@@ -34,6 +34,9 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.ResourceBundle;
 
+/**
+ * Controller pour ajouter ou voir toutes les armes
+ */
 public class ArmeController implements Initializable {
     @FXML
     private TextField nomArme;
@@ -64,6 +67,10 @@ public class ArmeController implements Initializable {
     public ArmeController(){
         instance = this;
     }
+
+    /**
+     * Envoi un objet Arme dans l'api
+     */
     public void addArme(){
         if(nomArme.getText().isEmpty() || DegatsArme.getText().isEmpty()){
             affichageError.setText("Le champ nom ou dégats est vide");
@@ -81,7 +88,11 @@ public class ArmeController implements Initializable {
         }
     }
 
-
+    /**
+     * Change la vue du programme vers l'acceuil
+     * @param event
+     * @throws IOException
+     */
 
     public void switchToMainPage(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("mainPage.fxml"));
@@ -92,6 +103,11 @@ public class ArmeController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Change la vue du programme vers la liste de personnage
+     * @param event
+     * @throws IOException
+     */
     public void switchToGestionPersonnages(ActionEvent event) throws IOException{
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("gestionPersonnages.fxml"));
         root = fxmlLoader.load();
@@ -101,6 +117,11 @@ public class ArmeController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Change la vue du programme vers la liste des armes
+     * @param event
+     * @throws IOException
+     */
     public void switchToGestionArmes(ActionEvent event) throws IOException{
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("gestionArmes.fxml"));
         root = fxmlLoader.load();
@@ -110,6 +131,12 @@ public class ArmeController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Change la vue du programme vers le détail d'une arme
+     * @param event
+     * @param id identifiant de l'arme qu'on souhaite voir
+     * @throws IOException
+     */
     public void changeViewToDetail(ActionEvent event, int id) throws IOException {
         // Logic to change the view and use the arme parameter
         // For example, load a new FXML file and pass the arme object to the new controller
@@ -126,10 +153,19 @@ public class ArmeController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Permet d'obtenir l'instance de la classe ArmeController
+     * @return l'instance
+     */
     public static ArmeController getInstance(){
         return instance;
     }
 
+    /**
+     * Initialise la vue avec le chargement de toute les armes de la base de donnée
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<ArmeListCell> listArme = FXCollections.observableArrayList();
@@ -180,6 +216,10 @@ public class ArmeController implements Initializable {
 
     }
 
+    /**
+     * Ajuste l'emplacement des colonne de la tableview
+     * @param tableView
+     */
     private void adjustTableColumnsWidth(TableView<?> tableView) {
         // Ajouter un écouteur sur la largeur de la TableView
         tableView.widthProperty().addListener((obs, oldWidth, newWidth) -> {
