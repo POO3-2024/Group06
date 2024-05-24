@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @SpringBootTest
 public class PersonnageDatabaseTest {
@@ -36,12 +37,10 @@ public class PersonnageDatabaseTest {
 //        personnages.add(this.perso1Dto);
 //        personnages.add(this.perso2Dto);
     }
-
     @AfterEach
     public void clean() throws SQLException {
         personnageDatabase.clearAll();
     }
-
     @Test
     public void testGetAllPersonnages() throws Exception {
         List<PersonnageDTO> personnageDTOS = personnageDatabase.getAllPersonnages();
@@ -50,22 +49,22 @@ public class PersonnageDatabaseTest {
         assertEquals(personnageDTOS.get(1).getNom(), perso1.getNom());
         assertEquals(personnageDTOS.get(2).getNom(), perso2.getNom());
     }
-
     @Test
     public void testAdd() throws SQLException {
-        assertEquals(personnageDatabase.add(perso).getNom(), perso.getNom());
+        assertEquals(perso.getNom(), personnageDatabase.add(perso).getNom());
     }
-
     @Test
     public void testGetPersonnageById() throws SQLException {
-        assertEquals(personnageDatabase.getPersonnageById(perso.getId()).getId(), perso.getId());
+        assertEquals(perso.getId(), personnageDatabase.getPersonnageById(perso.getId()).getId());
     }
-
     @Test
     public void testGetPersonnageByName() throws SQLException {
-        assertEquals(personnageDatabase.getPersonnageByName(perso.getNom()).getNom(), perso.getNom());
+        assertEquals(perso.getNom(), personnageDatabase.getPersonnageByName(perso.getNom()).getNom());
     }
-    
+    @Test
+    public void testUpdate() throws SQLException {
+        assertNotEquals(0, personnageDatabase.update(perso));
+    }
     @AfterAll
     public static void cleanall(){
         connectionDB.closeConnection();
