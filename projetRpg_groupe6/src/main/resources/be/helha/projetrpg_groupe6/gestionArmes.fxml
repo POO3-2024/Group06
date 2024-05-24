@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="740.0" prefWidth="1020.0" styleClass="button" stylesheets="@arme.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.helha.projetrpg_groupe6.controller.ArmeController">
+   <children>
+      <HBox prefHeight="45.0" prefWidth="1020.0">
+         <children>
+            <Label alignment="CENTER" prefHeight="45.0" prefWidth="307.0" text="Gestion RPG" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button mnemonicParsing="false" onAction="#switchToMainPage" prefHeight="25.0" prefWidth="112.0" stylesheets="@Styles/homepage.css" text="Accueil" textFill="WHITE" />
+            <Region prefHeight="45.0" prefWidth="10.0" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToGestionPersonnages" prefHeight="25.0" prefWidth="150.0" stylesheets="@Styles/homepage.css" text="Personnages" textFill="WHITE" />
+            <Region prefHeight="45.0" prefWidth="10.0" />
+            <Button alignment="CENTER" mnemonicParsing="false" onAction="#switchToGestionArmes" prefHeight="25.0" prefWidth="150.0" stylesheets="@Styles/homepage.css" text="Armes" textAlignment="CENTER" textFill="WHITE" />
+         </children>
+      </HBox>
+      <Label alignment="CENTER" layoutX="153.0" layoutY="116.0" prefHeight="45.0" prefWidth="98.0" styleClass="title" text="Armes">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+
+      <Button layoutX="799.0" layoutY="126.0" mnemonicParsing="false" onAction="#addArme" prefHeight="25.0" prefWidth="68.0" styleClass="button2" text="Add" />
+      <TextField fx:id="nomArme" layoutX="448.0" layoutY="126.0" />
+      <TextField fx:id="DegatsArme" layoutX="618.0" layoutY="126.0" />
+      <Label fx:id="affichageError" layoutX="597.0" layoutY="161.0" styleClass="navigation" />
+      <TableView fx:id="tvArmes" layoutX="153.0" layoutY="257.0" prefHeight="408.0" prefWidth="719.0" />
+   </children>
+</AnchorPane>

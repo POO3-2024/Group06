@@ -1,0 +1,44 @@
+.root {
+    -fx-background-color: #111518;
+}
+
+#detailsPane {
+    -fx-background-radius: 10px;
+    -fx-background-color: #EAE9E9;
+}
+
+.list-view {
+    -fx-background-color: #EAE9E9;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-text-fill: #222F3E;
+}
+
+.button#createButton, .button#modifierButton {
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+}
+
+.button#createButton {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+}
+
+.button#modifierButton {
+    -fx-background-color: #FFA500;
+    -fx-text-fill: white;
+}
+.selectedPlayer1Button {
+    -fx-background-color: #0a58c2;
+    -fx-text-fill: white;
+}
+.selectedPlayer2Button {
+    -fx-background-color: #ff0028;
+}
+.button#supprimerButton {
+    -fx-background-color: #ff3232;
+    -fx-text-fill: white;
+}

@@ -1,0 +1,49 @@
+.root {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 10px;
+}
+
+.detailsPane {
+    -fx-background-radius: 10px;
+    -fx-background-color: #555656;
+}
+
+.equipementPane {
+    -fx-background-radius: 10px;
+    -fx-background-color: #a2ecec;
+}
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+}
+.list-view {
+    -fx-background-color: #EAE9E9;
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-text-fill: #222F3E;
+}
+
+.button#createButton, .button#modifierButton {
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+    -fx-padding: 10px 20px;
+}
+
+.button#createButton {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+}
+
+.button#modifierButton {
+    -fx-background-color: #FFA500;
+    -fx-text-fill: white;
+}
+.endMessage{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-border-color: #000000;
+}
