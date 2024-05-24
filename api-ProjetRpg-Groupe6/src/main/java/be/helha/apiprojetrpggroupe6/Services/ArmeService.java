@@ -31,7 +31,7 @@ public class ArmeService {
     /**
      * Récupère toutes les armes de la base de données
      * Renvoi uniquement l'id et le nom des armes
-     * @return List<Arme> Renvoi la liste des armes
+     * @return Renvoi la liste des armes
      */
     public List<ArmeDTO> getArmes() throws Exception{
         List<ArmeDTO> list = new ArrayList<>();

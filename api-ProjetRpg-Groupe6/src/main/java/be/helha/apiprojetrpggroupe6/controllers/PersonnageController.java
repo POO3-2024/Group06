@@ -26,7 +26,7 @@ public class PersonnageController {
     /**
      * Récupère tous les personnages de la base de donénes
      * Endpoint : /api/personnages
-     * @return List<Personnage> Renvoi la liste des personnages
+     * @return Renvoi la liste des personnages
      * @return String Renvoi un message d'erreur
      *
      */

@@ -27,7 +27,7 @@ public class PersonnageService {
     /**
      * Récupère tous les personnages de la base de données
      * Renvoi uniquement l'id et le nom des personnages
-     * @return List<PersonnageDTO> Renvoi la liste des personnages
+     * @return Renvoi la liste des personnages
      */
     public List<PersonnageDTO>getPersonnages() throws SQLException {
         return this.personnageDatabase.getAllPersonnages();

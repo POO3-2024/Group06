@@ -25,7 +25,7 @@ public class PersonnageDatabase {
 
     /**
      * Récupère la liste de tous les personnages dans la base de données.
-     * @return List<PersonnageDTO> une liste d'objets PersonnageDTO.
+     * @return une liste d'objets PersonnageDTO.
      * @throws SQLException
      */
     public List<PersonnageDTO> getAllPersonnages() throws SQLException {

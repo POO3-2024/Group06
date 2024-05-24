@@ -27,7 +27,7 @@ public class ArmeController {
     /**
      * Récupère toutes les armes de la base de données
      * Endpoint : /api/armes
-     * @return List<Arme> Renvoi la liste des armes
+     * @return Renvoi la liste des armes
      * @return String Renvoi un message d'erreur
      */
     @GetMapping("/armes")
