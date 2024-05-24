@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class AttaqueService {
 
-
+    /**
+     * Services nécessaires pour attaquer
+     */
     private PersonnageService personnageService = new PersonnageService();
     private ArmeService armeService = new ArmeService();
     /**

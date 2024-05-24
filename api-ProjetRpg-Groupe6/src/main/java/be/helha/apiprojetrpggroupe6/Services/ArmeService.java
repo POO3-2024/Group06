@@ -18,7 +18,9 @@ import java.util.Optional;
 @Service
 public class ArmeService {
 
-
+    /**
+     * Base de données des armes
+     */
     private ArmeDatabase armeDatabase = new ArmeDatabase(ConnectionDB.getConnection());
 
     /**
