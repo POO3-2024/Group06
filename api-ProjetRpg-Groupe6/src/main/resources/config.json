@@ -1,5 +1,5 @@
 {
-  "dbPath": "C:/Users/Lawzen/Documents/GitHub/Group06/projetRpg_groupe6/src/main/java/db/",
+  "dbPath": "C:/sqlite/db",
   "dbTest": "/poo3test.db",
-  "dbProduction": "/projetRpg_groupe6.db"
+  "dbProduction": "/poo3.db"
 }
