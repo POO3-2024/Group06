@@ -12,8 +12,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -53,15 +57,22 @@ public class CombatController implements Initializable {
     @FXML
     private Button attackButtonPlayer2;
     @FXML
+    private ImageView avatarImageView1;
+    @FXML
+    private ImageView avatarImageView2;
+    @FXML
     private Label endMessageLabel;
     @FXML
     private AnchorPane endMessageContainer;
+    @FXML
+    private ProgressBar progress1;
+    @FXML
+    private ProgressBar progress2;
 
     private Partie partie;
     private ArmeService armeService = new ArmeService();
     private PersonnageService personnageService = new PersonnageService();
-
-
+    private CombatService combatService = new CombatService();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -71,95 +82,107 @@ public class CombatController implements Initializable {
     }
 
     private void initialisation() {
-        if(partie.getPersonnage1() == null || partie.getPersonnage2() == null || partie.getArme1() == null || partie.getArme2() == null){
+        if (partie.getPersonnage1() == null || partie.getPersonnage2() == null || partie.getArme1() == null || partie.getArme2() == null) {
             attackButtonPlayer1.setDisable(true);
             attackButtonPlayer2.setDisable(true);
-        }else if(partie.getJoueur1_actif()){
+            showAlert("Erreur", "Les personnages et les armes doivent être définis.");
+        } else if (partie.getJoueur1_actif()) {
             attackButtonPlayer1.setDisable(false);
             attackButtonPlayer2.setDisable(true);
         } else {
             attackButtonPlayer1.setDisable(true);
             attackButtonPlayer2.setDisable(false);
         }
-        if(partie.getPersonnage1() != null){
+        updateCharacterInfo();
+    }
+
+    private void updateCharacterInfo() {
+        if (partie.getPersonnage1() != null) {
             labelCharacterNamePlayer1.setText(partie.getPersonnage1().getNom());
-            labelCharacterHpPlayer1.setText(String.valueOf(partie.getPersonnage1().getPv()));
-            labelCharacterManaPlayer1.setText(String.valueOf(partie.getPersonnage1().getMana()));
+            avatarImageView1.setImage(new Image("https://mineskin.eu/helm/" + partie.getPersonnage1().getNom() + "/100"));
+            labelCharacterHpPlayer1.setText(String.valueOf(partie.getPersonnage1().getPv()) + " hp");
+            labelCharacterManaPlayer1.setText(String.valueOf(partie.getPersonnage1().getMana()) + " mana");
+            progress1.setProgress(partie.getPersonnage1().getPv() / 100.0);
         }
-        if(partie.getPersonnage2() != null){
+        if (partie.getPersonnage2() != null) {
             labelCharacterNamePlayer2.setText(partie.getPersonnage2().getNom());
-            labelCharacterHpPlayer2.setText(String.valueOf(partie.getPersonnage2().getPv()));
-            labelCharacterManaPlayer2.setText(String.valueOf(partie.getPersonnage2().getMana()));
+            avatarImageView2.setImage(new Image("https://mineskin.eu/helm/" + partie.getPersonnage2().getNom() + "/100"));
+            labelCharacterHpPlayer2.setText(String.valueOf(partie.getPersonnage2().getPv()) + " hp");
+            labelCharacterManaPlayer2.setText(String.valueOf(partie.getPersonnage2().getMana()) + " mana");
+            progress2.setProgress(partie.getPersonnage2().getPv() / 100.0);
         }
-        if(partie.getArme1() != null){
+        if (partie.getArme1() != null) {
             labelWeaponNamePlayer1.setText(partie.getArme1().getNom());
             labelWeaponDamagePlayer1.setText(String.valueOf(partie.getArme1().getDegats()));
         }
-        if(partie.getArme2() != null){
+        if (partie.getArme2() != null) {
             labelWeaponNamePlayer2.setText(partie.getArme2().getNom());
             labelWeaponDamagePlayer2.setText(String.valueOf(partie.getArme2().getDegats()));
         }
     }
 
-    public void attaquer(){
-        CombatService combatService = new CombatService();
-        int idAttaque = 0;
-        int idArme = 0;
-        if(partie.getJoueur1_actif()){
+    @FXML
+    public void attaquer() {
+        int idAttaque;
+        int idArme;
+        if (partie.getJoueur1_actif()) {
             idAttaque = partie.getPersonnage2().getId();
             idArme = partie.getArme1().getId();
             partie.setPersonnage2(combatService.attaquer(idAttaque, idArme));
-            labelCharacterHpPlayer2.setText(String.valueOf(partie.getPersonnage2().getPv()));
+            updateCharacterInfo();
             attackButtonPlayer1.setDisable(true);
             attackButtonPlayer2.setDisable(false);
-        }else {
+        } else {
             idAttaque = partie.getPersonnage1().getId();
             idArme = partie.getArme2().getId();
             partie.setPersonnage1(combatService.attaquer(idAttaque, idArme));
-            labelCharacterHpPlayer1.setText(String.valueOf(partie.getPersonnage1().getPv()));
+            updateCharacterInfo();
             attackButtonPlayer1.setDisable(false);
             attackButtonPlayer2.setDisable(true);
         }
         verifWin();
-
-
         partie.skipTurn();
     }
 
     private void verifWin() {
-        if(partie.getPersonnage1().getPv() <= 0){
+        if (partie.getPersonnage1().getPv() <= 0) {
             endMessageLabel.setText("Le joueur 2 a gagné !");
             endMessageContainer.setVisible(true);
-            attackButtonPlayer1.setDisable(true);
-            attackButtonPlayer2.setDisable(true);
-        }else if(partie.getPersonnage2().getPv() <= 0){
+            disableAttackButtons();
+        } else if (partie.getPersonnage2().getPv() <= 0) {
             endMessageLabel.setText("Le joueur 1 a gagné !");
             endMessageContainer.setVisible(true);
-            attackButtonPlayer1.setDisable(true);
-            attackButtonPlayer2.setDisable(true);
+            disableAttackButtons();
         }
     }
 
+    private void disableAttackButtons() {
+        attackButtonPlayer1.setDisable(true);
+        attackButtonPlayer2.setDisable(true);
+    }
+
+    private void showAlert(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
     public void switchToGestionPersonnages(ActionEvent event) throws IOException {
-        fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("gestionPersonnages.fxml"));
-        root = fxmlLoader.load();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        switchScene(event, "gestionPersonnages.fxml");
     }
 
     public void switchToMainPage(ActionEvent event) throws IOException {
-        fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("mainPage.fxml"));
-        root = fxmlLoader.load();
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        switchScene(event, "mainPage.fxml");
     }
 
     public void switchToGestionArmes(ActionEvent event) throws IOException {
-        fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("gestionArmes.fxml"));
+        switchScene(event, "gestionArmes.fxml");
+    }
+
+    private void switchScene(ActionEvent event, String fxmlFile) throws IOException {
+        fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxmlFile));
         root = fxmlLoader.load();
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
