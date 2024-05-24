@@ -69,6 +69,9 @@ public class CombatController implements Initializable {
     @FXML
     private ProgressBar progress2;
 
+    private static int baseHpPlayer1;
+    private static int baseHpPlayer2;
+
     private Partie partie;
     private ArmeService armeService = new ArmeService();
     private PersonnageService personnageService = new PersonnageService();
@@ -77,6 +80,8 @@ public class CombatController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.partie = CombatService.getPartie();
+        this.baseHpPlayer1 = partie.getPersonnage1().getPv();
+        this.baseHpPlayer2 = partie.getPersonnage2().getPv();
         initialisation();
         verifWin();
     }
@@ -102,14 +107,14 @@ public class CombatController implements Initializable {
             avatarImageView1.setImage(new Image("https://mineskin.eu/bust/" + partie.getPersonnage1().getNom() + "/100"));
             labelCharacterHpPlayer1.setText(String.valueOf(partie.getPersonnage1().getPv()) + " hp");
             labelCharacterManaPlayer1.setText(String.valueOf(partie.getPersonnage1().getMana()) + " mana");
-            progress1.setProgress(partie.getPersonnage1().getPv() / 100.0);
+            progress1.setProgress(partie.getPersonnage1().getPv() / (double) this.baseHpPlayer1);
         }
         if (partie.getPersonnage2() != null) {
             labelCharacterNamePlayer2.setText(partie.getPersonnage2().getNom());
             avatarImageView2.setImage(new Image("https://mineskin.eu/bust/" + partie.getPersonnage2().getNom() + "/100"));
             labelCharacterHpPlayer2.setText(String.valueOf(partie.getPersonnage2().getPv()) + " hp");
             labelCharacterManaPlayer2.setText(String.valueOf(partie.getPersonnage2().getMana()) + " mana");
-            progress2.setProgress(partie.getPersonnage2().getPv() / 100.0);
+            progress2.setProgress(partie.getPersonnage2().getPv() / (double) this.baseHpPlayer2);
         }
         if (partie.getArme1() != null) {
             labelWeaponNamePlayer1.setText(partie.getArme1().getNom());
