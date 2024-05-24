@@ -10,6 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.sql.SQLException;
 
+/**
+ * Tests unitaires pour la base de données de personnage
+ */
 @SpringBootTest
 public class PersonnageDatabaseTest {
     private static final ConnectionDB connectionDB = ConnectionDB.getConnection(true);
@@ -21,6 +24,10 @@ public class PersonnageDatabaseTest {
     public PersonnageDatabaseTest() throws SQLException, ClassNotFoundException {
     }
 
+    /**
+     * Initialise le nécéssaire pour les tests
+     * @throws SQLException
+     */
     @BeforeEach
     public void init() throws SQLException {
         this.perso = personnageDatabase.add(perso);
@@ -28,10 +35,18 @@ public class PersonnageDatabaseTest {
         this.perso2 = personnageDatabase.add(perso2);
     }
 
+    /**
+     * Nettoir la base de données après chaque test
+     * @throws SQLException
+     */
     @AfterEach
     public void clean() throws SQLException {
         personnageDatabase.clearAll();
     }
+
+    /**
+     * Ferme la connexion à la base de données
+     */
     @AfterAll
     public static void cleanall(){
         connectionDB.closeConnection();
