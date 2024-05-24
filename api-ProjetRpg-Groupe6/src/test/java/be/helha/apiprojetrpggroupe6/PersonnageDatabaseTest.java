@@ -55,6 +55,13 @@ public class PersonnageDatabaseTest {
     public void testAdd() throws SQLException {
         assertEquals(personnageDatabase.add(perso).getNom(), perso.getNom());
     }
+
+    @Test
+    public void testGetPersonnageById() throws SQLException {
+        assertEquals(personnageDatabase.getPersonnageById(perso.getId()).getId(), perso.getId());
+    }
+
+    
     @AfterAll
     public static void cleanall(){
         connectionDB.closeConnection();
