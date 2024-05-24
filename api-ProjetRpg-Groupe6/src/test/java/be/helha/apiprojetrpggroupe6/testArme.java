@@ -4,6 +4,7 @@ import be.helha.apiprojetrpggroupe6.Database.ArmeDatabase;
 import be.helha.apiprojetrpggroupe6.Models.Arme;
 import be.helha.apiprojetrpggroupe6.Models.DTO.ArmeDTO;
 import be.helha.apiprojetrpggroupe6.dbConnection.ConnectionDB;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,7 +26,6 @@ public class testArme {
     private Arme arme3 = new Arme("test3",85);
     @BeforeEach
     public void setUp() throws Exception {
-        armeDatabase.deleteArme(Optional.empty());
         armeDatabase.addArme(arme);
         armeDatabase.addArme(arme2);
         armeDatabase.addArme(arme3);
@@ -33,6 +33,10 @@ public class testArme {
     @AfterEach
     public void end(){
         armeDatabase.deleteArme(Optional.empty());
+    }
+    @AfterAll
+    public static void clean(){
+        connection.closeConnection();
     }
 
     @Test
