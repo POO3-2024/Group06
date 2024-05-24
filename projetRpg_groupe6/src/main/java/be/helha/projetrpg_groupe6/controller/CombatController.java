@@ -99,14 +99,14 @@ public class CombatController implements Initializable {
     private void updateCharacterInfo() {
         if (partie.getPersonnage1() != null) {
             labelCharacterNamePlayer1.setText(partie.getPersonnage1().getNom());
-            avatarImageView1.setImage(new Image("https://mineskin.eu/helm/" + partie.getPersonnage1().getNom() + "/100"));
+            avatarImageView1.setImage(new Image("https://mineskin.eu/bust/" + partie.getPersonnage1().getNom() + "/100"));
             labelCharacterHpPlayer1.setText(String.valueOf(partie.getPersonnage1().getPv()) + " hp");
             labelCharacterManaPlayer1.setText(String.valueOf(partie.getPersonnage1().getMana()) + " mana");
             progress1.setProgress(partie.getPersonnage1().getPv() / 100.0);
         }
         if (partie.getPersonnage2() != null) {
             labelCharacterNamePlayer2.setText(partie.getPersonnage2().getNom());
-            avatarImageView2.setImage(new Image("https://mineskin.eu/helm/" + partie.getPersonnage2().getNom() + "/100"));
+            avatarImageView2.setImage(new Image("https://mineskin.eu/bust/" + partie.getPersonnage2().getNom() + "/100"));
             labelCharacterHpPlayer2.setText(String.valueOf(partie.getPersonnage2().getPv()) + " hp");
             labelCharacterManaPlayer2.setText(String.valueOf(partie.getPersonnage2().getMana()) + " mana");
             progress2.setProgress(partie.getPersonnage2().getPv() / 100.0);
