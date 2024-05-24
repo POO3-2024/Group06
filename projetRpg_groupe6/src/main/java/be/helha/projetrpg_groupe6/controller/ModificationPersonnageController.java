@@ -18,6 +18,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Classe de modification de personnages
+ */
 public class ModificationPersonnageController implements Initializable {
 
     private Stage stage;
@@ -37,11 +40,20 @@ public class ModificationPersonnageController implements Initializable {
     private Personnage personnage;
     private PersonnageService personnageService;
 
+    /**
+     * initialize
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         personnageService = new PersonnageService();
     }
 
+    /**
+     * Fonction pour définir les attributs du personnage
+     * @param personnage
+     */
     public void setPersonnage(Personnage personnage) {
         this.personnage = personnage;
         if (personnage != null) {
@@ -55,6 +67,11 @@ public class ModificationPersonnageController implements Initializable {
         }
     }
 
+    /**
+     * Fonction pour modifier le personnage
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void modifierPersonnage(ActionEvent event) throws IOException {
         String nom = nomField.getText();
@@ -93,18 +110,32 @@ public class ModificationPersonnageController implements Initializable {
     }
 
 
-
+    /**
+     * Fonction pour supprimer un personnage
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void supprimerPersonnage(ActionEvent event) throws IOException {
         personnageService.deletePersonnageById(personnage.getId());
         switchToGestionPersonnages(event);
     }
 
+    /**
+     * Fonction pour annuler et retourner en arrière
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void annulerModification(ActionEvent event) throws IOException {
         switchToGestionPersonnages(event);
     }
 
+    /**
+     * Fonction pour changer de page
+     * @param event
+     * @throws IOException
+     */
     public void switchToGestionPersonnages(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("gestionPersonnages.fxml"));
         root = fxmlLoader.load();
@@ -114,6 +145,11 @@ public class ModificationPersonnageController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Fonction pour switch de page
+     * @param event
+     * @throws IOException
+     */
     public void switchToMainPage(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("mainPage.fxml"));
         root = fxmlLoader.load();
@@ -123,6 +159,11 @@ public class ModificationPersonnageController implements Initializable {
         stage.show();
     }
 
+    /**
+     * Fonction pour switch de page
+     * @param event
+     * @throws IOException
+     */
     public void switchToGestionArmes(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("gestionArmes.fxml"));
         root = fxmlLoader.load();
@@ -131,5 +172,4 @@ public class ModificationPersonnageController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
 }

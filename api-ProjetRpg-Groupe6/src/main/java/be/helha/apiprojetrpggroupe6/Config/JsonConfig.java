@@ -1,5 +1,8 @@
 package be.helha.apiprojetrpggroupe6.Config;
 
+/**
+ * Classe qui contient les infos du fichier de config json
+ */
 public class JsonConfig {
     /**
      * nom de la db de test

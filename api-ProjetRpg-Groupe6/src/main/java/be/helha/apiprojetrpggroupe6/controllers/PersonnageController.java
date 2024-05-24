@@ -18,11 +18,17 @@ import java.util.List;
 @RequestMapping("/api")
 public class PersonnageController {
 
+    /**
+     * Service de la classe Personnage
+     */
     private PersonnageService personnageService = new PersonnageService();
 
     /**
      * Récupère tous les personnages de la base de donénes
-     * @return List<Personnage>
+     * Endpoint : /api/personnages
+     * @return List<Personnage> Renvoi la liste des personnages
+     * @return String Renvoi un message d'erreur
+     *
      */
     @GetMapping("/personnages")
     public ResponseEntity<?> getPersonnages(){
@@ -37,8 +43,10 @@ public class PersonnageController {
 
     /**
      * Récupère un personnage par son id
+     * Endpoint : /api/personnages/1
      * @param id id du personnage
      * @return Personnage Renvoi le personnage correspondant à l'id
+     * @return String Renvoi un message d'erreur
      */
     @GetMapping("/personnages/{id}")
     public ResponseEntity<?> getPersonnageById(@PathVariable("id") int id){
@@ -51,8 +59,10 @@ public class PersonnageController {
     }
     /**
      * Ajoute un personnage à la base de données
+     * Endpoint : /api/personnages
      * @param personnage Personnage à ajouter
      * @return Personnage Renvoi le personnage ajouté
+     * @return String Renvoi un message d'erreur
      */
     @PostMapping("/personnages")
     public ResponseEntity<?> addPersonnage(@RequestBody Personnage personnage){
@@ -65,8 +75,10 @@ public class PersonnageController {
     }
     /**
      * Met à jour un personnage
+     * Endpoint : /api/personnages
      * @param personnage Personnage à mettre à jour
      * @return int Renvoi le nombre de lignes modifiées
+     * @return String Renvoi un message d'erreur
      */
     @PutMapping("/personnages")
     public ResponseEntity<?> updatePersonnage(@RequestBody Personnage personnage){
@@ -79,8 +91,10 @@ public class PersonnageController {
     }
     /**
      * Supprime un personnage
+     * Endpoint : /api/personnages/1
      * @param id id du personnage à supprimer
      * @return int Renvoi le nombre de lignes supprimées
+     * @return String Renvoi un message d'erreur
      */
     @DeleteMapping("/personnages/{id}")
     public ResponseEntity<?> deletePersonnage(@PathVariable("id") int id){
