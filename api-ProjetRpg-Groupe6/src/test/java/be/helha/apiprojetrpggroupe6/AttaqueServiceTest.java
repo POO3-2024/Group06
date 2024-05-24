@@ -66,4 +66,13 @@ public class AttaqueServiceTest {
             e.printStackTrace();
         }
     }
+    @Test
+    public void attaquerLorsqueVieInferieurADegat() {
+        try {
+            perso = attaqueService.attaquer(perso.getId(), arme2.getId());
+            assertEquals(0, perso.getPv());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
