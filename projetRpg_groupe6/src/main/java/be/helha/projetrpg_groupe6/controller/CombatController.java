@@ -2,6 +2,7 @@ package be.helha.projetrpg_groupe6.controller;
 
 import be.helha.projetrpg_groupe6.HelloApplication;
 import be.helha.projetrpg_groupe6.models.Partie;
+import be.helha.projetrpg_groupe6.personnage.Personnage;
 import be.helha.projetrpg_groupe6.service.ArmeService;
 import be.helha.projetrpg_groupe6.services.CombatService;
 import be.helha.projetrpg_groupe6.services.PersonnageService;
@@ -72,8 +73,8 @@ public class CombatController implements Initializable {
     @FXML
     private ProgressBar progress2;
 
-    private static int baseHpPlayer1;
-    private static int baseHpPlayer2;
+    private int baseHpPlayer1;
+    private int baseHpPlayer2;
 
     private Partie partie;
     private ArmeService armeService = new ArmeService();
@@ -129,14 +130,14 @@ public class CombatController implements Initializable {
     private void updateCharacterInfo() {
         if (partie.getPersonnage1() != null) {
             labelCharacterNamePlayer1.setText(partie.getPersonnage1().getNom());
-            avatarImageView1.setImage(new Image("https://mineskin.eu/bust/" + partie.getPersonnage1().getNom() + "/100"));
+            avatarImageView1.setImage(new Image("https://mineskin.eu/armor/bust/" + partie.getPersonnage1().getNom() + "/100"));
             labelCharacterHpPlayer1.setText(String.valueOf(partie.getPersonnage1().getPv()) + " hp");
             labelCharacterManaPlayer1.setText(String.valueOf(partie.getPersonnage1().getMana()) + " mana");
             progress1.setProgress(partie.getPersonnage1().getPv() / (double) this.baseHpPlayer1);
         }
         if (partie.getPersonnage2() != null) {
             labelCharacterNamePlayer2.setText(partie.getPersonnage2().getNom());
-            avatarImageView2.setImage(new Image("https://mineskin.eu/bust/" + partie.getPersonnage2().getNom() + "/100"));
+            avatarImageView2.setImage(new Image("https://mineskin.eu/armor/bust/" + partie.getPersonnage2().getNom() + "/100"));
             labelCharacterHpPlayer2.setText(String.valueOf(partie.getPersonnage2().getPv()) + " hp");
             labelCharacterManaPlayer2.setText(String.valueOf(partie.getPersonnage2().getMana()) + " mana");
             progress2.setProgress(partie.getPersonnage2().getPv() / (double) this.baseHpPlayer2);
@@ -192,11 +193,21 @@ public class CombatController implements Initializable {
             endMessageLabel.setText(partie.getPersonnage2().getNom()+" a gagné !");
             endMessageContainer.setVisible(true);
             disableAttackButtons();
+            resetHp();
         } else if (partie.getPersonnage2().getPv() <= 0) {
             endMessageLabel.setText(partie.getPersonnage1().getNom()+" a gagné !");
             endMessageContainer.setVisible(true);
             disableAttackButtons();
+            resetHp();
         }
+    }
+
+    private void resetHp() {
+        partie.getPersonnage1().setPv(baseHpPlayer1);
+        partie.getPersonnage2().setPv(baseHpPlayer2);
+        this.personnageService.updatePersonnage(partie.getPersonnage2());
+        this.personnageService.updatePersonnage(partie.getPersonnage1());
+        updateCharacterInfo();
     }
 
     /**
