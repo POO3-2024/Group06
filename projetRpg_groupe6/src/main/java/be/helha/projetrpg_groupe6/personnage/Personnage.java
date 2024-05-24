@@ -1,5 +1,6 @@
 package be.helha.projetrpg_groupe6.personnage;
 
+import be.helha.projetrpg_groupe6.services.PersonnageService;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -25,6 +26,18 @@ public class Personnage {
         this.nom = nom;
         this.pv = pv;
         this.mana = mana;
+    }
+    public Personnage(Personnage personnage){
+        this.id = personnage.getId();
+        this.nom = personnage.getNom();
+        this.pv = personnage.getPv();
+        this.mana = personnage.getMana();
+    }
+
+    public Personnage(String nom) {
+        this.nom = nom;
+        this.pv = 10;
+        this.mana = 10;
     }
 
     public int getId() {

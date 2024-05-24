@@ -71,6 +71,14 @@ public class SceneController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    public void switchToLancerCombat(ActionEvent event) throws IOException{
+        fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("combat.fxml"));
+        root = fxmlLoader.load();
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
 
 
 }

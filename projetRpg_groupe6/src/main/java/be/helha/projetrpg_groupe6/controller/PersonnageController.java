@@ -2,6 +2,7 @@ package be.helha.projetrpg_groupe6.controller;
 
 import be.helha.projetrpg_groupe6.HelloApplication;
 import be.helha.projetrpg_groupe6.personnage.Personnage;
+import be.helha.projetrpg_groupe6.services.CombatService;
 import be.helha.projetrpg_groupe6.services.PersonnageService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,6 +15,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -55,7 +58,6 @@ public class PersonnageController implements Initializable {
 
     private PersonnageService personnageService;
     private List<Personnage> personnages;
-
     @FXML
     private AnchorPane detailsPane;
 
@@ -65,6 +67,16 @@ public class PersonnageController implements Initializable {
     private Button modifierButton;
     @FXML
     private Button createButton;
+    @FXML
+    private ImageView avatarImageView;
+
+    @FXML
+    private Button selectionJoueur1;
+    @FXML
+    private Button selectionJoueur2;
+
+    private Personnage selectedPersonnage;
+
 
     /**
      * Initialise le contrôleur. Charge la liste des personnages et configure les gestionnaires d'événements.
@@ -83,10 +95,14 @@ public class PersonnageController implements Initializable {
                 detailsPane.setVisible(true);
                 infoLabel.setVisible(true);
                 modifierButton.setVisible(true);
+                selectionJoueur1.setVisible(true);
+                selectionJoueur2.setVisible(true);
             } else {
                 detailsPane.setVisible(false);
                 infoLabel.setVisible(false);
                 modifierButton.setVisible(false);
+                selectionJoueur1.setVisible(false);
+                selectionJoueur2.setVisible(false);
             }
         });
 
@@ -128,6 +144,7 @@ public class PersonnageController implements Initializable {
     private int getPersonnageIdByName(String nomPersonnage) {
         for (Personnage personnage : personnages) {
             if (personnage.getNom().equals(nomPersonnage)) {
+                this.selectedPersonnage = personnage;
                 return personnage.getId();
             }
         }
@@ -147,8 +164,19 @@ public class PersonnageController implements Initializable {
                 nomLabel.setText("» " + personnage.getNom());
                 pvLabel.setText(String.valueOf(personnage.getPv()) + " hp");
                 manaLabel.setText(String.valueOf(personnage.getMana()) + " mana");
+                this.selectedPersonnage = personnage;
+                avatarImageView.setImage(new Image("https://mineskin.eu/helm/" + personnage.getNom() + "/100"));
             }
         }
+    }
+    public void selectionJoueur1(){
+        CombatService.getPartie().setPersonnage1(new Personnage(selectedPersonnage));
+        System.out.println(selectedPersonnage.getNom());
+    }
+    public void selectionJoueur2(){
+        CombatService.getPartie().setPersonnage2(new Personnage(selectedPersonnage));
+        System.out.println(selectedPersonnage.getNom());
+
     }
 
     /**

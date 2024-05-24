@@ -1,12 +1,23 @@
 .root {
-    -fx-background-color: #111518;
-}
-
-#detailsPane {
+    -fx-background-color: #FFFFFF;
     -fx-background-radius: 10px;
-    -fx-background-color: #EAE9E9;
 }
 
+.detailsPane {
+    -fx-background-radius: 10px;
+    -fx-background-color: #555656;
+}
+
+.equipementPane {
+    -fx-background-radius: 10px;
+    -fx-background-color: #a2ecec;
+}
+.button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-background-radius: 5px;
+}
 .list-view {
     -fx-background-color: #EAE9E9;
     -fx-background-radius: 5px;
@@ -31,14 +42,8 @@
     -fx-background-color: #FFA500;
     -fx-text-fill: white;
 }
-.selectedPlayer1Button {
-    -fx-background-color: #0a58c2;
-    -fx-text-fill: white;
-}
-.selectedPlayer2Button {
-    -fx-background-color: #ff0028;
-}
-.button#supprimerButton {
-    -fx-background-color: #ff3232;
-    -fx-text-fill: white;
+.endMessage{
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 10px;
+    -fx-border-color: #000000;
 }

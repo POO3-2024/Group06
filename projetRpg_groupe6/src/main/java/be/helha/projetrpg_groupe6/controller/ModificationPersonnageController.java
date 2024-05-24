@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -56,15 +57,47 @@ public class ModificationPersonnageController implements Initializable {
 
     @FXML
     public void modifierPersonnage(ActionEvent event) throws IOException {
-        if (personnage == null) {
-            personnageService.postPersonnage(nomField.getText(), Integer.parseInt(pvField.getText()), Integer.parseInt(manaField.getText()));
-        } else {
-            personnage.setNom(nomField.getText());
-            personnage.setPv(Integer.parseInt(pvField.getText()));
-            personnage.setMana(Integer.parseInt(manaField.getText()));
-           personnageService.updatePersonnage(personnage);
+        String nom = nomField.getText();
+
+        if (nom.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText(null);
+            alert.setContentText("Veuillez introduire un nom.");
+            alert.showAndWait();
+            return;
         }
-            switchToGestionPersonnages(event);
+
+        if (personnage == null) {
+            String spv = pvField.getText();
+            String smana = manaField.getText();
+
+            int pv = !spv.isEmpty() ? Integer.parseInt(spv) : 0;
+            int mana = !smana.isEmpty() ? Integer.parseInt(smana) : 0;
+
+            personnageService.postPersonnage(nom, pv, mana);
+        } else {
+            personnage.setNom(nom);
+
+            String pvString = pvField.getText();
+            int pv = !pvString.isEmpty() ? Integer.parseInt(pvString) : 0;
+            personnage.setPv(pv);
+
+            String manaString = manaField.getText();
+            int mana = !manaString.isEmpty() ? Integer.parseInt(manaString) : 0;
+            personnage.setMana(mana);
+
+            personnageService.updatePersonnage(personnage);
+        }
+        switchToGestionPersonnages(event);
+    }
+
+
+
+    @FXML
+    public void supprimerPersonnage(ActionEvent event) throws IOException {
+        personnageService.deletePersonnageById(personnage.getId());
+        switchToGestionPersonnages(event);
     }
 
     @FXML
@@ -98,4 +131,5 @@ public class ModificationPersonnageController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
 }

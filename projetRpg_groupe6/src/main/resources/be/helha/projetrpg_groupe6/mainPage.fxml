@@ -28,7 +28,7 @@
       <AnchorPane layoutX="654.0" layoutY="156.0" onKeyPressed="#switchToGestionArmes" prefHeight="200.0" prefWidth="200.0" styleClass="armes_box" stylesheets="@Styles/homepage.css" />
       <Button alignment="CENTER" layoutX="166.0" layoutY="370.0" mnemonicParsing="false" onAction="#switchToGestionPersonnages" prefHeight="37.0" prefWidth="200.0" styleClass="verticall_button" stylesheets="@Styles/homepage.css" text="Sélectionner un personnage" textFill="WHITE" />
       <Button alignment="CENTER" layoutX="654.0" layoutY="370.0" mnemonicParsing="false" onAction="#switchToGestionArmes" prefHeight="37.0" prefWidth="200.0" styleClass="verticall_button" stylesheets="@Styles/homepage.css" text="Sélectionner une arme" textAlignment="CENTER" textFill="WHITE" />
-      <AnchorPane layoutX="410.0" layoutY="418.0" onKeyPressed="#switchToGestionArmes" prefHeight="200.0" prefWidth="200.0" styleClass="war_box" stylesheets="@Styles/homepage.css" />
-      <Button alignment="CENTER" layoutX="435.0" layoutY="632.0" mnemonicParsing="false" onAction="#switchToGestionArmes" prefHeight="25.0" prefWidth="150.0" styleClass="verticall_button" stylesheets="@Styles/homepage.css" text="Lancer un Combat" textAlignment="CENTER" textFill="WHITE" />
+      <AnchorPane layoutX="410.0" layoutY="418.0" onKeyPressed="#switchToLancerCombat" prefHeight="200.0" prefWidth="200.0" styleClass="war_box" stylesheets="@Styles/homepage.css" />
+      <Button alignment="CENTER" layoutX="435.0" layoutY="632.0" mnemonicParsing="false" onAction="#switchToLancerCombat" prefHeight="25.0" prefWidth="150.0" styleClass="verticall_button" stylesheets="@Styles/homepage.css" text="Lancer un Combat" textAlignment="CENTER" textFill="WHITE" />
    </children>
 </AnchorPane>

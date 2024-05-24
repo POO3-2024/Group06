@@ -2,6 +2,7 @@ package be.helha.projetrpg_groupe6.controller;
 
 import be.helha.projetrpg_groupe6.arme.Arme;
 import be.helha.projetrpg_groupe6.service.ArmeService;
+import be.helha.projetrpg_groupe6.services.CombatService;
 import com.google.gson.reflect.TypeToken;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -137,4 +138,14 @@ public class DetailArme {
 
 
     }
+
+    public void selecteArmeJoueur1(){
+       Arme arme = this.armeService.getArmeById(id_Arme);
+       CombatService.getPartie().setArme1(arme);
+    }
+    public void selecteArmeJoueur2(){
+        Arme arme = this.armeService.getArmeById(id_Arme);
+        CombatService.getPartie().setArme2(arme);
+    }
+
 }
