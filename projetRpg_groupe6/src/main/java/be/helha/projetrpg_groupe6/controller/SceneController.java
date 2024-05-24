@@ -17,6 +17,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller de la page d'acueil
+ */
 public class SceneController implements Initializable {
 
     private Stage stage;
@@ -31,20 +34,21 @@ public class SceneController implements Initializable {
 
     private ArmeController armeController;
 
-    Personnage test1 = new Personnage("test1", 100, 100);
-    Personnage test2 = new Personnage("test2", 500, 100);
-    Personnage[] personnagesList = {test1, test2};
-
+    /**
+     * Fonction initialize
+     * @param url
+     * @param resourceBundle
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //lv_personnages.getItems().addAll(personnagesList);
         armeController = new ArmeController();
-
-//            List<Personnage> personnages = personnageDAO.getAllPersonnages();
-        //lv_personnages.getItems().addAll(personnages);
-
     }
 
+    /**
+     * Fonction pour switch de pages
+     * @param event
+     * @throws IOException
+     */
     public void switchToMainPage(ActionEvent event) throws IOException {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("mainPage.fxml"));
         root = fxmlLoader.load();
@@ -53,7 +57,11 @@ public class SceneController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * Fonction pour switch de pages
+     * @param event
+     * @throws IOException
+     */
     public void switchToGestionPersonnages(ActionEvent event) throws IOException{
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("gestionPersonnages.fxml"));
         root = fxmlLoader.load();
@@ -62,7 +70,11 @@ public class SceneController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
-
+    /**
+     * Fonction pour switch de pages
+     * @param event
+     * @throws IOException
+     */
     public void switchToGestionArmes(ActionEvent event) throws IOException{
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("gestionArmes.fxml"));
         root = fxmlLoader.load();
@@ -71,6 +83,11 @@ public class SceneController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+    /**
+     * Fonction pour switch de pages
+     * @param event
+     * @throws IOException
+     */
     public void switchToLancerCombat(ActionEvent event) throws IOException{
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("combat.fxml"));
         root = fxmlLoader.load();
