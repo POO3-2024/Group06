@@ -46,6 +46,8 @@ public class DetailArme {
     @FXML
     private Button retour;
 
+    private ArmeService armeService = new ArmeService();
+
     /**
      * Définit l'ID de l'arme à afficher ou à modifier.
      *
