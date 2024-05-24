@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe permettant de gérer les requêtes SQL pour la table personnage.
+ * La classe PersonnageDatabase intéragit directement avec la base de données
+ *
+ * @author David-Lumu Dewever
+ * @see be.helha.apiprojetrpggroupe6.Database.PersonnageDatabase
  */
 public class PersonnageDatabase {
 
@@ -27,8 +30,8 @@ public class PersonnageDatabase {
     }
 
     /**
-     * Récupère la liste de tous les personnages dans la base de données.
-     * @return une liste d'objets PersonnageDTO.
+     * Fonction qui récupère tout les personnages de la db
+     * @return une liste de personnageDTO contenant tout les personnages
      * @throws SQLException
      */
     public List<PersonnageDTO> getAllPersonnages() throws SQLException {
@@ -62,10 +65,10 @@ public class PersonnageDatabase {
     }
 
     /**
-     * Récupère un personnage par son id.
-     * @param id l'id du personnage.
-     * @return Personnage le personnage correspondant à l'id.
-     * @throws SQLException si une erreur de base de données survient.
+     * Fonction qui retrouve un personnage depuis une id
+     * @param id du personnage à retrouver
+     * @return le personnage si il éxiste, si pas return null
+     * @throws SQLException
      */
     public Personnage getPersonnageById(int id) throws SQLException {
         String query = "SELECT * FROM personnage WHERE Id_personnage = " + id;
@@ -78,10 +81,10 @@ public class PersonnageDatabase {
     }
 
     /**
-     * Récupère un personnage par son nom.
-     * @param name le nom du personnage.
-     * @return Personnage l'objet Personna ge correspondant au nom.
-     * @throws SQLException si une erreur de base de données survient.
+     * Fonction qui retrouve un personnage depuis un nom
+     * @param name
+     * @return le personnage si il éxiste, si pas return null
+     * @throws SQLException
      */
     public Personnage getPersonnageByName(String name) throws SQLException {
         String query = "SELECT * FROM personnage WHERE nom = '" + name + "'";
