@@ -21,7 +21,9 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.ResourceBundle;
-
+/**
+ * Contrôleur pour afficher et modifier les détails d'une arme.
+ */
 public class DetailArme {
 
     @FXML
@@ -44,14 +46,20 @@ public class DetailArme {
     @FXML
     private Button retour;
 
-    private ArmeService armeService = new ArmeService();
-
+    /**
+     * Définit l'ID de l'arme à afficher ou à modifier.
+     *
+     * @param id l'ID de l'arme
+     */
     public void setId_Arme(int id) {
 
        id_Arme = id;
 
     }
-
+    /**
+     * Modifie les détails de l'arme en fonction des valeurs saisies dans les champs de texte.
+     * Affiche un message d'erreur si aucun champ n'est renseigné.
+     */
     public void modifArme(){
         if(nomModif.getText().isEmpty() && degatsModif.getText().isEmpty()){
             error.setText("Introduire des valeurs");
@@ -73,7 +81,13 @@ public class DetailArme {
         }
     }
 
-
+    /**
+     * Initialise le contrôleur avec l'ID de l'arme à afficher.
+     * Récupère les détails de l'arme à partir du service et les affiche.
+     * Configure les actions des boutons de suppression et de retour.
+     *
+     * @param id l'ID de l'arme à afficher
+     */
     public void initialize(int id) {
         ArmeService armeService = new ArmeService();
 
@@ -117,7 +131,9 @@ public class DetailArme {
         });
 
     }
-
+    /**
+     * Constructeur par défaut de la classe DetailArme.
+     */
     public DetailArme(){
 
 
