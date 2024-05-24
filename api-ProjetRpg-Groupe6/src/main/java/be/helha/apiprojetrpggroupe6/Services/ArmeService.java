@@ -18,10 +18,15 @@ import java.util.Optional;
 @Service
 public class ArmeService {
 
-    /**
-     * Base de données des armes
-     */
-    private ArmeDatabase armeDatabase = new ArmeDatabase(ConnectionDB.getConnection());
+
+    private ArmeDatabase armeDatabase;
+
+    public ArmeService() {
+        this.armeDatabase = new ArmeDatabase(ConnectionDB.getConnection());
+    }
+    public ArmeService(boolean test) {
+        this.armeDatabase = new ArmeDatabase(ConnectionDB.getConnection(true));
+    }
 
     /**
      * Récupère toutes les armes de la base de données
