@@ -20,13 +20,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class AttaqueController {
 
+    /**
+     * Service de la classe Attaque
+     */
     private AttaqueService attaqueService = new AttaqueService();
 
     /**
      * Attaque un personnage avec une arme
+     * Endpoint : /api/attaques/1/1
      * @param id_personnage id du personnage
      * @param id_arme id de l'arme
      * @return Personnage Renvoi le personnage attaqué
+     * @return String Renvoi un message d'erreur
      */
     @GetMapping("/attaques/{id_personnage}/{id_arme}")
     public ResponseEntity<?> attaquer(@PathVariable("id_personnage") int id_personnage,@PathVariable("id_arme") int id_arme){
