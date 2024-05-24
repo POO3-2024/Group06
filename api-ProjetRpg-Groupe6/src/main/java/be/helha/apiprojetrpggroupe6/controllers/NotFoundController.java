@@ -5,6 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * Controller qui gère les erreurs 404
+ * Permet de renvoyer une erreur 404 lorsqu'une url n'existe pas
+ */
 @RestController
 @RequestMapping("/api")
 public class NotFoundController {

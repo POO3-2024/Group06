@@ -16,6 +16,9 @@ import java.util.List;
 @Service
 public class PersonnageService {
 
+    /**
+     * Base de données des personnages
+     */
     private PersonnageDatabase personnageDatabase = new PersonnageDatabase(ConnectionDB.getConnection());
     /**
      * Récupère tous les personnages de la base de données
