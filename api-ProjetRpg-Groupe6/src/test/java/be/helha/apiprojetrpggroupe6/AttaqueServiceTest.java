@@ -18,6 +18,9 @@ import java.sql.SQLException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Tests unitaires pour le service d'attaque
+ */
 @SpringBootTest
 public class AttaqueServiceTest {
 
@@ -28,9 +31,12 @@ public class AttaqueServiceTest {
     private Arme arme = new Arme("Baton", 10);
     private Arme arme2 = new Arme("Epee", 50);
 
-
+    /**
+     * Initialise le nécéssaire pour les tests
+     * @throws SQLException
+     */
     @BeforeEach
-    public void init() throws SQLException {
+    public void init() {
         try {
             this.perso = personnageService.addPersonnage(perso);
             this.arme = armeService.addArme(arme);
@@ -40,6 +46,9 @@ public class AttaqueServiceTest {
         }
     }
 
+    /**
+     * Nettoie la base de données après chaques tests
+     */
     @AfterEach
     public void clean() {
         try {
@@ -50,11 +59,18 @@ public class AttaqueServiceTest {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Ferme la connexion à la base de données après tous les tests
+     */
     @AfterAll
     public static void cleanAll(){
         ConnectionDB.getConnection(true).closeConnection();
     }
 
+    /**
+     * Teste l'attaque d'un personnage
+     */
     @Test
     public void attaquerTest() {
         try {
@@ -66,6 +82,10 @@ public class AttaqueServiceTest {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Teste l'attaque d'un personnage lorsque la vie est inférieure aux dégats
+     */
     @Test
     public void attaquerLorsqueVieInferieurADegat() {
         try {
