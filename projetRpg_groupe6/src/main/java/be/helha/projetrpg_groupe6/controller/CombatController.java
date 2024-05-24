@@ -25,6 +25,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller pour gérer les interactions avec l'interface utilisateur du combat.
+ */
 public class CombatController implements Initializable {
 
     private Stage stage;
@@ -77,6 +80,16 @@ public class CombatController implements Initializable {
     private PersonnageService personnageService = new PersonnageService();
     private CombatService combatService = new CombatService();
 
+    /**
+     * Initialise le contrôleur après que son élément racine ait été complètement traité.
+     * @param url
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resourceBundle
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.partie = CombatService.getPartie();
@@ -86,6 +99,9 @@ public class CombatController implements Initializable {
         verifWin();
     }
 
+    /**
+     * Initialise les éléments de l'interface utilisateur.
+     */
     private void initialisation() {
         if (partie.getPersonnage1() == null || partie.getPersonnage2() == null || partie.getArme1() == null || partie.getArme2() == null) {
             attackButtonPlayer1.setDisable(true);
@@ -101,6 +117,15 @@ public class CombatController implements Initializable {
         updateCharacterInfo();
     }
 
+    /**
+     * Met à jour les informations des personnages et des armes.
+     * Si un personnage ou une arme n'est pas défini, les boutons d'attaque sont désactivés.
+     * Si le joueur 1 est actif, le bouton d'attaque du joueur 1 est activé.
+     * Si le joueur 2 est actif, le bouton d'attaque du joueur 2 est activé.
+     * Si un personnage n'a plus de points de vie, le message de fin de partie est affiché.
+     * La partie est terminée si un des deux personnages n'a plus de points de vie.
+     * Si un personnage est attaqué, les points de vie et la barre de progression sont mis à jour.
+     */
     private void updateCharacterInfo() {
         if (partie.getPersonnage1() != null) {
             labelCharacterNamePlayer1.setText(partie.getPersonnage1().getNom());
@@ -126,6 +151,15 @@ public class CombatController implements Initializable {
         }
     }
 
+    /**
+     * Attaque le personnage adverse.
+     * Si le joueur 1 est actif, le personnage 2 est attaqué.
+     * Si le joueur 2 est actif, le personnage 1 est attaqué.
+     * Les boutons d'attaque sont désactivés après l'attaque.
+     * Si un personnage n'a plus de points de vie, le message de fin de partie est affiché.
+     * La partie est terminée si un des deux personnages n'a plus de points de vie.
+     *
+     */
     @FXML
     public void attaquer() {
         int idAttaque;
@@ -149,6 +183,10 @@ public class CombatController implements Initializable {
         partie.skipTurn();
     }
 
+    /**
+     * Vérifie si un des deux personnages n'a plus de points de vie.
+     * Si c'est le cas, affiche le message de fin de partie.
+     */
     private void verifWin() {
         if (partie.getPersonnage1().getPv() <= 0) {
             endMessageLabel.setText(partie.getPersonnage2().getNom()+" a gagné !");
@@ -161,11 +199,19 @@ public class CombatController implements Initializable {
         }
     }
 
+    /**
+     * Désactive les boutons d'attaque.
+     */
     private void disableAttackButtons() {
         attackButtonPlayer1.setDisable(true);
         attackButtonPlayer2.setDisable(true);
     }
 
+    /**
+     * Affiche une alerte avec un titre et un message.
+     * @param title le titre de l'alerte
+     * @param message le message de l'alerte
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -174,18 +220,39 @@ public class CombatController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Change la scène vers la gestion des personnages.
+     * @param event l'événement de l'action
+     * @throws IOException en cas d'erreur de chargement de la scène
+     */
     public void switchToGestionPersonnages(ActionEvent event) throws IOException {
         switchScene(event, "gestionPersonnages.fxml");
     }
 
+    /**
+     * Change la scène vers la page principale.
+     * @param event l'événement de l'action
+     * @throws IOException en cas d'erreur de chargement de la scène
+     */
     public void switchToMainPage(ActionEvent event) throws IOException {
         switchScene(event, "mainPage.fxml");
     }
 
+    /**
+     * Change la scène vers la gestion des armes.
+     * @param event l'événement de l'action
+     * @throws IOException en cas d'erreur de chargement de la scène
+     */
     public void switchToGestionArmes(ActionEvent event) throws IOException {
         switchScene(event, "gestionArmes.fxml");
     }
 
+    /**
+     * Change la scène vers la gestion des combats.
+     * @param event l'événement de l'action
+     * @param fxmlFile le fichier fxml à charger
+     * @throws IOException en cas d'erreur de chargement de la scène
+     */
     private void switchScene(ActionEvent event, String fxmlFile) throws IOException {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxmlFile));
         root = fxmlLoader.load();
