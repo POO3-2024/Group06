@@ -146,11 +146,11 @@ public class CombatController implements Initializable {
 
     private void verifWin() {
         if (partie.getPersonnage1().getPv() <= 0) {
-            endMessageLabel.setText("Le joueur 2 a gagné !");
+            endMessageLabel.setText(partie.getPersonnage2().getNom()+" a gagné !");
             endMessageContainer.setVisible(true);
             disableAttackButtons();
         } else if (partie.getPersonnage2().getPv() <= 0) {
-            endMessageLabel.setText("Le joueur 1 a gagné !");
+            endMessageLabel.setText(partie.getPersonnage1().getNom()+" a gagné !");
             endMessageContainer.setVisible(true);
             disableAttackButtons();
         }
