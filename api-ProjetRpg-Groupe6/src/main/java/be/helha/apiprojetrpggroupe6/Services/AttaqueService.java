@@ -11,8 +11,27 @@ import org.springframework.stereotype.Service;
 public class AttaqueService {
 
 
-    private PersonnageService personnageService = new PersonnageService();
-    private ArmeService armeService = new ArmeService();
+    private PersonnageService personnageService;
+    private ArmeService armeService;
+
+    /**
+     * Constructeur par défaut
+     */
+    public AttaqueService() {
+        this.personnageService = new PersonnageService();
+        this.armeService = new ArmeService();
+    }
+
+    /**
+     * Constructeur pour les tests
+     * @param test true si test
+     */
+    public AttaqueService(boolean test) {
+        this.personnageService = new PersonnageService(true);
+        this.armeService = new ArmeService(true);
+    }
+
+
     /**
      * Attaque un personnage avec une arme
      * @param id_personnage Personnage à attaquer

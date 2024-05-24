@@ -169,10 +169,18 @@ public class PersonnageController implements Initializable {
             }
         }
     }
+
+    /**
+     * Sélectionne un personnage pour le joueur 1 pour la partie en cours
+     */
     public void selectionJoueur1(){
         CombatService.getPartie().setPersonnage1(new Personnage(selectedPersonnage));
         System.out.println(selectedPersonnage.getNom());
     }
+
+    /**
+     * Sélectionne un personnage pour le joueur 2 pour la partie en cours
+     */
     public void selectionJoueur2(){
         CombatService.getPartie().setPersonnage2(new Personnage(selectedPersonnage));
         System.out.println(selectedPersonnage.getNom());

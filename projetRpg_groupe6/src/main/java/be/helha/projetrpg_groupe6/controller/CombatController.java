@@ -2,6 +2,7 @@ package be.helha.projetrpg_groupe6.controller;
 
 import be.helha.projetrpg_groupe6.HelloApplication;
 import be.helha.projetrpg_groupe6.models.Partie;
+import be.helha.projetrpg_groupe6.personnage.Personnage;
 import be.helha.projetrpg_groupe6.service.ArmeService;
 import be.helha.projetrpg_groupe6.services.CombatService;
 import be.helha.projetrpg_groupe6.services.PersonnageService;
@@ -25,6 +26,9 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Controller pour gérer les interactions avec l'interface utilisateur du combat.
+ */
 public class CombatController implements Initializable {
 
     private Stage stage;
@@ -69,18 +73,36 @@ public class CombatController implements Initializable {
     @FXML
     private ProgressBar progress2;
 
+    private int baseHpPlayer1;
+    private int baseHpPlayer2;
+
     private Partie partie;
     private ArmeService armeService = new ArmeService();
     private PersonnageService personnageService = new PersonnageService();
     private CombatService combatService = new CombatService();
 
+    /**
+     * Initialise le contrôleur après que son élément racine ait été complètement traité.
+     * @param url
+     * The location used to resolve relative paths for the root object, or
+     * {@code null} if the location is not known.
+     *
+     * @param resourceBundle
+     * The resources used to localize the root object, or {@code null} if
+     * the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.partie = CombatService.getPartie();
+        this.baseHpPlayer1 = partie.getPersonnage1().getPv();
+        this.baseHpPlayer2 = partie.getPersonnage2().getPv();
         initialisation();
         verifWin();
     }
 
+    /**
+     * Initialise les éléments de l'interface utilisateur.
+     */
     private void initialisation() {
         if (partie.getPersonnage1() == null || partie.getPersonnage2() == null || partie.getArme1() == null || partie.getArme2() == null) {
             attackButtonPlayer1.setDisable(true);
@@ -96,20 +118,29 @@ public class CombatController implements Initializable {
         updateCharacterInfo();
     }
 
+    /**
+     * Met à jour les informations des personnages et des armes.
+     * Si un personnage ou une arme n'est pas défini, les boutons d'attaque sont désactivés.
+     * Si le joueur 1 est actif, le bouton d'attaque du joueur 1 est activé.
+     * Si le joueur 2 est actif, le bouton d'attaque du joueur 2 est activé.
+     * Si un personnage n'a plus de points de vie, le message de fin de partie est affiché.
+     * La partie est terminée si un des deux personnages n'a plus de points de vie.
+     * Si un personnage est attaqué, les points de vie et la barre de progression sont mis à jour.
+     */
     private void updateCharacterInfo() {
         if (partie.getPersonnage1() != null) {
             labelCharacterNamePlayer1.setText(partie.getPersonnage1().getNom());
-            avatarImageView1.setImage(new Image("https://mineskin.eu/helm/" + partie.getPersonnage1().getNom() + "/100"));
+            avatarImageView1.setImage(new Image("https://mineskin.eu/armor/bust/" + partie.getPersonnage1().getNom() + "/100"));
             labelCharacterHpPlayer1.setText(String.valueOf(partie.getPersonnage1().getPv()) + " hp");
             labelCharacterManaPlayer1.setText(String.valueOf(partie.getPersonnage1().getMana()) + " mana");
-            progress1.setProgress(partie.getPersonnage1().getPv() / 100.0);
+            progress1.setProgress(partie.getPersonnage1().getPv() / (double) this.baseHpPlayer1);
         }
         if (partie.getPersonnage2() != null) {
             labelCharacterNamePlayer2.setText(partie.getPersonnage2().getNom());
-            avatarImageView2.setImage(new Image("https://mineskin.eu/helm/" + partie.getPersonnage2().getNom() + "/100"));
+            avatarImageView2.setImage(new Image("https://mineskin.eu/armor/bust/" + partie.getPersonnage2().getNom() + "/100"));
             labelCharacterHpPlayer2.setText(String.valueOf(partie.getPersonnage2().getPv()) + " hp");
             labelCharacterManaPlayer2.setText(String.valueOf(partie.getPersonnage2().getMana()) + " mana");
-            progress2.setProgress(partie.getPersonnage2().getPv() / 100.0);
+            progress2.setProgress(partie.getPersonnage2().getPv() / (double) this.baseHpPlayer2);
         }
         if (partie.getArme1() != null) {
             labelWeaponNamePlayer1.setText(partie.getArme1().getNom());
@@ -121,6 +152,15 @@ public class CombatController implements Initializable {
         }
     }
 
+    /**
+     * Attaque le personnage adverse.
+     * Si le joueur 1 est actif, le personnage 2 est attaqué.
+     * Si le joueur 2 est actif, le personnage 1 est attaqué.
+     * Les boutons d'attaque sont désactivés après l'attaque.
+     * Si un personnage n'a plus de points de vie, le message de fin de partie est affiché.
+     * La partie est terminée si un des deux personnages n'a plus de points de vie.
+     *
+     */
     @FXML
     public void attaquer() {
         int idAttaque;
@@ -144,23 +184,45 @@ public class CombatController implements Initializable {
         partie.skipTurn();
     }
 
+    /**
+     * Vérifie si un des deux personnages n'a plus de points de vie.
+     * Si c'est le cas, affiche le message de fin de partie.
+     */
     private void verifWin() {
         if (partie.getPersonnage1().getPv() <= 0) {
             endMessageLabel.setText(partie.getPersonnage2().getNom()+" a gagné !");
             endMessageContainer.setVisible(true);
             disableAttackButtons();
+            resetHp();
         } else if (partie.getPersonnage2().getPv() <= 0) {
             endMessageLabel.setText(partie.getPersonnage1().getNom()+" a gagné !");
             endMessageContainer.setVisible(true);
             disableAttackButtons();
+            resetHp();
         }
     }
 
+    private void resetHp() {
+        partie.getPersonnage1().setPv(baseHpPlayer1);
+        partie.getPersonnage2().setPv(baseHpPlayer2);
+        this.personnageService.updatePersonnage(partie.getPersonnage2());
+        this.personnageService.updatePersonnage(partie.getPersonnage1());
+        updateCharacterInfo();
+    }
+
+    /**
+     * Désactive les boutons d'attaque.
+     */
     private void disableAttackButtons() {
         attackButtonPlayer1.setDisable(true);
         attackButtonPlayer2.setDisable(true);
     }
 
+    /**
+     * Affiche une alerte avec un titre et un message.
+     * @param title le titre de l'alerte
+     * @param message le message de l'alerte
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -169,18 +231,39 @@ public class CombatController implements Initializable {
         alert.showAndWait();
     }
 
+    /**
+     * Change la scène vers la gestion des personnages.
+     * @param event l'événement de l'action
+     * @throws IOException en cas d'erreur de chargement de la scène
+     */
     public void switchToGestionPersonnages(ActionEvent event) throws IOException {
         switchScene(event, "gestionPersonnages.fxml");
     }
 
+    /**
+     * Change la scène vers la page principale.
+     * @param event l'événement de l'action
+     * @throws IOException en cas d'erreur de chargement de la scène
+     */
     public void switchToMainPage(ActionEvent event) throws IOException {
         switchScene(event, "mainPage.fxml");
     }
 
+    /**
+     * Change la scène vers la gestion des armes.
+     * @param event l'événement de l'action
+     * @throws IOException en cas d'erreur de chargement de la scène
+     */
     public void switchToGestionArmes(ActionEvent event) throws IOException {
         switchScene(event, "gestionArmes.fxml");
     }
 
+    /**
+     * Change la scène vers la gestion des combats.
+     * @param event l'événement de l'action
+     * @param fxmlFile le fichier fxml à charger
+     * @throws IOException en cas d'erreur de chargement de la scène
+     */
     private void switchScene(ActionEvent event, String fxmlFile) throws IOException {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(fxmlFile));
         root = fxmlLoader.load();

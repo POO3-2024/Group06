@@ -17,12 +17,13 @@ import java.util.List;
 public class PersonnageDatabase {
 
     /**
-     * la connection à la db
+     * La connexion à la base de données à utiliser.
      */
     private ConnectionDB connectionDB;
+
     /**
-     * Constructeur de la classe
-     * @param connectionDB Connection à la db
+     * Constructeur pour PersonnageDatabase.
+     * @param connectionDB
      */
     public PersonnageDatabase(ConnectionDB connectionDB) {
         this.connectionDB = connectionDB;
@@ -49,10 +50,10 @@ public class PersonnageDatabase {
     }
 
     /**
-     * Fonction pour ajouter un personnage dans la db
-     * @param perso à ajouter en db
-     * @return Le personnage ajouté en db
-     * @throws SQLException
+     * Ajoute un personnage à la base de données.
+     * @param perso le personnage à ajouter.
+     * @return Personnage le personnage ajouté.
+     * @throws SQLException si une erreur de base de données survient.
      */
     public Personnage add(Personnage perso) throws SQLException {
         String query = "INSERT INTO personnage (nom, pv, mana) VALUES ('" + perso.getNom() + "', " + perso.getPv() + ", " + perso.getMana() + ")";
@@ -96,10 +97,10 @@ public class PersonnageDatabase {
     }
 
     /**
-     * Fonction qui met à jour un personnage
-     * @param perso
-     * @return 0 si il y a un problème
-     * @throws SQLException
+     * Met à jour un personnage.
+     * @param perso le personnage à mettre à jour.
+     * @return int le nombre de lignes modifiées.
+     * @throws SQLException     si une erreur de base de données survient.
      */
     public int update(Personnage perso) throws SQLException {
         String query = "UPDATE personnage SET pv = " + perso.getPv() + ", mana = " + perso.getMana() + ", nom = '" + perso.getNom() + "' WHERE Id_personnage = " + perso.getId();
@@ -107,18 +108,19 @@ public class PersonnageDatabase {
     }
 
     /**
-     * Fonction qui supprime un personnage
-     * @param id
-     * @return 0 si il y a un problème
-     * @throws SQLException
+     * Supprime un personnage par son id.
+     * @param id l'id du personnage à supprimer.
+     * @return int le nombre de lignes supprimées.
+     * @throws SQLException si une erreur de base de données survient.
      */
     public int deletePersonnageById(int id) throws SQLException {
         String query = "DELETE FROM personnage WHERE Id_personnage = " + id;
         return connectionDB.executeUpdate(query);
     }
+
     /**
-     * Fonction qui supprime tout les personnages
-     * @throws SQLException
+     * Supprime tous les personnages de la base de données.
+     * @throws SQLException si une erreur de base de données survient.
      */
     public void clearAll() throws SQLException {
         String query = "DELETE FROM personnage";

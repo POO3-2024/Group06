@@ -18,6 +18,9 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
+/**
+ * Tests unitaires pour la base de données de personnage
+ */
 @SpringBootTest
 public class PersonnageDatabaseTest {
     private static final ConnectionDB connectionDB = ConnectionDB.getConnection(true);
@@ -28,6 +31,15 @@ public class PersonnageDatabaseTest {
     private PersonnageDTO perso1Dto = new PersonnageDTO(perso1.getId(), perso1.getNom());
     private Personnage perso2 = new Personnage("Legolas",600,35);
     private PersonnageDTO perso2Dto = new PersonnageDTO(perso2.getId(), perso2.getNom());
+
+
+    public PersonnageDatabaseTest() throws SQLException, ClassNotFoundException {
+    }
+
+    /**
+     * Initialise le nécéssaire pour les tests
+     * @throws SQLException
+     */
     @BeforeEach
     public void init() throws SQLException {
         this.perso = personnageDatabase.add(perso);
@@ -37,6 +49,11 @@ public class PersonnageDatabaseTest {
 //        personnages.add(this.perso1Dto);
 //        personnages.add(this.perso2Dto);
     }
+
+    /**
+     * Nettoir la base de données après chaque test
+     * @throws SQLException
+     */
     @AfterEach
     public void clean() throws SQLException {
         personnageDatabase.clearAll();

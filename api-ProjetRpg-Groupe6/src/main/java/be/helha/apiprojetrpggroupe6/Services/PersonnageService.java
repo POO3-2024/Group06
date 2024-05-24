@@ -16,11 +16,26 @@ import java.util.List;
 @Service
 public class PersonnageService {
 
-    private PersonnageDatabase personnageDatabase = new PersonnageDatabase(ConnectionDB.getConnection());
+    private PersonnageDatabase personnageDatabase;
+
+    /**
+     * Constructeur par défaut
+     */
+    public PersonnageService() {
+        this.personnageDatabase = new PersonnageDatabase(ConnectionDB.getConnection());
+    }
+
+    /**
+     * Constructeur pour les tests
+     * @param test true si test
+     */
+    public PersonnageService(boolean test) {
+        this.personnageDatabase = new PersonnageDatabase(ConnectionDB.getConnection(true));
+    }
     /**
      * Récupère tous les personnages de la base de données
      * Renvoi uniquement l'id et le nom des personnages
-     * @return List<PersonnageDTO> Renvoi la liste des personnages
+     * @return Renvoi la liste des personnages
      */
     public List<PersonnageDTO>getPersonnages() throws SQLException {
         return this.personnageDatabase.getAllPersonnages();

@@ -19,11 +19,16 @@ import java.util.List;
 @RequestMapping("/api")
 public class ArmeController {
 
+    /**
+     * Service de la classe Arme
+     */
     private ArmeService armeService = new ArmeService();
 
     /**
      * Récupère toutes les armes de la base de données
-     * @return List<Arme> Renvoi la liste des armes
+     * Endpoint : /api/armes
+     * @return Renvoi la liste des armes
+     * @return String Renvoi un message d'erreur
      */
     @GetMapping("/armes")
     public ResponseEntity<?> getArmes(){
@@ -36,8 +41,10 @@ public class ArmeController {
     }
     /**
      * Récupère une arme par son id
+     * Endpoint : /api/armes/1
      * @param id id de l'arme
      * @return Arme Renvoi l'arme correspondant à l'id
+     * @return String Renvoi un message d'erreur
      */
     @GetMapping("/armes/{id}")
     public ResponseEntity<?> getArmeById(@PathVariable("id") int id){
@@ -50,8 +57,10 @@ public class ArmeController {
     }
     /**
      * Ajoute une arme à la base de données
+     * Endpoint : /api/armes
      * @param arme Arme à ajouter
      * @return Arme Renvoi l'arme ajoutée
+     * @return String Renvoi un message d'erreur
      */
     @PostMapping("/armes")
     public ResponseEntity<?> addArme(@RequestBody Arme arme){
@@ -64,8 +73,10 @@ public class ArmeController {
     }
     /**
      * Met à jour une arme
+     * Endpoint : /api/armes
      * @param arme Arme à mettre à jour
      * @return int Renvoi le nombre de lignes modifiées
+     * @return String Renvoi un message d'erreur
      */
     @PutMapping("/armes")
     public ResponseEntity<?> updateArme(@RequestBody Arme arme) {
@@ -80,8 +91,10 @@ public class ArmeController {
     }
     /**
      * Supprime une arme
+     * Endpoint : /api/armes/1
      * @param id id de l'arme à supprimer
      * @return int Renvoi le nombre de lignes supprimées
+     * @return String Renvoi un message d'erreur
      */
     @DeleteMapping("/armes/{id}")
     public ResponseEntity<?> deleteArme(@PathVariable("id") int id) {

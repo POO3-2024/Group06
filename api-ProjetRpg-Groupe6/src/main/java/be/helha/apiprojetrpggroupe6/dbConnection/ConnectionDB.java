@@ -10,7 +10,9 @@ import ch.qos.logback.core.net.SyslogOutputStream;
 import org.sqlite.SQLiteDataSource;
 import org.sqlite.SQLiteJDBCLoader;
 
-
+/**
+ * Classe permettant la connexion à la base de données
+ */
 public class ConnectionDB {
     /**
      * Objet utilisé pour la connexion à la base de données

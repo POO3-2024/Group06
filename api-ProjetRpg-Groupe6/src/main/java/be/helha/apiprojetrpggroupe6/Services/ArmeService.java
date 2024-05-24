@@ -19,12 +19,27 @@ import java.util.Optional;
 public class ArmeService {
 
 
-    private ArmeDatabase armeDatabase = new ArmeDatabase(ConnectionDB.getConnection());
+    private ArmeDatabase armeDatabase;
+
+    /**
+     * Constructeur pour ArmeService avec une connexion par défaut
+     */
+    public ArmeService() {
+        this.armeDatabase = new ArmeDatabase(ConnectionDB.getConnection());
+    }
+
+    /**
+     * Constructeur pour ArmeService avec une connexion pour les tests
+     * @param test : Détermine si la base de données est utilisée pour les tests ou la production
+     */
+    public ArmeService(boolean test) {
+        this.armeDatabase = new ArmeDatabase(ConnectionDB.getConnection(true));
+    }
 
     /**
      * Récupère toutes les armes de la base de données
      * Renvoi uniquement l'id et le nom des armes
-     * @return List<Arme> Renvoi la liste des armes
+     * @return Renvoi la liste des armes
      */
     public List<ArmeDTO> getArmes() throws Exception{
         List<ArmeDTO> list = new ArrayList<>();
