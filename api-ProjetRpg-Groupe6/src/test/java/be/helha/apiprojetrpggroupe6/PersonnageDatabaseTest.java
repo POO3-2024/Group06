@@ -61,6 +61,10 @@ public class PersonnageDatabaseTest {
         assertEquals(personnageDatabase.getPersonnageById(perso.getId()).getId(), perso.getId());
     }
 
+    @Test
+    public void testGetPersonnageByName() throws SQLException {
+        assertEquals(personnageDatabase.getPersonnageByName(perso.getNom()).getNom(), perso.getNom());
+    }
     
     @AfterAll
     public static void cleanall(){
