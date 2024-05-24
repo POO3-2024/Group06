@@ -35,6 +35,8 @@ public class Personnage {
      */
     public Personnage(String nom, int mana, int pv) {
         this.nom = nom;
+        this.mana = mana;
+        this.pv = pv;
     }
     /**
      * Constructeur vide
