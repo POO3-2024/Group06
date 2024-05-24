@@ -116,7 +116,6 @@ public class ArmeController implements Initializable {
         fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("detailArme.fxml"));
         root = fxmlLoader.load();
         DetailArme detailArme = fxmlLoader.getController();
-        System.out.println(id);
         detailArme.initialize(id);
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
 

@@ -78,7 +78,6 @@ public class ArmeListCell extends ListCell<Arme> {
     }
 
     public void changeView(ActionEvent event, int id) throws IOException {
-        System.out.println(id);
         ArmeController.getInstance().changeViewToDetail(event,id);
     }
 
