@@ -18,9 +18,17 @@ public class PersonnageService {
 
     private PersonnageDatabase personnageDatabase;
 
+    /**
+     * Constructeur par défaut
+     */
     public PersonnageService() {
         this.personnageDatabase = new PersonnageDatabase(ConnectionDB.getConnection());
     }
+
+    /**
+     * Constructeur pour les tests
+     * @param test true si test
+     */
     public PersonnageService(boolean test) {
         this.personnageDatabase = new PersonnageDatabase(ConnectionDB.getConnection(true));
     }

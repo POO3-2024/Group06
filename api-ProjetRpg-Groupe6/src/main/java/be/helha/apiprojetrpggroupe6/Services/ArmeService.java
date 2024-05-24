@@ -21,9 +21,17 @@ public class ArmeService {
 
     private ArmeDatabase armeDatabase;
 
+    /**
+     * Constructeur pour ArmeService avec une connexion par d&faut
+     */
     public ArmeService() {
         this.armeDatabase = new ArmeDatabase(ConnectionDB.getConnection());
     }
+
+    /**
+     * Constructeur pour ArmeService avec une connexion pour les tests
+     * @param test : Détermine si la base de données est utilisée pour les tests ou la production
+     */
     public ArmeService(boolean test) {
         this.armeDatabase = new ArmeDatabase(ConnectionDB.getConnection(true));
     }
