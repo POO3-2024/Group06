@@ -54,4 +54,16 @@ public class AttaqueServiceTest {
     public static void cleanAll(){
         ConnectionDB.getConnection(true).closeConnection();
     }
+
+    @Test
+    public void attaquerTest() {
+        try {
+            perso = attaqueService.attaquer(perso.getId(), arme.getId());
+            assertEquals(20, perso.getPv());
+            perso = attaqueService.attaquer(perso.getId(), arme.getId());
+            assertEquals(10, perso.getPv());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
