@@ -33,7 +33,6 @@ public class AttaqueServiceTest {
 
     /**
      * Initialise le nécéssaire pour les tests
-     * @throws SQLException
      */
     @BeforeEach
     public void init() {

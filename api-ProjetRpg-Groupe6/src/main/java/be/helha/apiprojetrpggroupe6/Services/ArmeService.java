@@ -22,7 +22,7 @@ public class ArmeService {
     private ArmeDatabase armeDatabase;
 
     /**
-     * Constructeur pour ArmeService avec une connexion par d&faut
+     * Constructeur pour ArmeService avec une connexion par défaut
      */
     public ArmeService() {
         this.armeDatabase = new ArmeDatabase(ConnectionDB.getConnection());
