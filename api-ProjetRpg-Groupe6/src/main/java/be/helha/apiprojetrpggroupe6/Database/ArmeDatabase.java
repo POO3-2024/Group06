@@ -118,13 +118,19 @@ public class ArmeDatabase {
      * @throws Exception si l'arme voulant etre ajoutée existe déjà sur base de son nom
      */
     public Arme addArme(Arme arme) throws Exception {
-        List<ArmeDTO> listArme = getArme();
         boolean verifArmeExist = false;
-        for(ArmeDTO armeLoop : listArme){
-            if (armeLoop.getNom().equals(arme.getNom())){
-                verifArmeExist = true;
+        List<ArmeDTO> listArme;
+        System.out.println(getArme().isEmpty());
+        if(!getArme().isEmpty()){
+            listArme = getArme();
+            for(ArmeDTO armeLoop : listArme){
+                if (armeLoop.getNom().equals(arme.getNom())){
+                    verifArmeExist = true;
+                }
             }
         }
+
+
         if(!verifArmeExist){
             String query = "INSERT INTO arme (Nom, Degats) VALUES ('"+arme.getNom()+"','"+arme.getDegats()+"')";
             try {
