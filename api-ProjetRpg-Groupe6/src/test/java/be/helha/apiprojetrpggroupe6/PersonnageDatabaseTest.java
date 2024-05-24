@@ -65,6 +65,10 @@ public class PersonnageDatabaseTest {
     public void testUpdate() throws SQLException {
         assertNotEquals(0, personnageDatabase.update(perso));
     }
+    @Test
+    public void testDeletePersonnageById() throws SQLException {
+        assertNotEquals(0, personnageDatabase.deletePersonnageById(perso.getId()));
+    }
     @AfterAll
     public static void cleanall(){
         connectionDB.closeConnection();
